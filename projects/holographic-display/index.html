@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DIY Holographic Display — Persistence-of-vision LED cylinder build log. ESP32, WS2812B, Hall sensor.">
+  <title>DIY Holographic Display — Joy</title>
+
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/nav.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/project.css">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <div id="reading-progress" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#008080,#3EB489);z-index:1001;transition:width .1s linear;"></div>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">
+        <div class="nav__logo-mark">J</div>
+        <span>Joy</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary navigation">
+        <a href="/"           class="nav__link">Home</a>
+        <a href="/projects/"  class="nav__link active">Projects</a>
+        <a href="/about.html" class="nav__link">About</a>
+        <a href="/about.html#contact" class="nav__link">Contact</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">GitHub ↗</a>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav__mobile">
+      <a href="/"           class="nav__link">Home</a>
+      <a href="/projects/"  class="nav__link">Projects</a>
+      <a href="/about.html" class="nav__link">About</a>
+      <a href="/about.html#contact" class="nav__link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="project-hero">
+      <div class="project-hero__bg"></div>
+      <div class="project-hero__content">
+
+        <div class="project-hero__breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/projects/">Projects</a>
+          <span>/</span>
+          <span>Holographic Display</span>
+        </div>
+
+        <div class="project-hero__meta-top">
+          <span class="badge badge--experimental">Prototype</span>
+          <span class="tag">Experimental</span>
+          <span class="tag">ESP32</span>
+          <span class="tag">POV</span>
+        </div>
+
+        <h1 class="project-hero__title reveal">DIY Holographic Display</h1>
+        <p class="project-hero__tagline reveal" data-delay="60">
+          A persistence-of-vision LED cylinder spinning at 600 RPM — rendering text and shapes
+          as floating 3D-like images in mid-air, for under ₹2000 in parts.
+        </p>
+
+        <div class="project-hero__stack reveal" data-delay="100">
+          <span class="tag">ESP32</span>
+          <span class="tag">WS2812B LEDs</span>
+          <span class="tag">Hall Effect Sensor</span>
+          <span class="tag">Slip Ring</span>
+          <span class="tag">Brushless Motor</span>
+          <span class="tag">3D Printed Frame</span>
+        </div>
+
+      </div>
+
+      <div style="max-width:var(--container-max);margin-inline:auto;padding-inline:var(--sp-6);">
+        <div class="project-hero__cover reveal" data-delay="140">
+          <img src="assets/images/cover.jpg" alt="DIY Holographic Display"
+               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>✨</div>'">
+        </div>
+      </div>
+    </section>
+
+    <!-- BODY -->
+    <div class="project-body">
+
+      <article class="project-main">
+
+        <!-- PROBLEM -->
+        <div class="project-section reveal">
+          <div class="project-section__label">01 — Problem</div>
+          <h2 class="project-section__title">The Idea</h2>
+          <div class="project-section__body">
+            <p>
+              I'd seen commercial POV (persistence-of-vision) displays online — spinning LED arms
+              that trick your eye into seeing a complete 2D image floating in space. Proper holographic
+              volumetric displays cost thousands. But a POV display? That felt buildable.
+            </p>
+            <p>
+              The core question: could I spin an LED strip fast enough that human persistence of vision
+              would fill in the gaps, rendering a coherent image from discrete flashes of light?
+              The answer, it turns out, is yes — but the engineering to get there is genuinely hard.
+            </p>
+
+            <div class="callout callout--info">
+              <span class="callout__icon">🧠</span>
+              <div>
+                <div class="callout__title">How POV Works</div>
+                <div class="callout__body">
+                  The human eye retains an image for roughly 1/25th of a second (the persistence of vision effect).
+                  If an LED arm completes one full rotation faster than this, and lights specific LEDs at precise
+                  angular positions, the brain assembles the flashes into a complete circular image.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLANNING -->
+        <div class="project-section reveal">
+          <div class="project-section__label">02 — Planning</div>
+          <h2 class="project-section__title">Design & Architecture</h2>
+          <div class="project-section__body">
+            <p>The system has three interdependent challenges that all had to be solved together:</p>
+            <ul>
+              <li><strong>Mechanical</strong> — Spin an LED arm fast and stably enough at 600+ RPM</li>
+              <li><strong>Synchronisation</strong> — Know exactly where the arm is at every millisecond</li>
+              <li><strong>Data transfer</strong> — Get power and control signals onto a spinning assembly</li>
+            </ul>
+            <h4>Synchronisation Approach</h4>
+            <p>
+              A Hall effect sensor mounted on the fixed base detects a neodymium magnet attached
+              to the spinning arm once per revolution. This pulse resets the angular position counter,
+              ensuring each rotation starts at the same reference point regardless of speed variation.
+            </p>
+            <h4>The Slip Ring Problem</h4>
+            <p>
+              You can't run wires to a spinning assembly — they'd twist and snap. A 6-wire slip ring
+              provides continuous electrical contact between the static base and the rotating frame.
+              Two wires for 5V power, one for GND, one for the WS2812B data line.
+            </p>
+          </div>
+
+          <div style="margin-top:var(--sp-6);background:var(--clr-bg-soft);border:1px solid var(--clr-border);border-radius:var(--radius-md);padding:var(--sp-8);text-align:center;color:var(--clr-text-muted);font-family:var(--font-mono);font-size:var(--fs-sm);">
+            📐 System architecture + mechanical diagram — <em>assets/diagrams/architecture.png</em>
+          </div>
+        </div>
+
+        <!-- HARDWARE -->
+        <div class="project-section reveal">
+          <div class="project-section__label">03 — Hardware</div>
+          <h2 class="project-section__title">Components & BOM</h2>
+
+          <table class="bom-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Qty</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>ESP32 Dev Board</td><td>1</td><td>Controller + Wi-Fi for frame upload</td></tr>
+              <tr><td>WS2812B LED Strip (60 LEDs/m)</td><td>30cm</td><td>18 addressable RGB LEDs per arm</td></tr>
+              <tr><td>Hall Effect Sensor (A3144)</td><td>1</td><td>One-per-revolution position sync</td></tr>
+              <tr><td>Neodymium Magnet (10mm)</td><td>1</td><td>Triggers Hall sensor</td></tr>
+              <tr><td>DC Brushless Motor (12V)</td><td>1</td><td>Spinning arm at ~600 RPM</td></tr>
+              <tr><td>Slip Ring (6-wire, 2A)</td><td>1</td><td>Power + data to spinning assembly</td></tr>
+              <tr><td>3D Printed PLA Frame</td><td>1</td><td>LED arm + motor coupling</td></tr>
+              <tr><td>5V 3A Power Supply</td><td>1</td><td>LED strip (up to 2A at full white)</td></tr>
+              <tr><td>12V Power Supply</td><td>1</td><td>Brushless motor drive</td></tr>
+              <tr><td>Acrylic Base (200×200mm)</td><td>1</td><td>Stability and housing</td></tr>
+              <tr><td>470Ω resistor</td><td>1</td><td>WS2812B data line protection</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- GALLERY -->
+        <div class="project-section reveal">
+          <div class="project-section__label">04 — Media</div>
+          <h2 class="project-section__title">Build Photos</h2>
+          <div class="gallery">
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/arm-assembly.jpg</div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/slip-ring.jpg</div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/hall-sensor.jpg</div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/pov-result.jpg</div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/full-assembly.jpg</div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/3d-print.jpg</div>
+          </div>
+        </div>
+
+        <!-- IMPLEMENTATION -->
+        <div class="project-section reveal">
+          <div class="project-section__label">05 — Implementation</div>
+          <h2 class="project-section__title">Firmware & POV Rendering</h2>
+          <div class="project-section__body">
+            <p>
+              Each frame is stored as a 2D array: 18 rows (LEDs, radial position) × 120 columns
+              (angular slices around the circle). At 600 RPM, one revolution takes 100ms.
+              Divided into 120 slices gives ~0.83ms per column — tight but achievable with ESP32.
+            </p>
+            <p>
+              The Hall sensor interrupt fires once per revolution, resetting the column counter
+              and recalibrating the timing interval based on the measured period.
+            </p>
+          </div>
+
+          <div class="code-block" style="margin-top:var(--sp-5);">
+            <div class="code-block__header">
+              <span class="code-block__lang">C++ (ESP32 Arduino)</span>
+              <span class="code-block__copy">Copy</span>
+            </div>
+            <pre>
+#define NUM_LEDS     18
+#define NUM_COLUMNS  120
+
+CRGB leds[NUM_LEDS];
+uint8_t frame[NUM_COLUMNS][NUM_LEDS][3]; // R, G, B per pixel
+
+volatile unsigned long lastHallTime   = 0;
+volatile unsigned long rotationPeriod = 100000; // µs, initial guess
+volatile int currentColumn = 0;
+
+// Hall sensor interrupt — fires once per revolution
+void IRAM_ATTR onHallPulse() {
+  unsigned long now = micros();
+  rotationPeriod    = now - lastHallTime;
+  lastHallTime      = now;
+  currentColumn     = 0; // reset angular position
+}
+
+void loop() {
+  unsigned long columnDuration = rotationPeriod / NUM_COLUMNS;
+  unsigned long nextColumnTime = micros() + columnDuration;
+
+  // Render current column
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i] = CRGB(
+      frame[currentColumn][i][0],
+      frame[currentColumn][i][1],
+      frame[currentColumn][i][2]
+    );
+  }
+  FastLED.show();
+
+  currentColumn = (currentColumn + 1) % NUM_COLUMNS;
+
+  // Busy-wait for precise column timing
+  while (micros() < nextColumnTime);
+}</pre>
+          </div>
+
+          <div class="callout callout--info" style="margin-top:var(--sp-6);">
+            <span class="callout__icon">⏱️</span>
+            <div>
+              <div class="callout__title">Timing is Everything</div>
+              <div class="callout__body">
+                At 600 RPM, each of the 120 columns must be rendered in ~0.83ms. FastLED's
+                show() takes ~0.5ms for 18 LEDs at 800kHz. This leaves only ~0.33ms for
+                computation — which is why a busy-wait loop is used instead of delay().
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TROUBLESHOOTING -->
+        <div class="project-section reveal">
+          <div class="project-section__label">06 — Troubleshooting</div>
+          <h2 class="project-section__title">Failures & Fixes</h2>
+
+          <div class="callout callout--error">
+            <span class="callout__icon">🌀</span>
+            <div>
+              <div class="callout__title">Image "Smears" at High RPM</div>
+              <div class="callout__body">
+                At 800+ RPM, the image started smearing into arcs instead of clean columns.
+                Root cause: FastLED.show() latency was eating into column timing. Fix: reduced
+                to 600 RPM (more stable) and pre-computed all column timings rather than
+                recalculating each revolution.
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout--error" style="margin-top:var(--sp-4);">
+            <span class="callout__icon">⚡</span>
+            <div>
+              <div class="callout__title">Slip Ring Introducing Data Corruption</div>
+              <div class="callout__body">
+                WS2812B data signal was getting corrupted through the slip ring at speed —
+                motor EMI coupling into the data wire. Fix: shielded the data wire with foil,
+                added a 100nF decoupling cap close to the LED strip VCC, and kept data
+                wire away from power wires in the slip ring bundle.
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout--warning" style="margin-top:var(--sp-4);">
+            <span class="callout__icon">⚖️</span>
+            <div>
+              <div class="callout__title">Severe Vibration — Imbalanced Arm</div>
+              <div class="callout__body">
+                The 3D-printed arm was slightly asymmetric — at speed it vibrated badly enough
+                to walk across the table. Added small M3 nuts as counterweights to the lighter
+                end, iterating until vibration was eliminated at operating RPM.
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout--info" style="margin-top:var(--sp-4);">
+            <span class="callout__icon">🔄</span>
+            <div>
+              <div class="callout__title">Hall Sensor False Triggers</div>
+              <div class="callout__body">
+                Motor magnets were triggering the Hall sensor multiple times per revolution.
+                Fixed by repositioning the sensor further from the motor and adding a 10ms
+                software debounce on the interrupt — any pulse within 10ms of the last is ignored.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="project-section reveal">
+          <div class="project-section__label">07 — Results</div>
+          <h2 class="project-section__title">Current State</h2>
+          <div class="project-section__body">
+            <ul>
+              <li><strong>Resolution:</strong> 18 LEDs × 120 columns = ~2160 pixels per frame</li>
+              <li><strong>Rotation speed:</strong> ~600 RPM stable</li>
+              <li><strong>Frame rate:</strong> ~10 FPS at current sync accuracy</li>
+              <li><strong>Text rendering:</strong> Clean, readable up to 3–4 characters</li>
+              <li><strong>Complex images:</strong> Recognisable but needs better angular calibration</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:var(--sp-6);aspect-ratio:16/9;background:var(--clr-bg-soft);border:1px solid var(--clr-border);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-family:var(--font-mono);font-size:var(--fs-sm);">
+            🎥 Demo video — <em>assets/videos/demo.mp4</em>
+          </div>
+
+          <div class="callout callout--warning" style="margin-top:var(--sp-6);">
+            <span class="callout__icon">🚧</span>
+            <div>
+              <div class="callout__title">Still a Prototype</div>
+              <div class="callout__body">
+                This project is ongoing. The mechanical and electrical foundations work well —
+                the main remaining challenge is software: improving angular calibration, adding a
+                Wi-Fi image upload interface, and achieving stable 30 FPS rendering.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REFLECTION -->
+        <div class="project-section reveal">
+          <div class="project-section__label">08 — Reflection</div>
+          <h2 class="project-section__title">What I Learned</h2>
+          <div class="project-section__body">
+            <p>
+              This is the hardest project I've built so far. It sits at the intersection of
+              mechanical engineering, real-time firmware, signal integrity, and optics. Each
+              domain had its own failure modes that I had to research and solve independently.
+            </p>
+            <p>
+              The EMI interference from the motor into the data line was completely unexpected —
+              I didn't think of the slip ring as an antenna until I started reading about brushless
+              motor EMI. That rabbit hole led me to understanding shielding, decoupling capacitors,
+              and ground planes in a much more practical way than any tutorial had.
+            </p>
+            <h4>Next Steps</h4>
+            <ul>
+              <li>Design a custom PCB for the spinning assembly — reduce weight and improve signal integrity</li>
+              <li>Implement Wi-Fi frame upload — send images directly from phone to ESP32</li>
+              <li>Add a second LED arm (180° offset) to double the resolution</li>
+              <li>Explore cylindrical 3D rendering — stack frames at different heights for true volumetric effect</li>
+              <li>Investigate encoder-based position sensing for better angular accuracy than Hall sensor alone</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Project Nav -->
+        <div class="project-nav">
+          <a href="/projects/smart-irrigation/" class="project-nav__item">
+            <div class="project-nav__dir">← Previous</div>
+            <div class="project-nav__title">Smart Irrigation System</div>
+          </a>
+          <div class="project-nav__item project-nav__item--next" style="opacity:0.4;pointer-events:none;">
+            <div class="project-nav__dir">Next →</div>
+            <div class="project-nav__title">More projects coming soon</div>
+          </div>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="project-sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Project Info</div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Status</span>
+            <span class="sidebar-card__val"><span class="badge badge--experimental">Prototype</span></span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Date</span>
+            <span class="sidebar-card__val">May 2025</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Difficulty</span>
+            <span class="sidebar-card__val">Expert</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Ongoing</span>
+            <span class="sidebar-card__val">Yes</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Key Specs</div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">MCU</span>
+            <span class="sidebar-card__val">ESP32</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">LEDs</span>
+            <span class="sidebar-card__val">18 × WS2812B</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Speed</span>
+            <span class="sidebar-card__val">~600 RPM</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Resolution</span>
+            <span class="sidebar-card__val">18 × 120 px</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Links</div>
+          <div class="sidebar-links">
+            <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--outline btn--sm" style="justify-content:center;">
+              GitHub Repository ↗
+            </a>
+            <a href="assets/diagrams/schematic.pdf" target="_blank" class="btn btn--ghost btn--sm" style="justify-content:center;">
+              Schematic PDF ↗
+            </a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Joy</div>
+          <p class="footer__brand-desc">Building intelligent systems with hardware, code, and relentless experimentation.</p>
+        </div>
+        <div>
+          <div class="footer__heading">More Projects</div>
+          <ul class="footer__links">
+            <li><a href="/projects/line-follower-bot/" class="footer__link">Line Follower Bot</a></li>
+            <li><a href="/projects/smart-irrigation/"  class="footer__link">Smart Irrigation</a></li>
+            <li><a href="/projects/"                   class="footer__link">All Projects →</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__heading">Connect</div>
+          <ul class="footer__links">
+            <li><a href="https://github.com/"   target="_blank" rel="noopener" class="footer__link">GitHub ↗</a></li>
+            <li><a href="https://linkedin.com/" target="_blank" rel="noopener" class="footer__link">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="footer-year"></span> Joy — Engineering Portfolio</span>
+        <span>Built with HTML · CSS · Vanilla JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/project-page.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="All projects — Joy's engineering portfolio. IoT, robotics, embedded systems, and electronics experiments.">
+  <title>Projects — Joy</title>
+
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/nav.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/home.css">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">
+        <div class="nav__logo-mark">J</div>
+        <span>Joy</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary navigation">
+        <a href="/"                   class="nav__link">Home</a>
+        <a href="/projects/"          class="nav__link active">Projects</a>
+        <a href="/about.html"         class="nav__link">About</a>
+        <a href="/about.html#contact" class="nav__link">Contact</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">GitHub ↗</a>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav__mobile">
+      <a href="/"           class="nav__link">Home</a>
+      <a href="/projects/"  class="nav__link">Projects</a>
+      <a href="/about.html" class="nav__link">About</a>
+      <a href="/about.html#contact" class="nav__link">Contact</a>
+      <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--outline" style="width:fit-content;">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <section style="padding-top:var(--sp-20);padding-bottom:var(--sp-12);border-bottom:1px solid var(--clr-border);background:var(--clr-bg-soft);">
+      <div class="container">
+        <p class="section-label reveal">Project Library</p>
+        <h1 class="section-title reveal" data-delay="60" style="font-size:clamp(2rem,5vw,3.5rem);">Everything I've Built</h1>
+        <p class="section-desc reveal" data-delay="120">
+          Every project is a full engineering case study — including the failures, debugging sessions, and lessons learned.
+          Filter by technology or domain below.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section">
+      <div class="container">
+
+        <div class="filter-bar reveal" id="filter-bar" aria-label="Filter projects">
+          <!-- Populated by projects.js -->
+        </div>
+
+        <div class="project-feed" id="project-feed" data-stagger>
+          <!-- Populated by projects.js -->
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Joy</div>
+          <p class="footer__brand-desc">Building intelligent systems with hardware, code, and relentless experimentation.</p>
+        </div>
+        <div>
+          <div class="footer__heading">Navigate</div>
+          <ul class="footer__links">
+            <li><a href="/"           class="footer__link">Home</a></li>
+            <li><a href="/about.html" class="footer__link">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__heading">Connect</div>
+          <ul class="footer__links">
+            <li><a href="https://github.com/"   target="_blank" rel="noopener" class="footer__link">GitHub ↗</a></li>
+            <li><a href="https://linkedin.com/" target="_blank" rel="noopener" class="footer__link">LinkedIn ↗</a></li>
+            <li><a href="mailto:your@email.com"                                class="footer__link">Email ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="footer-year"></span> Joy — Engineering Portfolio</span>
+        <span>Built with HTML · CSS · Vanilla JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/projects.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Line Follower Robot — PID-controlled autonomous robot build log. Arduino, L298N, IR sensors.">
+  <title>Line Follower Robot — Joy</title>
+
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/nav.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/project.css">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- Reading Progress -->
+  <div id="reading-progress" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#008080,#3EB489);z-index:1001;transition:width .1s linear;"></div>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">
+        <div class="nav__logo-mark">J</div>
+        <span>Joy</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary navigation">
+        <a href="/"           class="nav__link">Home</a>
+        <a href="/projects/"  class="nav__link active">Projects</a>
+        <a href="/about.html" class="nav__link">About</a>
+        <a href="/about.html#contact" class="nav__link">Contact</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">GitHub ↗</a>
+        <button class="nav__hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav__mobile">
+      <a href="/"           class="nav__link">Home</a>
+      <a href="/projects/"  class="nav__link">Projects</a>
+      <a href="/about.html" class="nav__link">About</a>
+      <a href="/about.html#contact" class="nav__link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===================== PROJECT HERO ===================== -->
+    <section class="project-hero">
+      <div class="project-hero__bg"></div>
+      <div class="project-hero__content">
+
+        <div class="project-hero__breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/projects/">Projects</a>
+          <span>/</span>
+          <span>Line Follower Robot</span>
+        </div>
+
+        <div class="project-hero__meta-top">
+          <span class="badge badge--completed">Completed</span>
+          <span class="tag">Robotics</span>
+          <span class="tag">Arduino</span>
+          <span class="tag">PID</span>
+        </div>
+
+        <h1 class="project-hero__title reveal">Line Follower Robot</h1>
+        <p class="project-hero__tagline reveal" data-delay="60">
+          An autonomous PID-controlled robot that follows a black line at speed —
+          built from scratch with an Arduino Uno, L298N motor driver, and a 5-channel IR sensor array.
+        </p>
+
+        <div class="project-hero__stack reveal" data-delay="100">
+          <span class="tag">Arduino Uno</span>
+          <span class="tag">L298N Motor Driver</span>
+          <span class="tag">IR Sensor Array</span>
+          <span class="tag">TT Motors</span>
+          <span class="tag">PVC Chassis</span>
+          <span class="tag">18650 Li-Ion</span>
+        </div>
+
+      </div>
+
+      <!-- Cover Image -->
+      <div style="max-width:var(--container-max);margin-inline:auto;padding-inline:var(--sp-6);">
+        <div class="project-hero__cover reveal" data-delay="140">
+          <!-- Replace src when asset is ready -->
+          <img src="assets/images/cover.jpg" alt="Line Follower Robot — cover photo"
+               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>🤖</div>'">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECT BODY ===================== -->
+    <div class="project-body">
+
+      <!-- MAIN CONTENT -->
+      <article class="project-main">
+
+        <!-- PROBLEM / IDEA -->
+        <div class="project-section reveal">
+          <div class="project-section__label">01 — Problem</div>
+          <h2 class="project-section__title">The Idea</h2>
+          <div class="project-section__body">
+            <p>
+              I wanted to build a fully autonomous robot that could follow a predefined path reliably —
+              something that actually moves at speed without constantly overcorrecting. The classic
+              bang-bang control felt clunky. I wanted smooth, responsive motion using proper PID control.
+            </p>
+            <p>
+              The challenge: tuning a PID controller on physical hardware is fundamentally different
+              from simulation. Sensor noise, motor lag, battery sag — all of these make a textbook
+              PID formula behave unpredictably. I had to earn this one through trial and error.
+            </p>
+          </div>
+        </div>
+
+        <!-- PLANNING -->
+        <div class="project-section reveal">
+          <div class="project-section__label">02 — Planning</div>
+          <h2 class="project-section__title">Design & Architecture</h2>
+          <div class="project-section__body">
+            <p>The system was designed around three layers:</p>
+            <ul>
+              <li><strong>Sensing</strong> — 5-channel IR sensor array reading line position as a weighted average</li>
+              <li><strong>Control</strong> — PID loop computing correction from sensor error</li>
+              <li><strong>Actuation</strong> — L298N motor driver applying differential speed to both motors</li>
+            </ul>
+            <h4>Key Design Decisions</h4>
+            <ul>
+              <li>PVC chassis for rigidity and lightweight construction</li>
+              <li>Weight balanced toward front to improve turn response</li>
+              <li>Buck converter for stable 5V logic — batteries sag under load</li>
+              <li>5-channel sensor for better position resolution vs. 3-channel</li>
+            </ul>
+          </div>
+
+          <!-- Diagram placeholder -->
+          <div style="margin-top:var(--sp-6);background:var(--clr-bg-soft);border:1px solid var(--clr-border);border-radius:var(--radius-md);padding:var(--sp-8);text-align:center;color:var(--clr-text-muted);font-family:var(--font-mono);font-size:var(--fs-sm);">
+            📐 Block diagram — <em>assets/diagrams/architecture.png</em>
+          </div>
+        </div>
+
+        <!-- HARDWARE -->
+        <div class="project-section reveal">
+          <div class="project-section__label">03 — Hardware</div>
+          <h2 class="project-section__title">Components & BOM</h2>
+
+          <table class="bom-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Qty</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Arduino Uno</td><td>1</td><td>Main microcontroller</td></tr>
+              <tr><td>L298N Motor Driver</td><td>1</td><td>Dual DC motor control</td></tr>
+              <tr><td>IR Sensor Array (5ch)</td><td>1</td><td>Line detection</td></tr>
+              <tr><td>TT DC Motors (3–6V)</td><td>2</td><td>Drive wheels</td></tr>
+              <tr><td>PVC Chassis</td><td>1</td><td>Frame and structure</td></tr>
+              <tr><td>18650 Li-Ion Battery</td><td>2</td><td>Power supply (~7.4V)</td></tr>
+              <tr><td>Wheels (65mm)</td><td>2</td><td>Traction</td></tr>
+              <tr><td>Caster Wheel</td><td>1</td><td>Front balance</td></tr>
+              <tr><td>Buck Converter (5V)</td><td>1</td><td>Stable logic voltage</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- GALLERY -->
+        <div class="project-section reveal">
+          <div class="project-section__label">04 — Media</div>
+          <h2 class="project-section__title">Build Photos</h2>
+
+          <div class="gallery">
+            <!-- Add real image paths when assets are ready -->
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">
+              assets/images/build-01.jpg
+            </div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">
+              assets/images/build-02.jpg
+            </div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">
+              assets/images/wiring.jpg
+            </div>
+            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">
+              assets/images/sensors.jpg
+            </div>
+          </div>
+        </div>
+
+        <!-- IMPLEMENTATION -->
+        <div class="project-section reveal">
+          <div class="project-section__label">05 — Implementation</div>
+          <h2 class="project-section__title">Firmware & PID Logic</h2>
+          <div class="project-section__body">
+            <p>The core of the firmware is a PID loop running every 10ms. The sensor array outputs a position value from –4 (far left) to +4 (far right), with 0 meaning perfectly centered. This error feeds into the PID formula:</p>
+          </div>
+
+          <div class="code-block" style="margin-top:var(--sp-5);">
+            <div class="code-block__header">
+              <span class="code-block__lang">C++ (Arduino)</span>
+              <span class="code-block__copy">Copy</span>
+            </div>
+            <pre>
+// PID Constants — tune these for your track
+float Kp = 1.2, Ki = 0.0, Kd = 0.8;
+
+float lastError = 0, integral = 0;
+
+void loop() {
+  int position = readSensorArray();   // returns -4 to +4
+  float error  = position;            // setpoint is 0 (center)
+
+  integral  += error;
+  float derivative = error - lastError;
+
+  float correction = Kp * error
+                   + Ki * integral
+                   + Kd * derivative;
+
+  int leftSpeed  = BASE_SPEED - correction;
+  int rightSpeed = BASE_SPEED + correction;
+
+  // Clamp to 0–255 PWM range
+  leftSpeed  = constrain(leftSpeed,  0, 255);
+  rightSpeed = constrain(rightSpeed, 0, 255);
+
+  driveMotors(leftSpeed, rightSpeed);
+  lastError = error;
+  delay(10);
+}</pre>
+          </div>
+
+          <div class="callout callout--info" style="margin-top:var(--sp-6);">
+            <span class="callout__icon">💡</span>
+            <div>
+              <div class="callout__title">PID Tuning Tip</div>
+              <div class="callout__body">Start with Ki = 0 and Kd = 0. Tune Kp until it follows the line but oscillates. Then increase Kd until oscillation stops. Ki is rarely needed for line followers.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="project-section reveal">
+          <div class="project-section__label">06 — Build Timeline</div>
+          <h2 class="project-section__title">Week by Week</h2>
+
+          <div class="timeline">
+            <div class="timeline__item">
+              <div class="timeline__date">Week 1</div>
+              <div class="timeline__title">Concept & Planning</div>
+              <div class="timeline__desc">Chose PID over bang-bang. Sketched chassis layout. Sourced components from local electronics market.</div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__date">Week 2</div>
+              <div class="timeline__title">Hardware Assembly</div>
+              <div class="timeline__desc">Cut PVC chassis. Mounted motors and caster. Wired motor driver to Arduino. First movement test.</div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__date">Week 3</div>
+              <div class="timeline__title">Sensor Calibration</div>
+              <div class="timeline__desc">Wrote calibration routine. Found sensor 3 giving noisy readings — discovered cold solder joint. Re-soldered, fixed.</div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__date">Week 4</div>
+              <div class="timeline__title">PID Tuning</div>
+              <div class="timeline__desc">Manually tuned Kp, Ki, Kd over 6 hours. Kd was the game changer — killed the oscillation completely.</div>
+            </div>
+            <div class="timeline__item">
+              <div class="timeline__date">Week 5</div>
+              <div class="timeline__title">Track Testing & Refinement</div>
+              <div class="timeline__desc">Final track testing. Added weight to front. Final performance: 0.8 m/s on curves, 1.1 m/s on straights.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAILURES -->
+        <div class="project-section reveal">
+          <div class="project-section__label">07 — Troubleshooting</div>
+          <h2 class="project-section__title">Failures & Fixes</h2>
+
+          <div class="callout callout--error">
+            <span class="callout__icon">⚠️</span>
+            <div>
+              <div class="callout__title">Noisy Sensor Output</div>
+              <div class="callout__body">Sensor 3 was giving inconsistent digital readings. Root cause: cold solder joint on the sensor header pin. Fix: re-soldered with proper flux.</div>
+            </div>
+          </div>
+
+          <div class="callout callout--warning" style="margin-top:var(--sp-4);">
+            <span class="callout__icon">⚡</span>
+            <div>
+              <div class="callout__title">Battery Sag Causing Erratic Behavior</div>
+              <div class="callout__body">Under load, battery voltage dropped from 7.4V to 6.1V, making the motors respond differently. Fix: added 1000µF capacitor across motor power rails and added the buck converter for stable 5V logic.</div>
+            </div>
+          </div>
+
+          <div class="callout callout--warning" style="margin-top:var(--sp-4);">
+            <span class="callout__icon">🔄</span>
+            <div>
+              <div class="callout__title">Oscillation at High Speed</div>
+              <div class="callout__body">Kd was initially 0.1 — not enough damping. Robot would overshoot and oscillate on curves. Increased Kd to 0.8, which provided sufficient damping without slowing response.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="project-section reveal">
+          <div class="project-section__label">08 — Results</div>
+          <h2 class="project-section__title">Final Performance</h2>
+          <div class="project-section__body">
+            <ul>
+              <li><strong>Top speed on curves:</strong> 0.8 m/s</li>
+              <li><strong>Top speed on straights:</strong> 1.1 m/s</li>
+              <li><strong>Track completion:</strong> 10 consecutive laps without losing line</li>
+              <li><strong>Final PID values:</strong> Kp=1.2, Ki=0.0, Kd=0.8</li>
+            </ul>
+          </div>
+
+          <!-- Video placeholder -->
+          <div style="margin-top:var(--sp-6);aspect-ratio:16/9;background:var(--clr-bg-soft);border:1px solid var(--clr-border);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-family:var(--font-mono);font-size:var(--fs-sm);">
+            🎥 Demo video — <em>assets/videos/demo.mp4</em>
+          </div>
+        </div>
+
+        <!-- REFLECTIONS -->
+        <div class="project-section reveal">
+          <div class="project-section__label">09 — Reflection</div>
+          <h2 class="project-section__title">What I Learned</h2>
+          <div class="project-section__body">
+            <p>
+              This project taught me that PID tuning is fundamentally an empirical process. The textbook equations
+              give you a starting point, but the physical world — sensor noise, mechanical slop, power supply
+              variations — means you're always tuning on hardware, not in simulation.
+            </p>
+            <p>
+              The battery sag issue was the most educational failure. I didn't anticipate that voltage fluctuation
+              under load would affect the PID response so dramatically. Adding proper power filtering is now standard
+              in all my subsequent projects.
+            </p>
+            <h4>What I'd Do Differently</h4>
+            <ul>
+              <li>Use encoders on wheels for closed-loop speed control</li>
+              <li>Add a proper PCB instead of jumper wire rats nest</li>
+              <li>Implement auto-tuning using Ziegler–Nichols method</li>
+              <li>Consider a faster microcontroller (ESP32) for better loop frequency</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Project Nav -->
+        <div class="project-nav">
+          <div class="project-nav__item">
+            <div class="project-nav__dir">← Previous</div>
+            <div class="project-nav__title">(No previous project)</div>
+          </div>
+          <a href="/projects/smart-irrigation/" class="project-nav__item project-nav__item--next">
+            <div class="project-nav__dir">Next →</div>
+            <div class="project-nav__title">Smart Irrigation System</div>
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="project-sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Project Info</div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Status</span>
+            <span class="sidebar-card__val"><span class="badge badge--completed">Completed</span></span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Date</span>
+            <span class="sidebar-card__val">March 2025</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Difficulty</span>
+            <span class="sidebar-card__val">Intermediate</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Duration</span>
+            <span class="sidebar-card__val">5 Weeks</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Key Specs</div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Top Speed</span>
+            <span class="sidebar-card__val">1.1 m/s</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Sensor</span>
+            <span class="sidebar-card__val">5-channel IR</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">MCU</span>
+            <span class="sidebar-card__val">Arduino Uno</span>
+          </div>
+          <div class="sidebar-card__row">
+            <span class="sidebar-card__key">Power</span>
+            <span class="sidebar-card__val">18650 Li-Ion</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__title">Links</div>
+          <div class="sidebar-links">
+            <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--outline btn--sm" style="justify-content:center;">
+              GitHub Repository ↗
+            </a>
+            <a href="assets/diagrams/schematic.pdf" target="_blank" class="btn btn--ghost btn--sm" style="justify-content:center;">
+              Schematic PDF ↗
+            </a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div><!-- /project-body -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">Joy</div>
+          <p class="footer__brand-desc">Building intelligent systems with hardware, code, and relentless experimentation.</p>
+        </div>
+        <div>
+          <div class="footer__heading">More Projects</div>
+          <ul class="footer__links">
+            <li><a href="/projects/smart-irrigation/"    class="footer__link">Smart Irrigation</a></li>
+            <li><a href="/projects/holographic-display/" class="footer__link">Holographic Display</a></li>
+            <li><a href="/projects/"                     class="footer__link">All Projects →</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__heading">Connect</div>
+          <ul class="footer__links">
+            <li><a href="https://github.com/"   target="_blank" rel="noopener" class="footer__link">GitHub ↗</a></li>
+            <li><a href="https://linkedin.com/" target="_blank" rel="noopener" class="footer__link">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="footer-year"></span> Joy — Engineering Portfolio</span>
+        <span>Built with HTML · CSS · Vanilla JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/project-page.js"></script>
+  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+[
+  {
+    "id": "line-follower-bot",
+    "title": "Line Follower Robot",
+    "tagline": "An autonomous PID-controlled robot that follows a black line at speed.",
+    "description": "Built using Arduino Uno, L298N motor driver, and an IR sensor array on a PVC chassis. Implements PID control for smooth line tracking.",
+    "thumbnail": "/projects/line-follower-bot/assets/images/cover.jpg",
+    "url": "/projects/line-follower-bot/",
+    "tags": ["Robotics", "Arduino", "Embedded C", "Sensors", "PID"],
+    "status": "Completed",
+    "difficulty": 3,
+    "date": "2025-03-01",
+    "featured": true,
+    "github": "https://github.com/",
+    "components": ["Arduino Uno", "L298N Motor Driver", "IR Sensor Array (5ch)", "TT Motors x2", "PVC Chassis", "18650 Li-Ion Battery"]
+  },
+  {
+    "id": "smart-irrigation",
+    "title": "Smart Irrigation System",
+    "tagline": "IoT-powered plant watering system with soil moisture sensing and remote control.",
+    "description": "ESP32-based system that reads soil moisture, controls a pump via relay, and reports data to a dashboard over Wi-Fi.",
+    "thumbnail": "/projects/smart-irrigation/assets/images/cover.jpg",
+    "url": "/projects/smart-irrigation/",
+    "tags": ["IoT", "ESP32", "Sensors", "MQTT", "Hardware"],
+    "status": "Completed",
+    "difficulty": 2,
+    "date": "2025-01-15",
+    "featured": true,
+    "github": "https://github.com/"
+  },
+  {
+    "id": "holographic-display",
+    "title": "DIY Holographic Display",
+    "tagline": "Persistence-of-vision LED cylinder creating 3D holographic-like visuals.",
+    "description": "A spinning LED strip driven by an ESP32, synced via Hall sensor, rendering cylindrical volumetric images in mid-air.",
+    "thumbnail": "/projects/holographic-display/assets/images/cover.jpg",
+    "url": "/projects/holographic-display/",
+    "tags": ["Experimental", "ESP32", "LED", "Hardware", "POV"],
+    "status": "Prototype",
+    "difficulty": 5,
+    "date": "2025-05-01",
+    "featured": true,
+    "github": "https://github.com/"
+  }
+]

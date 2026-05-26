@@ -1,0 +1,36 @@
+{
+  "id": "your-project-id",
+  "title": "Your Project Title",
+  "tagline": "One sentence describing what this project does.",
+  "status": "Completed",
+  "date": "2025-01-01",
+  "difficulty": 3,
+  "tags": ["Arduino", "IoT", "Sensors"],
+  "github": "https://github.com/your-handle/your-repo",
+  "cover": "assets/images/cover.jpg",
+  "featured": false,
+
+  "problem": "What problem does this solve? Why did you build it? Keep this personal and honest.",
+
+  "components": [
+    { "name": "Component Name", "qty": 1, "purpose": "Why this component" }
+  ],
+
+  "timeline": [
+    { "date": "Week 1", "title": "Phase Name",  "desc": "What happened this week." }
+  ],
+
+  "failures": [
+    "Brief description of a failure and how you fixed it."
+  ],
+
+  "results": {
+    "metric_name": "metric value"
+  },
+
+  "reflections": {
+    "what_worked": "What went well.",
+    "what_failed": "What didn't.",
+    "next_time":   "What you'd do differently."
+  }
+}

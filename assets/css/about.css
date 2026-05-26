@@ -1,0 +1,286 @@
+/* ============================================================
+   ABOUT.CSS — About Page
+   ============================================================ */
+
+/* ----------------------------------------
+   ABOUT HERO
+   ---------------------------------------- */
+
+.about-hero {
+  padding-top: var(--sp-20);
+  padding-bottom: var(--sp-16);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.about-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-12);
+  align-items: center;
+}
+
+.about-hero__title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-5);
+}
+
+.about-hero__bio {
+  font-size: var(--fs-lg);
+  color: var(--clr-text-muted);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: var(--sp-8);
+}
+
+.about-hero__photo {
+  width: 220px;
+  height: 220px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--clr-bg-soft);
+  border: 1px solid var(--clr-border);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.about-hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder */
+.about-hero__photo--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: var(--clr-border);
+}
+
+@media (max-width: 768px) {
+  .about-hero__inner {
+    grid-template-columns: 1fr;
+  }
+  .about-hero__photo {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* ----------------------------------------
+   SKILLS SECTION
+   ---------------------------------------- */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--sp-4);
+  margin-top: var(--sp-10);
+}
+
+.skill-card {
+  background: var(--clr-bg-soft);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  transition: all var(--transition-base);
+}
+
+.skill-card:hover {
+  border-color: var(--clr-border-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.skill-card__icon {
+  font-size: 1.75rem;
+  margin-bottom: var(--sp-3);
+}
+
+.skill-card__name {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  font-family: var(--font-heading);
+  margin-bottom: var(--sp-2);
+}
+
+.skill-card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* ----------------------------------------
+   PHILOSOPHY SECTION
+   ---------------------------------------- */
+
+.philosophy-quote {
+  border-left: 4px solid var(--clr-accent-teal);
+  padding: var(--sp-6) var(--sp-8);
+  background: rgba(0,128,128,0.04);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-block: var(--sp-10);
+}
+
+.philosophy-quote__text {
+  font-size: var(--fs-xl);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--clr-text-primary);
+  font-style: italic;
+}
+
+/* ----------------------------------------
+   TIMELINE — Learning Journey
+   ---------------------------------------- */
+
+.learning-timeline {
+  margin-top: var(--sp-10);
+  position: relative;
+  padding-left: var(--sp-10);
+}
+
+.learning-timeline::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--clr-accent-teal), var(--clr-accent-mint));
+  border-radius: 1px;
+}
+
+.lt-item {
+  position: relative;
+  margin-bottom: var(--sp-10);
+}
+
+.lt-item__dot {
+  position: absolute;
+  left: calc(-1 * var(--sp-10) + 10px);
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--clr-accent-teal);
+  border: 3px solid var(--clr-bg);
+  box-shadow: 0 0 0 2px var(--clr-accent-teal);
+}
+
+.lt-item__year {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--clr-accent-teal);
+  margin-bottom: var(--sp-1);
+}
+
+.lt-item__title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  font-family: var(--font-heading);
+  margin-bottom: var(--sp-2);
+}
+
+.lt-item__desc {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+}
+
+/* ----------------------------------------
+   TOOLS SECTION
+   ---------------------------------------- */
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--sp-3);
+  margin-top: var(--sp-8);
+}
+
+.tool-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  background: var(--clr-bg-soft);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--clr-text-muted);
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.tool-chip:hover {
+  border-color: var(--clr-border-accent);
+  color: var(--clr-accent-teal);
+  transform: translateY(-2px);
+}
+
+.tool-chip__icon {
+  font-size: 1.5rem;
+}
+
+/* ----------------------------------------
+   CONTACT / CONNECT SECTION
+   ---------------------------------------- */
+
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--sp-4);
+  margin-top: var(--sp-8);
+}
+
+.connect-card {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  background: var(--clr-bg-soft);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  text-decoration: none;
+  color: var(--clr-text-primary);
+}
+
+.connect-card:hover {
+  border-color: var(--clr-border-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.connect-card__icon {
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,128,128,0.08);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.connect-card__label {
+  font-size: var(--fs-xs);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--sp-1);
+}
+
+.connect-card__value {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}

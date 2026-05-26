@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background square with rounded corners -->
+  <rect width="32" height="32" rx="6" fill="#008080"/>
+  <!-- Letter J stylised -->
+  <text
+    x="16" y="23"
+    font-family="'Syne', 'Poppins', sans-serif"
+    font-size="20"
+    font-weight="800"
+    fill="#ffffff"
+    text-anchor="middle"
+  >J</text>
+  <!-- Small circuit dot accent -->
+  <circle cx="24" cy="9" r="2.5" fill="#3EB489"/>
+  <line x1="20" y1="9" x2="24" y2="9" stroke="#3EB489" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

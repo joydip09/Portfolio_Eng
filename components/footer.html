@@ -1,0 +1,60 @@
+<!-- ============================================================
+     FOOTER.HTML — Site Footer Component
+     ============================================================ -->
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+
+      <!-- Brand -->
+      <div>
+        <div class="footer__brand-name">Joy</div>
+        <p class="footer__brand-desc">
+          Building intelligent systems with hardware, code, and relentless experimentation.
+          This is my engineering lab notebook — open to the world.
+        </p>
+      </div>
+
+      <!-- Projects -->
+      <div>
+        <div class="footer__heading">Projects</div>
+        <ul class="footer__links">
+          <li><a href="/projects/line-follower-bot/" class="footer__link">Line Follower Bot</a></li>
+          <li><a href="/projects/smart-irrigation/"  class="footer__link">Smart Irrigation</a></li>
+          <li><a href="/projects/holographic-display/" class="footer__link">Holographic Display</a></li>
+          <li><a href="/projects/"                   class="footer__link">View All →</a></li>
+        </ul>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <div class="footer__heading">Navigate</div>
+        <ul class="footer__links">
+          <li><a href="/"           class="footer__link">Home</a></li>
+          <li><a href="/about.html" class="footer__link">About</a></li>
+          <li><a href="/about.html#contact" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <div class="footer__heading">Connect</div>
+        <ul class="footer__links">
+          <li><a href="https://github.com/"    target="_blank" rel="noopener" class="footer__link">GitHub ↗</a></li>
+          <li><a href="https://linkedin.com/"  target="_blank" rel="noopener" class="footer__link">LinkedIn ↗</a></li>
+          <li><a href="mailto:your@email.com"                                 class="footer__link">Email ↗</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span id="footer-year"></span> Joy — Engineering Portfolio</span>
+      <span>Built with HTML · CSS · Vanilla JS</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
