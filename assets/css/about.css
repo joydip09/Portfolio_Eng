@@ -121,7 +121,7 @@
 .philosophy-quote {
   border-left: 4px solid var(--clr-accent-teal);
   padding: var(--sp-6) var(--sp-8);
-  background: rgba(0,128,128,0.04);
+  background: rgba(0, 128, 128, 0.04);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   margin-block: var(--sp-10);
 }
@@ -146,13 +146,17 @@
 }
 
 .learning-timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 16px;
   top: 8px;
   bottom: 8px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--clr-accent-teal), var(--clr-accent-mint));
+  background: linear-gradient(
+    to bottom,
+    var(--clr-accent-teal),
+    var(--clr-accent-mint)
+  );
   border-radius: 1px;
 }
 
@@ -238,7 +242,7 @@
 
 .connect-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--sp-4);
   margin-top: var(--sp-8);
 }
@@ -269,7 +273,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,128,128,0.08);
+  background: rgba(0, 128, 128, 0.08);
   border-radius: var(--radius-md);
   flex-shrink: 0;
 }
@@ -283,4 +287,16 @@
 .connect-card__value {
   font-size: var(--fs-sm);
   font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Prevent long unbroken text from overflowing flex items */
+.connect-card {
+  min-width: 0;
+}
+.connect-card > div {
+  min-width: 0;
+}
+.connect-card__value {
+  white-space: nowrap;
 }

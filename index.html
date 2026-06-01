@@ -1,218 +1,317 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Joy — Engineering portfolio documenting IoT, robotics, embedded systems, and electronics experiments.">
-  <title>Joy — Engineering Portfolio</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Joy — Engineering portfolio documenting IoT, robotics, embedded systems, and electronics experiments."
+    />
+    <title>Joy — Engineering Portfolio</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/variables.css">
-  <link rel="stylesheet" href="/assets/css/base.css">
-  <link rel="stylesheet" href="/assets/css/nav.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/home.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/variables.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/nav.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/home.css" />
 
-  <!-- Favicon placeholder -->
-  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
-</head>
-<body>
+    <!-- Favicon placeholder -->
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <!-- ===================== NAV ===================== -->
+    <!-- Inline from components/header.html -->
+    <div
+      id="reading-progress"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, #008080, #3eb489);
+        z-index: 1001;
+      "
+    ></div>
 
-  <!-- ===================== NAV ===================== -->
-  <!-- Inline from components/header.html -->
-  <div id="reading-progress" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#008080,#3EB489);z-index:1001;"></div>
-
-  <header class="nav" role="banner">
-    <div class="nav__inner">
-      <a href="/" class="nav__logo">
-        <div class="nav__logo-mark">J</div>
-        <span>Joy</span>
-      </a>
-      <nav class="nav__links" aria-label="Primary navigation">
-        <a href="/"                   class="nav__link active">Home</a>
-        <a href="/projects/"          class="nav__link">Projects</a>
-        <a href="/about.html"         class="nav__link">About</a>
+    <header class="nav" role="banner">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo">
+          <div class="nav__logo-mark">J</div>
+          <span>Joy</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="/" class="nav__link active">Home</a>
+          <a href="/projects/" class="nav__link">Projects</a>
+          <a href="/about.html" class="nav__link">About</a>
+          <a href="/about.html#contact" class="nav__link">Contact</a>
+        </nav>
+        <div class="nav__actions">
+          <a
+            href="https://github.com/joydip09"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--ghost btn--sm"
+            >GitHub ↗</a
+          >
+          <button class="nav__hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <nav class="nav__mobile" aria-label="Mobile navigation">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/projects/" class="nav__link">Projects</a>
+        <a href="/about.html" class="nav__link">About</a>
         <a href="/about.html#contact" class="nav__link">Contact</a>
+        <a
+          href="https://github.com/joydip09"
+          target="_blank"
+          rel="noopener"
+          class="btn btn--outline"
+          style="width: fit-content"
+          >GitHub ↗</a
+        >
       </nav>
-      <div class="nav__actions">
-        <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">GitHub ↗</a>
-        <button class="nav__hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-    <nav class="nav__mobile" aria-label="Mobile navigation">
-      <a href="/"           class="nav__link">Home</a>
-      <a href="/projects/"  class="nav__link">Projects</a>
-      <a href="/about.html" class="nav__link">About</a>
-      <a href="/about.html#contact" class="nav__link">Contact</a>
-      <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--outline" style="width:fit-content;">GitHub ↗</a>
-    </nav>
-  </header>
+    </header>
 
-  <main>
+    <main>
+      <!-- ===================== HERO ===================== -->
+      <section class="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__particles" aria-hidden="true"></div>
 
-    <!-- ===================== HERO ===================== -->
-    <section class="hero">
-      <div class="hero__bg"></div>
-      <div class="hero__particles" aria-hidden="true"></div>
-
-      <div class="container hero__content">
-
-        <div class="hero__eyebrow reveal">
-          <span class="hero__eyebrow-dot"></span>
-          Engineering Lab — Open to the World
-        </div>
-
-        <h1 class="hero__title reveal" data-delay="80">
-          Building Systems That <span class="accent">Actually Work.</span>
-        </h1>
-
-        <p class="hero__desc reveal" data-delay="160">
-          I'm Joy — I build IoT devices, robots, embedded systems, and electronics experiments.
-          This portfolio documents the full journey: ideation, failures, debugging, and breakthroughs.
-        </p>
-
-        <div class="hero__actions reveal" data-delay="240">
-          <a href="/projects/" class="btn btn--primary btn--lg">View Projects</a>
-          <a href="/about.html" class="btn btn--outline btn--lg">About Me</a>
-          <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">GitHub ↗</a>
-        </div>
-
-        <div class="hero__stats reveal" data-delay="320">
-          <div>
-            <div class="hero__stat-num">3+</div>
-            <div class="hero__stat-label">Projects Built</div>
+        <div class="container hero__content">
+          <div class="hero__eyebrow reveal">
+            <span class="hero__eyebrow-dot"></span>
+            Engineering Lab — Open to the World
           </div>
-          <div>
-            <div class="hero__stat-num">5+</div>
-            <div class="hero__stat-label">Tech Stacks</div>
+
+          <h1 class="hero__title reveal" data-delay="80">
+            Building Systems That <span class="accent">Actually Work.</span>
+          </h1>
+
+          <p class="hero__desc reveal" data-delay="160">
+            I'm Joy — I build IoT devices, robots, embedded systems, and
+            electronics experiments. This portfolio documents the full journey:
+            ideation, failures, debugging, and breakthroughs.
+          </p>
+
+          <div class="hero__actions reveal" data-delay="240">
+            <a href="/projects/" class="btn btn--primary btn--lg"
+              >View Projects</a
+            >
+            <a href="/about.html" class="btn btn--outline btn--lg">About Me</a>
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener"
+              class="btn btn--ghost btn--lg"
+              >GitHub ↗</a
+            >
           </div>
-          <div>
-            <div class="hero__stat-num">∞</div>
-            <div class="hero__stat-label">Experiments</div>
+
+          <div class="hero__stats reveal" data-delay="320">
+            <div>
+              <div class="hero__stat-num">3+</div>
+              <div class="hero__stat-label">Projects Built</div>
+            </div>
+            <div>
+              <div class="hero__stat-num">5+</div>
+              <div class="hero__stat-label">Tech Stacks</div>
+            </div>
+            <div>
+              <div class="hero__stat-num">∞</div>
+              <div class="hero__stat-label">Experiments</div>
+            </div>
           </div>
         </div>
+      </section>
 
+      <!-- ===================== STACK STRIP ===================== -->
+      <div class="stack-strip" aria-hidden="true">
+        <div class="stack-strip__track">
+          <!-- Duplicated for seamless loop -->
+          <span class="stack-strip__item"><span>⚙</span> Arduino</span>
+          <span class="stack-strip__item"><span>📡</span> ESP32</span>
+          <span class="stack-strip__item"><span>🤖</span> Robotics</span>
+          <span class="stack-strip__item"><span>🌐</span> IoT</span>
+          <span class="stack-strip__item"><span>🔌</span> Embedded C</span>
+          <span class="stack-strip__item"><span>📊</span> MQTT</span>
+          <span class="stack-strip__item"><span>⚡</span> Electronics</span>
+          <span class="stack-strip__item"><span>🧠</span> PID Control</span>
+          <span class="stack-strip__item"><span>📷</span> Computer Vision</span>
+          <span class="stack-strip__item"><span>🔧</span> Hardware</span>
+          <!-- Repeat for seamless -->
+          <span class="stack-strip__item"><span>⚙</span> Arduino</span>
+          <span class="stack-strip__item"><span>📡</span> ESP32</span>
+          <span class="stack-strip__item"><span>🤖</span> Robotics</span>
+          <span class="stack-strip__item"><span>🌐</span> IoT</span>
+          <span class="stack-strip__item"><span>🔌</span> Embedded C</span>
+          <span class="stack-strip__item"><span>📊</span> MQTT</span>
+          <span class="stack-strip__item"><span>⚡</span> Electronics</span>
+          <span class="stack-strip__item"><span>🧠</span> PID Control</span>
+          <span class="stack-strip__item"><span>📷</span> Computer Vision</span>
+          <span class="stack-strip__item"><span>🔧</span> Hardware</span>
+        </div>
       </div>
-    </section>
 
-    <!-- ===================== STACK STRIP ===================== -->
-    <div class="stack-strip" aria-hidden="true">
-      <div class="stack-strip__track">
-        <!-- Duplicated for seamless loop -->
-        <span class="stack-strip__item"><span>⚙</span> Arduino</span>
-        <span class="stack-strip__item"><span>📡</span> ESP32</span>
-        <span class="stack-strip__item"><span>🤖</span> Robotics</span>
-        <span class="stack-strip__item"><span>🌐</span> IoT</span>
-        <span class="stack-strip__item"><span>🔌</span> Embedded C</span>
-        <span class="stack-strip__item"><span>📊</span> MQTT</span>
-        <span class="stack-strip__item"><span>⚡</span> Electronics</span>
-        <span class="stack-strip__item"><span>🧠</span> PID Control</span>
-        <span class="stack-strip__item"><span>📷</span> Computer Vision</span>
-        <span class="stack-strip__item"><span>🔧</span> Hardware</span>
-        <!-- Repeat for seamless -->
-        <span class="stack-strip__item"><span>⚙</span> Arduino</span>
-        <span class="stack-strip__item"><span>📡</span> ESP32</span>
-        <span class="stack-strip__item"><span>🤖</span> Robotics</span>
-        <span class="stack-strip__item"><span>🌐</span> IoT</span>
-        <span class="stack-strip__item"><span>🔌</span> Embedded C</span>
-        <span class="stack-strip__item"><span>📊</span> MQTT</span>
-        <span class="stack-strip__item"><span>⚡</span> Electronics</span>
-        <span class="stack-strip__item"><span>🧠</span> PID Control</span>
-        <span class="stack-strip__item"><span>📷</span> Computer Vision</span>
-        <span class="stack-strip__item"><span>🔧</span> Hardware</span>
-      </div>
-    </div>
+      <!-- ===================== FEATURED PROJECTS ===================== -->
+      <section class="section featured">
+        <div class="container">
+          <div class="reveal">
+            <p class="section-label">Featured Work</p>
+            <h2 class="section-title">Recent Projects</h2>
+            <p class="section-desc">
+              A selection of builds that pushed my limits. Click any project to
+              read the full engineering story.
+            </p>
+          </div>
 
-    <!-- ===================== FEATURED PROJECTS ===================== -->
-    <section class="section featured">
+          <div class="featured__grid" id="featured-grid" data-stagger>
+            <!-- Populated by projects.js -->
+            <div
+              style="
+                height: 320px;
+                background: var(--clr-bg-soft);
+                border-radius: var(--radius-lg);
+                border: 1px solid var(--clr-border);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--clr-text-muted);
+                font-family: var(--font-mono);
+                font-size: var(--fs-sm);
+              "
+            >
+              Loading projects...
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: var(--sp-10)">
+            <a href="/projects/" class="btn btn--outline btn--lg"
+              >All Projects →</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== ALL PROJECTS FEED ===================== -->
+      <section class="section" id="projects">
+        <div class="container">
+          <div class="reveal">
+            <p class="section-label">Project Library</p>
+            <h2 class="section-title">Everything I've Built</h2>
+            <p class="section-desc">
+              Filter by technology or domain. Every project includes full
+              documentation of the build process.
+            </p>
+          </div>
+
+          <!-- Filter Bar -->
+          <div
+            class="filter-bar reveal"
+            data-delay="80"
+            id="filter-bar"
+            role="tablist"
+            aria-label="Filter projects"
+          >
+            <!-- Populated by projects.js -->
+          </div>
+
+          <!-- Feed Grid -->
+          <div class="project-feed" id="project-feed" data-stagger>
+            <!-- Populated by projects.js -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer" role="contentinfo">
       <div class="container">
-        <div class="reveal">
-          <p class="section-label">Featured Work</p>
-          <h2 class="section-title">Recent Projects</h2>
-          <p class="section-desc">A selection of builds that pushed my limits. Click any project to read the full engineering story.</p>
+        <div class="footer__grid">
+          <div>
+            <div class="footer__brand-name">Joy</div>
+            <p class="footer__brand-desc">
+              Building intelligent systems with hardware, code, and relentless
+              experimentation.
+            </p>
+          </div>
+          <div>
+            <div class="footer__heading">Projects</div>
+            <ul class="footer__links">
+              <li>
+                <a href="/projects/line-follower-bot/" class="footer__link"
+                  >Line Follower Bot</a
+                >
+              </li>
+              <li>
+                <a href="/projects/smart-irrigation/" class="footer__link"
+                  >Smart Irrigation</a
+                >
+              </li>
+              <li>
+                <a href="/projects/holographic-display/" class="footer__link"
+                  >Holographic Display</a
+                >
+              </li>
+              <li><a href="/projects/" class="footer__link">View All →</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer__heading">Navigate</div>
+            <ul class="footer__links">
+              <li><a href="/" class="footer__link">Home</a></li>
+              <li><a href="/about.html" class="footer__link">About</a></li>
+              <li>
+                <a href="/about.html#contact" class="footer__link">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer__heading">Connect</div>
+            <ul class="footer__links">
+              <li>
+                <a
+                  href="https://github.com/"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >GitHub ↗</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://linkedin.com/"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >LinkedIn ↗</a
+                >
+              </li>
+              <li>
+                <a href="mailto:your@email.com" class="footer__link">Email ↗</a>
+              </li>
+            </ul>
+          </div>
         </div>
-
-        <div class="featured__grid" id="featured-grid" data-stagger>
-          <!-- Populated by projects.js -->
-          <div style="height:320px;background:var(--clr-bg-soft);border-radius:var(--radius-lg);border:1px solid var(--clr-border);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-family:var(--font-mono);font-size:var(--fs-sm);">Loading projects...</div>
-        </div>
-
-        <div style="text-align:center;margin-top:var(--sp-10);">
-          <a href="/projects/" class="btn btn--outline btn--lg">All Projects →</a>
+        <div class="footer__bottom">
+          <span
+            >© <span id="footer-year"></span> Joy — Engineering Portfolio</span
+          >
+          <span>Built with HTML · CSS · Vanilla JS</span>
         </div>
       </div>
-    </section>
+    </footer>
 
-    <!-- ===================== ALL PROJECTS FEED ===================== -->
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="reveal">
-          <p class="section-label">Project Library</p>
-          <h2 class="section-title">Everything I've Built</h2>
-          <p class="section-desc">Filter by technology or domain. Every project includes full documentation of the build process.</p>
-        </div>
-
-        <!-- Filter Bar -->
-        <div class="filter-bar reveal" data-delay="80" id="filter-bar" role="tablist" aria-label="Filter projects">
-          <!-- Populated by projects.js -->
-        </div>
-
-        <!-- Feed Grid -->
-        <div class="project-feed" id="project-feed" data-stagger>
-          <!-- Populated by projects.js -->
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer__grid">
-        <div>
-          <div class="footer__brand-name">Joy</div>
-          <p class="footer__brand-desc">Building intelligent systems with hardware, code, and relentless experimentation.</p>
-        </div>
-        <div>
-          <div class="footer__heading">Projects</div>
-          <ul class="footer__links">
-            <li><a href="/projects/line-follower-bot/" class="footer__link">Line Follower Bot</a></li>
-            <li><a href="/projects/smart-irrigation/"  class="footer__link">Smart Irrigation</a></li>
-            <li><a href="/projects/holographic-display/" class="footer__link">Holographic Display</a></li>
-            <li><a href="/projects/"                    class="footer__link">View All →</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__heading">Navigate</div>
-          <ul class="footer__links">
-            <li><a href="/"           class="footer__link">Home</a></li>
-            <li><a href="/about.html" class="footer__link">About</a></li>
-            <li><a href="/about.html#contact" class="footer__link">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__heading">Connect</div>
-          <ul class="footer__links">
-            <li><a href="https://github.com/"   target="_blank" rel="noopener" class="footer__link">GitHub ↗</a></li>
-            <li><a href="https://linkedin.com/" target="_blank" rel="noopener" class="footer__link">LinkedIn ↗</a></li>
-            <li><a href="mailto:your@email.com"                                class="footer__link">Email ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span>© <span id="footer-year"></span> Joy — Engineering Portfolio</span>
-        <span>Built with HTML · CSS · Vanilla JS</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/projects.js"></script>
-  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
-
-</body>
+    <!-- Scripts -->
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/projects.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
 </html>
