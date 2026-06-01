@@ -6,29 +6,53 @@
   "date": "2025-03-01",
   "difficulty": 3,
   "tags": ["Robotics", "Arduino", "Embedded C", "Sensors", "PID"],
-  "github": "https://github.com/",
+  "github": "https://github.com/joydip09/",
   "cover": "assets/images/cover.jpg",
 
   "problem": "I wanted to build a fully autonomous robot that could follow a predefined path reliably — something that actually moves at speed without constantly overcorrecting. The classic bang-bang control felt clunky. I wanted smooth, responsive motion.",
 
   "components": [
-    { "name": "Arduino Uno",         "qty": 1, "purpose": "Main microcontroller" },
-    { "name": "L298N Motor Driver",  "qty": 1, "purpose": "Dual DC motor control" },
+    { "name": "Arduino Uno", "qty": 1, "purpose": "Main microcontroller" },
+    {
+      "name": "L298N Motor Driver",
+      "qty": 1,
+      "purpose": "Dual DC motor control"
+    },
     { "name": "IR Sensor Array (5ch)", "qty": 1, "purpose": "Line detection" },
-    { "name": "TT DC Motors",        "qty": 2, "purpose": "Drive wheels" },
-    { "name": "PVC Chassis",         "qty": 1, "purpose": "Frame and structure" },
-    { "name": "18650 Li-Ion Battery","qty": 2, "purpose": "Power supply" },
-    { "name": "Wheels (65mm)",       "qty": 2, "purpose": "Traction" },
-    { "name": "Caster Wheel",        "qty": 1, "purpose": "Front balance" },
-    { "name": "Buck Converter",      "qty": 1, "purpose": "5V regulation for logic" }
+    { "name": "TT DC Motors", "qty": 2, "purpose": "Drive wheels" },
+    { "name": "PVC Chassis", "qty": 1, "purpose": "Frame and structure" },
+    { "name": "18650 Li-Ion Battery", "qty": 2, "purpose": "Power supply" },
+    { "name": "Wheels (65mm)", "qty": 2, "purpose": "Traction" },
+    { "name": "Caster Wheel", "qty": 1, "purpose": "Front balance" },
+    { "name": "Buck Converter", "qty": 1, "purpose": "5V regulation for logic" }
   ],
 
   "timeline": [
-    { "date": "Week 1", "title": "Concept & Planning",    "desc": "Chose PID over bang-bang. Sketched chassis layout. Sourced components." },
-    { "date": "Week 2", "title": "Hardware Assembly",     "desc": "Cut PVC chassis. Mounted motors and caster. Wired motor driver to Arduino." },
-    { "date": "Week 3", "title": "Sensor Calibration",   "desc": "Wrote calibration routine. Found sensor 3 was giving noisy readings — resoldered joint." },
-    { "date": "Week 4", "title": "PID Tuning",           "desc": "Manually tuned Kp, Ki, Kd. Spent 6 hours on this. Kd was the game changer." },
-    { "date": "Week 5", "title": "Testing & Refinement", "desc": "Track testing. Added weight balancing to the front. Final performance: 0.8m/s on curves." }
+    {
+      "date": "Week 1",
+      "title": "Concept & Planning",
+      "desc": "Chose PID over bang-bang. Sketched chassis layout. Sourced components."
+    },
+    {
+      "date": "Week 2",
+      "title": "Hardware Assembly",
+      "desc": "Cut PVC chassis. Mounted motors and caster. Wired motor driver to Arduino."
+    },
+    {
+      "date": "Week 3",
+      "title": "Sensor Calibration",
+      "desc": "Wrote calibration routine. Found sensor 3 was giving noisy readings — resoldered joint."
+    },
+    {
+      "date": "Week 4",
+      "title": "PID Tuning",
+      "desc": "Manually tuned Kp, Ki, Kd. Spent 6 hours on this. Kd was the game changer."
+    },
+    {
+      "date": "Week 5",
+      "title": "Testing & Refinement",
+      "desc": "Track testing. Added weight balancing to the front. Final performance: 0.8m/s on curves."
+    }
   ],
 
   "failures": [

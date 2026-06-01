@@ -6,21 +6,53 @@
   "date": "2025-05-01",
   "difficulty": 5,
   "tags": ["Experimental", "ESP32", "LED", "Hardware", "POV"],
-  "github": "https://github.com/",
+  "github": "https://github.com/joydip09/",
   "cover": "assets/images/cover.jpg",
 
   "problem": "I wanted to explore volumetric displays — the kind that make light appear to float in 3D space. Commercial options cost thousands. Could I build something similar from scratch for under ₹2000?",
 
   "components": [
-    { "name": "ESP32 Dev Board",        "qty": 1,   "purpose": "Main controller + Wi-Fi for frame upload" },
-    { "name": "WS2812B LED Strip",      "qty": 1,   "purpose": "60 LEDs/m, 30cm length = 18 addressable LEDs per arm" },
-    { "name": "Hall Effect Sensor",     "qty": 1,   "purpose": "RPM sync — detects one full rotation" },
-    { "name": "Neodymium Magnet",       "qty": 1,   "purpose": "Triggers Hall sensor once per revolution" },
-    { "name": "DC Brushless Motor",     "qty": 1,   "purpose": "Spinning the LED arm at ~600 RPM" },
-    { "name": "Slip Ring (6-wire)",     "qty": 1,   "purpose": "Power + data transfer to spinning assembly" },
-    { "name": "3D Printed Frame",       "qty": 1,   "purpose": "LED arm mount and motor coupling" },
-    { "name": "5V 3A Power Supply",     "qty": 1,   "purpose": "LED strip power (draws up to 2A at full white)" },
-    { "name": "Acrylic Base",           "qty": 1,   "purpose": "Housing and stability" }
+    {
+      "name": "ESP32 Dev Board",
+      "qty": 1,
+      "purpose": "Main controller + Wi-Fi for frame upload"
+    },
+    {
+      "name": "WS2812B LED Strip",
+      "qty": 1,
+      "purpose": "60 LEDs/m, 30cm length = 18 addressable LEDs per arm"
+    },
+    {
+      "name": "Hall Effect Sensor",
+      "qty": 1,
+      "purpose": "RPM sync — detects one full rotation"
+    },
+    {
+      "name": "Neodymium Magnet",
+      "qty": 1,
+      "purpose": "Triggers Hall sensor once per revolution"
+    },
+    {
+      "name": "DC Brushless Motor",
+      "qty": 1,
+      "purpose": "Spinning the LED arm at ~600 RPM"
+    },
+    {
+      "name": "Slip Ring (6-wire)",
+      "qty": 1,
+      "purpose": "Power + data transfer to spinning assembly"
+    },
+    {
+      "name": "3D Printed Frame",
+      "qty": 1,
+      "purpose": "LED arm mount and motor coupling"
+    },
+    {
+      "name": "5V 3A Power Supply",
+      "qty": 1,
+      "purpose": "LED strip power (draws up to 2A at full white)"
+    },
+    { "name": "Acrylic Base", "qty": 1, "purpose": "Housing and stability" }
   ],
 
   "results": {

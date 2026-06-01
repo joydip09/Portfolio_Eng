@@ -11,8 +11,15 @@
     "difficulty": 3,
     "date": "2025-03-01",
     "featured": true,
-    "github": "https://github.com/",
-    "components": ["Arduino Uno", "L298N Motor Driver", "IR Sensor Array (5ch)", "TT Motors x2", "PVC Chassis", "18650 Li-Ion Battery"]
+    "github": "https://github.com/joydip09/",
+    "components": [
+      "Arduino Uno",
+      "L298N Motor Driver",
+      "IR Sensor Array (5ch)",
+      "TT Motors x2",
+      "PVC Chassis",
+      "18650 Li-Ion Battery"
+    ]
   },
   {
     "id": "smart-irrigation",
@@ -26,7 +33,7 @@
     "difficulty": 2,
     "date": "2025-01-15",
     "featured": true,
-    "github": "https://github.com/"
+    "github": "https://github.com/joydip09/"
   },
   {
     "id": "holographic-display",
@@ -40,6 +47,6 @@
     "difficulty": 5,
     "date": "2025-05-01",
     "featured": true,
-    "github": "https://github.com/"
+    "github": "https://github.com/joydip09/"
   }
 ]

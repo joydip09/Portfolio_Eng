@@ -1,208 +1,354 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Smart Irrigation System — IoT plant watering with ESP32, soil moisture sensors, MQTT, and remote control.">
-  <title>Smart Irrigation System — Joy</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Smart Irrigation System — IoT plant watering with ESP32, soil moisture sensors, MQTT, and remote control."
+    />
+    <title>Smart Irrigation System — Joy</title>
 
-  <link rel="stylesheet" href="/assets/css/variables.css">
-  <link rel="stylesheet" href="/assets/css/base.css">
-  <link rel="stylesheet" href="/assets/css/nav.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/project.css">
-  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
-</head>
-<body>
+    <link rel="stylesheet" href="/assets/css/variables.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/nav.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/project.css" />
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div
+      id="reading-progress"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, #008080, #3eb489);
+        z-index: 1001;
+        transition: width 0.1s linear;
+      "
+    ></div>
 
-  <div id="reading-progress" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#008080,#3EB489);z-index:1001;transition:width .1s linear;"></div>
-
-  <!-- NAV -->
-  <header class="nav" role="banner">
-    <div class="nav__inner">
-      <a href="/" class="nav__logo">
-        <div class="nav__logo-mark">J</div>
-        <span>Joy</span>
-      </a>
-      <nav class="nav__links" aria-label="Primary navigation">
-        <a href="/"           class="nav__link">Home</a>
-        <a href="/projects/"  class="nav__link active">Projects</a>
+    <!-- NAV -->
+    <header class="nav" role="banner">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo">
+          <div class="nav__logo-mark">J</div>
+          <span>Joy</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="/" class="nav__link">Home</a>
+          <a href="/projects/" class="nav__link active">Projects</a>
+          <a href="/about.html" class="nav__link">About</a>
+          <a href="/about.html#contact" class="nav__link">Contact</a>
+        </nav>
+        <div class="nav__actions">
+          <a
+            href="https://github.com/joydip09"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--ghost btn--sm"
+            >GitHub ↗</a
+          >
+          <button class="nav__hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <nav class="nav__mobile">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/projects/" class="nav__link">Projects</a>
         <a href="/about.html" class="nav__link">About</a>
         <a href="/about.html#contact" class="nav__link">Contact</a>
       </nav>
-      <div class="nav__actions">
-        <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">GitHub ↗</a>
-        <button class="nav__hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-    <nav class="nav__mobile">
-      <a href="/"           class="nav__link">Home</a>
-      <a href="/projects/"  class="nav__link">Projects</a>
-      <a href="/about.html" class="nav__link">About</a>
-      <a href="/about.html#contact" class="nav__link">Contact</a>
-    </nav>
-  </header>
+    </header>
 
-  <main>
+    <main>
+      <!-- HERO -->
+      <section class="project-hero">
+        <div class="project-hero__bg"></div>
+        <div class="project-hero__content">
+          <div class="project-hero__breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/projects/">Projects</a>
+            <span>/</span>
+            <span>Smart Irrigation System</span>
+          </div>
 
-    <!-- HERO -->
-    <section class="project-hero">
-      <div class="project-hero__bg"></div>
-      <div class="project-hero__content">
+          <div class="project-hero__meta-top">
+            <span class="badge badge--completed">Completed</span>
+            <span class="tag">IoT</span>
+            <span class="tag">ESP32</span>
+            <span class="tag">MQTT</span>
+          </div>
 
-        <div class="project-hero__breadcrumb">
-          <a href="/">Home</a>
-          <span>/</span>
-          <a href="/projects/">Projects</a>
-          <span>/</span>
-          <span>Smart Irrigation System</span>
-        </div>
+          <h1 class="project-hero__title reveal">Smart Irrigation System</h1>
+          <p class="project-hero__tagline reveal" data-delay="60">
+            An ESP32-powered automatic plant watering system — reads soil
+            moisture from two sensors, controls a submersible pump via relay,
+            and publishes live data over MQTT to a dashboard.
+          </p>
 
-        <div class="project-hero__meta-top">
-          <span class="badge badge--completed">Completed</span>
-          <span class="tag">IoT</span>
-          <span class="tag">ESP32</span>
-          <span class="tag">MQTT</span>
-        </div>
-
-        <h1 class="project-hero__title reveal">Smart Irrigation System</h1>
-        <p class="project-hero__tagline reveal" data-delay="60">
-          An ESP32-powered automatic plant watering system — reads soil moisture from two sensors,
-          controls a submersible pump via relay, and publishes live data over MQTT to a dashboard.
-        </p>
-
-        <div class="project-hero__stack reveal" data-delay="100">
-          <span class="tag">ESP32</span>
-          <span class="tag">Capacitive Soil Sensor</span>
-          <span class="tag">5V Relay</span>
-          <span class="tag">Mini Pump</span>
-          <span class="tag">MQTT</span>
-          <span class="tag">OLED Display</span>
-        </div>
-
-      </div>
-
-      <div style="max-width:var(--container-max);margin-inline:auto;padding-inline:var(--sp-6);">
-        <div class="project-hero__cover reveal" data-delay="140">
-          <img src="assets/images/cover.jpg" alt="Smart Irrigation System"
-               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>🌱</div>'">
-        </div>
-      </div>
-    </section>
-
-    <!-- BODY -->
-    <div class="project-body">
-
-      <article class="project-main">
-
-        <!-- PROBLEM -->
-        <div class="project-section reveal">
-          <div class="project-section__label">01 — Problem</div>
-          <h2 class="project-section__title">Why I Built This</h2>
-          <div class="project-section__body">
-            <p>
-              Plants in my room kept dying — not from neglect exactly, but from inconsistency.
-              Sometimes I'd water too much, sometimes too little. It was pure guesswork based on
-              how dry the soil looked. I wanted to replace intuition with data.
-            </p>
-            <p>
-              The goal: an automated system that reads actual soil moisture levels and triggers
-              a pump only when needed, with real-time monitoring accessible from my phone over Wi-Fi.
-              No cloud dependency — just a local MQTT broker on my home network.
-            </p>
+          <div class="project-hero__stack reveal" data-delay="100">
+            <span class="tag">ESP32</span>
+            <span class="tag">Capacitive Soil Sensor</span>
+            <span class="tag">5V Relay</span>
+            <span class="tag">Mini Pump</span>
+            <span class="tag">MQTT</span>
+            <span class="tag">OLED Display</span>
           </div>
         </div>
 
-        <!-- PLANNING -->
-        <div class="project-section reveal">
-          <div class="project-section__label">02 — Planning</div>
-          <h2 class="project-section__title">System Architecture</h2>
-          <div class="project-section__body">
-            <p>The system is built around four layers:</p>
-            <ul>
-              <li><strong>Sensing</strong> — Two capacitive soil moisture sensors (chosen over resistive for longevity)</li>
-              <li><strong>Decision</strong> — ESP32 compares readings against configurable dry/wet thresholds</li>
-              <li><strong>Actuation</strong> — 5V relay switches the submersible pump on/off</li>
-              <li><strong>Reporting</strong> — MQTT publishes sensor data + pump state every 30 seconds</li>
-            </ul>
-            <h4>Why Capacitive Sensors?</h4>
-            <p>
-              Resistive soil sensors corrode within weeks due to electrolysis. Capacitive sensors
-              measure the dielectric constant of soil — no exposed electrodes, no corrosion.
-              They cost slightly more but last indefinitely.
-            </p>
-            <h4>Why Local MQTT vs. Cloud?</h4>
-            <p>
-              No internet dependency, no latency, no subscription fees. Mosquitto broker running
-              on a Raspberry Pi on my home network. Node-RED handles the dashboard visualization.
-            </p>
-          </div>
-
-          <div style="margin-top:var(--sp-6);background:var(--clr-bg-soft);border:1px solid var(--clr-border);border-radius:var(--radius-md);padding:var(--sp-8);text-align:center;color:var(--clr-text-muted);font-family:var(--font-mono);font-size:var(--fs-sm);">
-            📐 System architecture diagram — <em>assets/diagrams/architecture.png</em>
+        <div
+          style="
+            max-width: var(--container-max);
+            margin-inline: auto;
+            padding-inline: var(--sp-6);
+          "
+        >
+          <div class="project-hero__cover reveal" data-delay="140">
+            <img
+              src="assets/images/cover.jpg"
+              alt="Smart Irrigation System"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>🌱</div>'
+              "
+            />
           </div>
         </div>
+      </section>
 
-        <!-- HARDWARE -->
-        <div class="project-section reveal">
-          <div class="project-section__label">03 — Hardware</div>
-          <h2 class="project-section__title">Components & BOM</h2>
-
-          <table class="bom-table">
-            <thead>
-              <tr>
-                <th>Component</th>
-                <th>Qty</th>
-                <th>Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>ESP32 Dev Board</td><td>1</td><td>Main MCU + Wi-Fi</td></tr>
-              <tr><td>Capacitive Soil Moisture Sensor</td><td>2</td><td>Analog moisture reading (ADC)</td></tr>
-              <tr><td>5V Relay Module (optocoupler)</td><td>1</td><td>Pump switching, isolated from logic</td></tr>
-              <tr><td>Submersible Mini Pump (5V)</td><td>1</td><td>Water delivery</td></tr>
-              <tr><td>5V 2A Power Supply</td><td>1</td><td>Powers ESP32 + pump</td></tr>
-              <tr><td>Silicone Tubing (4mm ID)</td><td>1m</td><td>Water routing to plants</td></tr>
-              <tr><td>OLED Display 0.96" (I2C)</td><td>1</td><td>Local moisture + pump status</td></tr>
-              <tr><td>Water reservoir (1L)</td><td>1</td><td>Pump water source</td></tr>
-              <tr><td>Jumper wires, breadboard</td><td>—</td><td>Prototyping connections</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- GALLERY -->
-        <div class="project-section reveal">
-          <div class="project-section__label">04 — Media</div>
-          <h2 class="project-section__title">Build Photos</h2>
-          <div class="gallery">
-            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/build-01.jpg</div>
-            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/sensors-in-soil.jpg</div>
-            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/wiring.jpg</div>
-            <div class="gallery__item" style="background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-size:var(--fs-sm);font-family:var(--font-mono);">assets/images/dashboard.jpg</div>
-          </div>
-        </div>
-
-        <!-- IMPLEMENTATION -->
-        <div class="project-section reveal">
-          <div class="project-section__label">05 — Implementation</div>
-          <h2 class="project-section__title">Firmware & MQTT Logic</h2>
-          <div class="project-section__body">
-            <p>
-              The ESP32 reads both soil sensors every 30 seconds, maps the ADC values to a
-              0–100% moisture percentage (calibrated per sensor), and publishes JSON payloads
-              to an MQTT broker. If either sensor reads below the dry threshold, the pump
-              activates for a configurable duration.
-            </p>
-          </div>
-
-          <div class="code-block" style="margin-top:var(--sp-5);">
-            <div class="code-block__header">
-              <span class="code-block__lang">C++ (ESP32 Arduino)</span>
-              <span class="code-block__copy">Copy</span>
+      <!-- BODY -->
+      <div class="project-body">
+        <article class="project-main">
+          <!-- PROBLEM -->
+          <div class="project-section reveal">
+            <div class="project-section__label">01 — Problem</div>
+            <h2 class="project-section__title">Why I Built This</h2>
+            <div class="project-section__body">
+              <p>
+                Plants in my room kept dying — not from neglect exactly, but
+                from inconsistency. Sometimes I'd water too much, sometimes too
+                little. It was pure guesswork based on how dry the soil looked.
+                I wanted to replace intuition with data.
+              </p>
+              <p>
+                The goal: an automated system that reads actual soil moisture
+                levels and triggers a pump only when needed, with real-time
+                monitoring accessible from my phone over Wi-Fi. No cloud
+                dependency — just a local MQTT broker on my home network.
+              </p>
             </div>
-            <pre>
+          </div>
+
+          <!-- PLANNING -->
+          <div class="project-section reveal">
+            <div class="project-section__label">02 — Planning</div>
+            <h2 class="project-section__title">System Architecture</h2>
+            <div class="project-section__body">
+              <p>The system is built around four layers:</p>
+              <ul>
+                <li>
+                  <strong>Sensing</strong> — Two capacitive soil moisture
+                  sensors (chosen over resistive for longevity)
+                </li>
+                <li>
+                  <strong>Decision</strong> — ESP32 compares readings against
+                  configurable dry/wet thresholds
+                </li>
+                <li>
+                  <strong>Actuation</strong> — 5V relay switches the submersible
+                  pump on/off
+                </li>
+                <li>
+                  <strong>Reporting</strong> — MQTT publishes sensor data + pump
+                  state every 30 seconds
+                </li>
+              </ul>
+              <h4>Why Capacitive Sensors?</h4>
+              <p>
+                Resistive soil sensors corrode within weeks due to electrolysis.
+                Capacitive sensors measure the dielectric constant of soil — no
+                exposed electrodes, no corrosion. They cost slightly more but
+                last indefinitely.
+              </p>
+              <h4>Why Local MQTT vs. Cloud?</h4>
+              <p>
+                No internet dependency, no latency, no subscription fees.
+                Mosquitto broker running on a Raspberry Pi on my home network.
+                Node-RED handles the dashboard visualization.
+              </p>
+            </div>
+
+            <div
+              style="
+                margin-top: var(--sp-6);
+                background: var(--clr-bg-soft);
+                border: 1px solid var(--clr-border);
+                border-radius: var(--radius-md);
+                padding: var(--sp-8);
+                text-align: center;
+                color: var(--clr-text-muted);
+                font-family: var(--font-mono);
+                font-size: var(--fs-sm);
+              "
+            >
+              📐 System architecture diagram —
+              <em>assets/diagrams/architecture.png</em>
+            </div>
+          </div>
+
+          <!-- HARDWARE -->
+          <div class="project-section reveal">
+            <div class="project-section__label">03 — Hardware</div>
+            <h2 class="project-section__title">Components & BOM</h2>
+
+            <table class="bom-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Qty</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ESP32 Dev Board</td>
+                  <td>1</td>
+                  <td>Main MCU + Wi-Fi</td>
+                </tr>
+                <tr>
+                  <td>Capacitive Soil Moisture Sensor</td>
+                  <td>2</td>
+                  <td>Analog moisture reading (ADC)</td>
+                </tr>
+                <tr>
+                  <td>5V Relay Module (optocoupler)</td>
+                  <td>1</td>
+                  <td>Pump switching, isolated from logic</td>
+                </tr>
+                <tr>
+                  <td>Submersible Mini Pump (5V)</td>
+                  <td>1</td>
+                  <td>Water delivery</td>
+                </tr>
+                <tr>
+                  <td>5V 2A Power Supply</td>
+                  <td>1</td>
+                  <td>Powers ESP32 + pump</td>
+                </tr>
+                <tr>
+                  <td>Silicone Tubing (4mm ID)</td>
+                  <td>1m</td>
+                  <td>Water routing to plants</td>
+                </tr>
+                <tr>
+                  <td>OLED Display 0.96" (I2C)</td>
+                  <td>1</td>
+                  <td>Local moisture + pump status</td>
+                </tr>
+                <tr>
+                  <td>Water reservoir (1L)</td>
+                  <td>1</td>
+                  <td>Pump water source</td>
+                </tr>
+                <tr>
+                  <td>Jumper wires, breadboard</td>
+                  <td>—</td>
+                  <td>Prototyping connections</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- GALLERY -->
+          <div class="project-section reveal">
+            <div class="project-section__label">04 — Media</div>
+            <h2 class="project-section__title">Build Photos</h2>
+            <div class="gallery">
+              <div
+                class="gallery__item"
+                style="
+                  background: var(--clr-bg-soft);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--clr-text-muted);
+                  font-size: var(--fs-sm);
+                  font-family: var(--font-mono);
+                "
+              >
+                assets/images/build-01.jpg
+              </div>
+              <div
+                class="gallery__item"
+                style="
+                  background: var(--clr-bg-soft);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--clr-text-muted);
+                  font-size: var(--fs-sm);
+                  font-family: var(--font-mono);
+                "
+              >
+                assets/images/sensors-in-soil.jpg
+              </div>
+              <div
+                class="gallery__item"
+                style="
+                  background: var(--clr-bg-soft);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--clr-text-muted);
+                  font-size: var(--fs-sm);
+                  font-family: var(--font-mono);
+                "
+              >
+                assets/images/wiring.jpg
+              </div>
+              <div
+                class="gallery__item"
+                style="
+                  background: var(--clr-bg-soft);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--clr-text-muted);
+                  font-size: var(--fs-sm);
+                  font-family: var(--font-mono);
+                "
+              >
+                assets/images/dashboard.jpg
+              </div>
+            </div>
+          </div>
+
+          <!-- IMPLEMENTATION -->
+          <div class="project-section reveal">
+            <div class="project-section__label">05 — Implementation</div>
+            <h2 class="project-section__title">Firmware & MQTT Logic</h2>
+            <div class="project-section__body">
+              <p>
+                The ESP32 reads both soil sensors every 30 seconds, maps the ADC
+                values to a 0–100% moisture percentage (calibrated per sensor),
+                and publishes JSON payloads to an MQTT broker. If either sensor
+                reads below the dry threshold, the pump activates for a
+                configurable duration.
+              </p>
+            </div>
+
+            <div class="code-block" style="margin-top: var(--sp-5)">
+              <div class="code-block__header">
+                <span class="code-block__lang">C++ (ESP32 Arduino)</span>
+                <span class="code-block__copy">Copy</span>
+              </div>
+              <pre>
 // Thresholds — calibrate to your soil + sensor
 const int DRY_THRESHOLD  = 30;   // % — below this, water
 const int WET_THRESHOLD  = 70;   // % — above this, stop
@@ -228,215 +374,307 @@ void loop() {
 
   updateOLED(moisture1, moisture2);
   delay(30000); // 30 second interval
-}</pre>
-          </div>
-
-          <div class="callout callout--warning" style="margin-top:var(--sp-6);">
-            <span class="callout__icon">⚠️</span>
-            <div>
-              <div class="callout__title">Sensor Calibration is Critical</div>
-              <div class="callout__body">
-                Each capacitive sensor has slightly different AIR_VAL and WATER_VAL readings.
-                Calibrate each one individually by reading in completely dry soil and submerged in water.
-                Don't assume they match the datasheet.
-              </div>
+}</pre
+              >
             </div>
-          </div>
-        </div>
 
-        <!-- TROUBLESHOOTING -->
-        <div class="project-section reveal">
-          <div class="project-section__label">06 — Troubleshooting</div>
-          <h2 class="project-section__title">Failures & Fixes</h2>
-
-          <div class="callout callout--error">
-            <span class="callout__icon">💧</span>
-            <div>
-              <div class="callout__title">Pump Wouldn't Stop — Relay Stuck Closed</div>
-              <div class="callout__body">
-                First relay module didn't have an optocoupler — ESP32 GPIO couldn't reliably
-                drive it and it would latch. Switched to an optocoupler-isolated relay module.
-                Never looked back.
+            <div
+              class="callout callout--warning"
+              style="margin-top: var(--sp-6)"
+            >
+              <span class="callout__icon">⚠️</span>
+              <div>
+                <div class="callout__title">Sensor Calibration is Critical</div>
+                <div class="callout__body">
+                  Each capacitive sensor has slightly different AIR_VAL and
+                  WATER_VAL readings. Calibrate each one individually by reading
+                  in completely dry soil and submerged in water. Don't assume
+                  they match the datasheet.
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="callout callout--warning" style="margin-top:var(--sp-4);">
-            <span class="callout__icon">📡</span>
-            <div>
-              <div class="callout__title">Wi-Fi Disconnects After ~6 Hours</div>
-              <div class="callout__body">
-                ESP32 was losing Wi-Fi connection overnight. Root cause: router DHCP lease
-                expiry wasn't handled gracefully. Fix: added reconnection logic in the MQTT
-                loop callback and assigned a static IP on the router side.
+          <!-- TROUBLESHOOTING -->
+          <div class="project-section reveal">
+            <div class="project-section__label">06 — Troubleshooting</div>
+            <h2 class="project-section__title">Failures & Fixes</h2>
+
+            <div class="callout callout--error">
+              <span class="callout__icon">💧</span>
+              <div>
+                <div class="callout__title">
+                  Pump Wouldn't Stop — Relay Stuck Closed
+                </div>
+                <div class="callout__body">
+                  First relay module didn't have an optocoupler — ESP32 GPIO
+                  couldn't reliably drive it and it would latch. Switched to an
+                  optocoupler-isolated relay module. Never looked back.
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="callout callout--warning"
+              style="margin-top: var(--sp-4)"
+            >
+              <span class="callout__icon">📡</span>
+              <div>
+                <div class="callout__title">
+                  Wi-Fi Disconnects After ~6 Hours
+                </div>
+                <div class="callout__body">
+                  ESP32 was losing Wi-Fi connection overnight. Root cause:
+                  router DHCP lease expiry wasn't handled gracefully. Fix: added
+                  reconnection logic in the MQTT loop callback and assigned a
+                  static IP on the router side.
+                </div>
+              </div>
+            </div>
+
+            <div class="callout callout--info" style="margin-top: var(--sp-4)">
+              <span class="callout__icon">🔢</span>
+              <div>
+                <div class="callout__title">ADC Noise on ESP32</div>
+                <div class="callout__body">
+                  ESP32 ADC is notoriously noisy, especially on ADC2 pins (which
+                  share with Wi-Fi). Moved both sensors to ADC1 pins and added a
+                  10-sample moving average. Readings stabilized significantly.
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="callout callout--info" style="margin-top:var(--sp-4);">
-            <span class="callout__icon">🔢</span>
-            <div>
-              <div class="callout__title">ADC Noise on ESP32</div>
-              <div class="callout__body">
-                ESP32 ADC is notoriously noisy, especially on ADC2 pins (which share with Wi-Fi).
-                Moved both sensors to ADC1 pins and added a 10-sample moving average. Readings
-                stabilized significantly.
-              </div>
+          <!-- RESULTS -->
+          <div class="project-section reveal">
+            <div class="project-section__label">07 — Results</div>
+            <h2 class="project-section__title">Final Performance</h2>
+            <div class="project-section__body">
+              <ul>
+                <li>
+                  <strong>Uptime:</strong> 30 days continuous without manual
+                  intervention
+                </li>
+                <li>
+                  <strong>Sensor accuracy:</strong> ±3% across calibrated range
+                </li>
+                <li>
+                  <strong>MQTT latency:</strong> Under 200ms on local network
+                </li>
+                <li>
+                  <strong>Plants:</strong> All survived. One thrived noticeably
+                  more than before.
+                </li>
+              </ul>
+            </div>
+
+            <div
+              style="
+                margin-top: var(--sp-6);
+                aspect-ratio: 16/9;
+                background: var(--clr-bg-soft);
+                border: 1px solid var(--clr-border);
+                border-radius: var(--radius-md);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--clr-text-muted);
+                font-family: var(--font-mono);
+                font-size: var(--fs-sm);
+              "
+            >
+              🎥 Demo video — <em>assets/videos/demo.mp4</em>
             </div>
           </div>
-        </div>
 
-        <!-- RESULTS -->
-        <div class="project-section reveal">
-          <div class="project-section__label">07 — Results</div>
-          <h2 class="project-section__title">Final Performance</h2>
-          <div class="project-section__body">
-            <ul>
-              <li><strong>Uptime:</strong> 30 days continuous without manual intervention</li>
-              <li><strong>Sensor accuracy:</strong> ±3% across calibrated range</li>
-              <li><strong>MQTT latency:</strong> Under 200ms on local network</li>
-              <li><strong>Plants:</strong> All survived. One thrived noticeably more than before.</li>
-            </ul>
+          <!-- REFLECTION -->
+          <div class="project-section reveal">
+            <div class="project-section__label">08 — Reflection</div>
+            <h2 class="project-section__title">What I Learned</h2>
+            <div class="project-section__body">
+              <p>
+                This project taught me the value of proper sensor selection
+                upfront. The resistive sensor I initially bought corroded within
+                a week. Spending slightly more on capacitive sensors saved
+                rebuilding the whole thing.
+              </p>
+              <p>
+                The ESP32 ADC noise issue was a deep rabbit hole — I didn't
+                expect a microcontroller to have such quirky ADC behavior. The
+                Wi-Fi coexistence issue on ADC2 pins is a known hardware
+                limitation that's easy to miss if you don't read the datasheet
+                carefully.
+              </p>
+              <h4>What I'd Do Differently</h4>
+              <ul>
+                <li>
+                  Design a proper PCB to replace the jumper-wire prototype
+                </li>
+                <li>
+                  Add a water level sensor in the reservoir to alert when empty
+                </li>
+                <li>
+                  Implement OTA firmware updates via ESP32's built-in OTA
+                  library
+                </li>
+                <li>Add a manual override button on the enclosure</li>
+              </ul>
+            </div>
           </div>
 
-          <div style="margin-top:var(--sp-6);aspect-ratio:16/9;background:var(--clr-bg-soft);border:1px solid var(--clr-border);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--clr-text-muted);font-family:var(--font-mono);font-size:var(--fs-sm);">
-            🎥 Demo video — <em>assets/videos/demo.mp4</em>
-          </div>
-        </div>
-
-        <!-- REFLECTION -->
-        <div class="project-section reveal">
-          <div class="project-section__label">08 — Reflection</div>
-          <h2 class="project-section__title">What I Learned</h2>
-          <div class="project-section__body">
-            <p>
-              This project taught me the value of proper sensor selection upfront. The resistive
-              sensor I initially bought corroded within a week. Spending slightly more on capacitive
-              sensors saved rebuilding the whole thing.
-            </p>
-            <p>
-              The ESP32 ADC noise issue was a deep rabbit hole — I didn't expect a microcontroller
-              to have such quirky ADC behavior. The Wi-Fi coexistence issue on ADC2 pins is a known
-              hardware limitation that's easy to miss if you don't read the datasheet carefully.
-            </p>
-            <h4>What I'd Do Differently</h4>
-            <ul>
-              <li>Design a proper PCB to replace the jumper-wire prototype</li>
-              <li>Add a water level sensor in the reservoir to alert when empty</li>
-              <li>Implement OTA firmware updates via ESP32's built-in OTA library</li>
-              <li>Add a manual override button on the enclosure</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Project Nav -->
-        <div class="project-nav">
-          <a href="/projects/line-follower-bot/" class="project-nav__item">
-            <div class="project-nav__dir">← Previous</div>
-            <div class="project-nav__title">Line Follower Robot</div>
-          </a>
-          <a href="/projects/holographic-display/" class="project-nav__item project-nav__item--next">
-            <div class="project-nav__dir">Next →</div>
-            <div class="project-nav__title">Holographic Display</div>
-          </a>
-        </div>
-
-      </article>
-
-      <!-- SIDEBAR -->
-      <aside class="project-sidebar">
-
-        <div class="sidebar-card">
-          <div class="sidebar-card__title">Project Info</div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">Status</span>
-            <span class="sidebar-card__val"><span class="badge badge--completed">Completed</span></span>
-          </div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">Date</span>
-            <span class="sidebar-card__val">Jan 2025</span>
-          </div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">Difficulty</span>
-            <span class="sidebar-card__val">Easy</span>
-          </div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">Duration</span>
-            <span class="sidebar-card__val">2 Weeks</span>
-          </div>
-        </div>
-
-        <div class="sidebar-card">
-          <div class="sidebar-card__title">Key Specs</div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">MCU</span>
-            <span class="sidebar-card__val">ESP32</span>
-          </div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">Protocol</span>
-            <span class="sidebar-card__val">MQTT</span>
-          </div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">Sensors</span>
-            <span class="sidebar-card__val">Capacitive ×2</span>
-          </div>
-          <div class="sidebar-card__row">
-            <span class="sidebar-card__key">Uptime</span>
-            <span class="sidebar-card__val">30 days</span>
-          </div>
-        </div>
-
-        <div class="sidebar-card">
-          <div class="sidebar-card__title">Links</div>
-          <div class="sidebar-links">
-            <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--outline btn--sm" style="justify-content:center;">
-              GitHub Repository ↗
+          <!-- Project Nav -->
+          <div class="project-nav">
+            <a href="/projects/line-follower-bot/" class="project-nav__item">
+              <div class="project-nav__dir">← Previous</div>
+              <div class="project-nav__title">Line Follower Robot</div>
             </a>
-            <a href="assets/diagrams/schematic.pdf" target="_blank" class="btn btn--ghost btn--sm" style="justify-content:center;">
-              Schematic PDF ↗
+            <a
+              href="/projects/holographic-display/"
+              class="project-nav__item project-nav__item--next"
+            >
+              <div class="project-nav__dir">Next →</div>
+              <div class="project-nav__title">Holographic Display</div>
             </a>
           </div>
-        </div>
+        </article>
 
-      </aside>
-    </div>
+        <!-- SIDEBAR -->
+        <aside class="project-sidebar">
+          <div class="sidebar-card">
+            <div class="sidebar-card__title">Project Info</div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Status</span>
+              <span class="sidebar-card__val"
+                ><span class="badge badge--completed">Completed</span></span
+              >
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Date</span>
+              <span class="sidebar-card__val">Jan 2025</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Difficulty</span>
+              <span class="sidebar-card__val">Easy</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Duration</span>
+              <span class="sidebar-card__val">2 Weeks</span>
+            </div>
+          </div>
 
-  </main>
+          <div class="sidebar-card">
+            <div class="sidebar-card__title">Key Specs</div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">MCU</span>
+              <span class="sidebar-card__val">ESP32</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Protocol</span>
+              <span class="sidebar-card__val">MQTT</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Sensors</span>
+              <span class="sidebar-card__val">Capacitive ×2</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Uptime</span>
+              <span class="sidebar-card__val">30 days</span>
+            </div>
+          </div>
 
-  <!-- FOOTER -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer__grid">
-        <div>
-          <div class="footer__brand-name">Joy</div>
-          <p class="footer__brand-desc">Building intelligent systems with hardware, code, and relentless experimentation.</p>
+          <div class="sidebar-card">
+            <div class="sidebar-card__title">Links</div>
+            <div class="sidebar-links">
+              <a
+                href="https://github.com/joydip09/smart-irrigation"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--outline btn--sm"
+                style="justify-content: center"
+              >
+                GitHub Repository ↗
+              </a>
+              <a
+                href="assets/diagrams/schematic.pdf"
+                target="_blank"
+                class="btn btn--ghost btn--sm"
+                style="justify-content: center"
+              >
+                Schematic PDF ↗
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <div class="footer__brand-name">Joy</div>
+            <p class="footer__brand-desc">
+              Building intelligent systems with hardware, code, and relentless
+              experimentation.
+            </p>
+          </div>
+          <div>
+            <div class="footer__heading">More Projects</div>
+            <ul class="footer__links">
+              <li>
+                <a href="/projects/line-follower-bot/" class="footer__link"
+                  >Line Follower Bot</a
+                >
+              </li>
+              <li>
+                <a href="/projects/holographic-display/" class="footer__link"
+                  >Holographic Display</a
+                >
+              </li>
+              <li>
+                <a href="/projects/" class="footer__link">All Projects →</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer__heading">Connect</div>
+            <ul class="footer__links">
+              <li>
+                <a
+                  href="https://github.com/joydip09"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >GitHub ↗</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://linkedin.com/in/joydip-chowdhury-4583843a5/"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >LinkedIn ↗</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <div class="footer__heading">More Projects</div>
-          <ul class="footer__links">
-            <li><a href="/projects/line-follower-bot/"   class="footer__link">Line Follower Bot</a></li>
-            <li><a href="/projects/holographic-display/" class="footer__link">Holographic Display</a></li>
-            <li><a href="/projects/"                     class="footer__link">All Projects →</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__heading">Connect</div>
-          <ul class="footer__links">
-            <li><a href="https://github.com/"   target="_blank" rel="noopener" class="footer__link">GitHub ↗</a></li>
-            <li><a href="https://linkedin.com/" target="_blank" rel="noopener" class="footer__link">LinkedIn ↗</a></li>
-          </ul>
+        <div class="footer__bottom">
+          <span
+            >© <span id="footer-year"></span> Joy — Engineering Portfolio</span
+          >
+          <span>Built with HTML · CSS · Vanilla JS</span>
         </div>
       </div>
-      <div class="footer__bottom">
-        <span>© <span id="footer-year"></span> Joy — Engineering Portfolio</span>
-        <span>Built with HTML · CSS · Vanilla JS</span>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/project-page.js"></script>
-  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
-
-</body>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/project-page.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
 </html>

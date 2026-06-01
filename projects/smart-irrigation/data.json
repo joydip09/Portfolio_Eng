@@ -6,19 +6,27 @@
   "date": "2025-01-15",
   "difficulty": 2,
   "tags": ["IoT", "ESP32", "Sensors", "MQTT", "Hardware"],
-  "github": "https://github.com/",
+  "github": "https://github.com/joydip09/",
   "cover": "assets/images/cover.jpg",
 
   "problem": "Plants in my room kept either over-watered or under-watered — entirely based on guesswork. I wanted an automated system that reads actual soil moisture and waters only when needed, with remote monitoring over Wi-Fi.",
 
   "components": [
-    { "name": "ESP32 Dev Board",       "qty": 1, "purpose": "Main MCU + Wi-Fi" },
-    { "name": "Capacitive Soil Sensor","qty": 2, "purpose": "Moisture reading" },
-    { "name": "5V Relay Module",       "qty": 1, "purpose": "Pump switching" },
+    { "name": "ESP32 Dev Board", "qty": 1, "purpose": "Main MCU + Wi-Fi" },
+    {
+      "name": "Capacitive Soil Sensor",
+      "qty": 2,
+      "purpose": "Moisture reading"
+    },
+    { "name": "5V Relay Module", "qty": 1, "purpose": "Pump switching" },
     { "name": "Submersible Mini Pump", "qty": 1, "purpose": "Water delivery" },
-    { "name": "5V Power Supply",       "qty": 1, "purpose": "System power" },
-    { "name": "Silicone Tubing",       "qty": 1, "purpose": "Water routing" },
-    { "name": "OLED Display (0.96\")", "qty": 1, "purpose": "Local status display" }
+    { "name": "5V Power Supply", "qty": 1, "purpose": "System power" },
+    { "name": "Silicone Tubing", "qty": 1, "purpose": "Water routing" },
+    {
+      "name": "OLED Display (0.96\")",
+      "qty": 1,
+      "purpose": "Local status display"
+    }
   ],
 
   "results": {
