@@ -234,6 +234,7 @@
 
 .tool-chip__icon {
   font-size: 1.5rem;
+  color: var(--clr-accent-teal);
 }
 
 /* ----------------------------------------
@@ -273,7 +274,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 128, 128, 0.08);
+  background: rgba(0, 128, 128, 0.12);
+  color: var(--clr-accent-teal);
   border-radius: var(--radius-md);
   flex-shrink: 0;
 }
