@@ -169,24 +169,38 @@
             </p>
           </div>
 
-          <div class="featured__grid" id="featured-grid" data-stagger>
-            <!-- Populated by projects.js -->
-            <div
-              style="
-                height: 320px;
-                background: var(--clr-bg-soft);
-                border-radius: var(--radius-lg);
-                border: 1px solid var(--clr-border);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: var(--clr-text-muted);
-                font-family: var(--font-mono);
-                font-size: var(--fs-sm);
-              "
+          <div class="featured__carousel">
+            <button
+              class="carousel__nav carousel__nav--prev"
+              aria-label="Previous project"
             >
-              Loading projects...
+              ‹
+            </button>
+            <div class="featured__track" id="featured-grid" data-stagger>
+              <!-- Populated by projects.js -->
+              <div
+                style="
+                  height: 320px;
+                  background: var(--clr-bg-soft);
+                  border-radius: var(--radius-lg);
+                  border: 1px solid var(--clr-border);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--clr-text-muted);
+                  font-family: var(--font-mono);
+                  font-size: var(--fs-sm);
+                "
+              >
+                Loading projects...
+              </div>
             </div>
+            <button
+              class="carousel__nav carousel__nav--next"
+              aria-label="Next project"
+            >
+              ›
+            </button>
           </div>
 
           <div style="text-align: center; margin-top: var(--sp-10)">
