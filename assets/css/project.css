@@ -19,8 +19,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0,128,128,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,128,128,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 128, 128, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 128, 128, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
   pointer-events: none;
 }
@@ -40,7 +40,7 @@
   font-size: var(--fs-xs);
   font-family: var(--font-mono);
   color: var(--clr-text-muted);
-  margin-bottom: var(--sp-6);
+  margin: var(--sp-6) 0;
 }
 
 .project-hero__breadcrumb a {
@@ -48,7 +48,9 @@
   transition: opacity var(--transition-fast);
 }
 
-.project-hero__breadcrumb a:hover { opacity: 0.75; }
+.project-hero__breadcrumb a:hover {
+  opacity: 0.75;
+}
 
 .project-hero__breadcrumb span {
   color: var(--clr-border);
@@ -105,7 +107,9 @@
 }
 
 @media (max-width: 768px) {
-  .project-hero__cover { aspect-ratio: 16 / 9; }
+  .project-hero__cover {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 /* ----------------------------------------
@@ -163,7 +167,7 @@
 }
 
 .project-section__label::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 16px;
   height: 2px;
@@ -185,8 +189,12 @@
   color: var(--clr-text-primary);
 }
 
-.project-section__body p { margin-bottom: var(--sp-4); }
-.project-section__body p:last-child { margin-bottom: 0; }
+.project-section__body p {
+  margin-bottom: var(--sp-4);
+}
+.project-section__body p:last-child {
+  margin-bottom: 0;
+}
 
 .project-section__body h4 {
   font-size: var(--fs-lg);
@@ -209,7 +217,7 @@
 }
 
 .project-section__body ul li::before {
-  content: '→';
+  content: "→";
   position: absolute;
   left: 0;
   color: var(--clr-accent-teal);
@@ -247,7 +255,9 @@
   border-bottom: 1px solid var(--clr-border);
 }
 
-.sidebar-card__row:last-child { border-bottom: none; }
+.sidebar-card__row:last-child {
+  border-bottom: none;
+}
 
 .sidebar-card__key {
   color: var(--clr-text-muted);
@@ -326,7 +336,7 @@
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 10px;
   top: 0;
@@ -342,7 +352,7 @@
 }
 
 .timeline__item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: calc(-1 * var(--sp-8) + 5px);
   top: 6px;
@@ -396,7 +406,7 @@
 
 .project-nav__item:hover {
   border-color: var(--clr-border-accent);
-  background: rgba(0,128,128,0.03);
+  background: rgba(0, 128, 128, 0.03);
 }
 
 .project-nav__dir {
