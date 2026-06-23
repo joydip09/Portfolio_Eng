@@ -1,24 +1,30 @@
 [
   {
-    "id": "line-follower-bot",
-    "title": "Line Follower Robot",
-    "tagline": "An autonomous PID-controlled robot that follows a black line at speed.",
-    "description": "Built using Arduino Uno, L298N motor driver, and an IR sensor array on a PVC chassis. Implements PID control for smooth line tracking.",
-    "thumbnail": "/projects/line-follower-bot/assets/images/cover.jpg",
-    "url": "/projects/line-follower-bot/",
-    "tags": ["Robotics", "Arduino", "Embedded C", "Sensors", "PID"],
+    "id": "student-management-system",
+    "title": "Student Management System",
+    "tagline": "A console-based application for managing student records using file storage.",
+    "description": "A C-based Student Management System that demonstrates structures, arrays, file handling, and modular programming. Users can add, view, search, update, and delete student records while persisting data through file storage.",
+    "thumbnail": "/projects/student-management-system/assets/images/cover.png",
+    "url": "/projects/student-management-system/",
+    "tags": [
+      "C",
+      "File Handling",
+      "Structures",
+      "Arrays",
+      "Programming Fundamentals"
+    ],
     "status": "Completed",
-    "difficulty": 3,
-    "date": "2025-03-01",
-    "featured": true,
-    "github": "https://github.com/joydip09/",
+    "difficulty": 1,
+    "date": "2025-01-01",
+    "featured": false,
+    "github": "https://github.com/joydip09/Student-Management",
     "components": [
-      "Arduino Uno",
-      "L298N Motor Driver",
-      "IR Sensor Array (5ch)",
-      "TT Motors x2",
-      "PVC Chassis",
-      "18650 Li-Ion Battery"
+      "Structures",
+      "Arrays",
+      "File Handling",
+      "Functions",
+      "Header Files",
+      "Text Files"
     ]
   },
   {

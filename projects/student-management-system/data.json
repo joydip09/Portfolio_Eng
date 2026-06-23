@@ -1,0 +1,80 @@
+{
+  "id": "student-management-system",
+  "title": "Student Management System",
+  "tagline": "A console-based C application for managing student records with persistent file storage.",
+  "status": "Completed",
+  "date": "2025-01-01",
+  "difficulty": 1,
+  "tags": [
+    "C",
+    "Structures",
+    "Arrays",
+    "File Handling",
+    "Programming Fundamentals"
+  ],
+  "github": "https://github.com/joydip09/Student-Management",
+  "cover": "assets/images/cover.jpg",
+  "featured": false,
+
+  "problem": "I wanted to practice fundamental C programming concepts by building a real application instead of isolated exercises. The goal was to create a system capable of storing and managing student information while learning structures, arrays, modular programming, and file handling.",
+
+  "components": [
+    {
+      "name": "Structures",
+      "qty": 1,
+      "purpose": "Store student information in a structured format."
+    },
+    {
+      "name": "Arrays",
+      "qty": 1,
+      "purpose": "Manage multiple student records in memory."
+    },
+    {
+      "name": "File Handling",
+      "qty": 1,
+      "purpose": "Save and load student data from storage."
+    },
+    {
+      "name": "Functions",
+      "qty": 1,
+      "purpose": "Organize program logic into reusable modules."
+    }
+  ],
+
+  "timeline": [
+    {
+      "date": "Phase 1",
+      "title": "Data Structure Design",
+      "desc": "Designed the Student structure and planned how records would be stored."
+    },
+    {
+      "date": "Phase 2",
+      "title": "Core CRUD Features",
+      "desc": "Implemented add, view, search, update, and delete operations."
+    },
+    {
+      "date": "Phase 3",
+      "title": "Persistent Storage",
+      "desc": "Added file saving and loading functionality so records persist between sessions."
+    }
+  ],
+
+  "failures": [
+    "Initially struggled with reading and writing structured data to files correctly.",
+    "Faced issues handling string input because of newline characters left in the input buffer.",
+    "Needed multiple revisions to ensure records were updated and deleted correctly."
+  ],
+
+  "results": {
+    "programming_language": "C",
+    "student_operations": "CRUD",
+    "storage": "File Based",
+    "architecture": "Multi-file Project"
+  },
+
+  "reflections": {
+    "what_worked": "Using structures and modular functions made the project easier to maintain and extend.",
+    "what_failed": "Input handling and file operations caused several bugs during development.",
+    "next_time": "I would replace text-file storage with a database and build a graphical user interface."
+  }
+}

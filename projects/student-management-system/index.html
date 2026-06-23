@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ✏️ UPDATE: description and title -->
+    A console-based C application that manages student records through file-based
+  storage and CRUD operations, demonstrating structures, arrays, and modular
+  programming.
     <meta
       name="description"
-      content="PROJECT TITLE — short description for SEO."
+      content="Student Management System — short description for SEO."
     />
-    <title>PROJECT TITLE — Joy</title>
+    <title>Student Management System</title>
 
     <link rel="stylesheet" href="/assets/css/variables.css" />
     <link rel="stylesheet" href="/assets/css/base.css" />
@@ -73,34 +75,38 @@
         <div class="project-hero__bg"></div>
         <div class="project-hero__content">
           <div class="project-hero__breadcrumb">
-            <a href="/">Home</a>
-            <span>/</span>
-            <a href="/projects/">Projects</a>
-            <span>/</span>
-            <!-- ✏️ UPDATE -->
-            <span>Project Title</span>
-          </div>
+  <a href="/">Home</a>
+  <span>/</span>
+  <a href="/projects/">Projects</a>
+  <span>/</span>
+  <span>Student Management System</span>
+</div>
 
-          <div class="project-hero__meta-top">
-            <!-- ✏️ UPDATE: badge class options: badge--completed | badge--progress | badge--prototype | badge--experimental | badge--archived -->
-            <span class="badge badge--completed">Completed</span>
-            <!-- ✏️ UPDATE: add your tags -->
-            <span class="tag">Tag 1</span>
-            <span class="tag">Tag 2</span>
-          </div>
+<div class="project-hero__meta-top">
+  <span class="badge badge--completed">Completed</span>
 
-          <!-- ✏️ UPDATE -->
-          <h1 class="project-hero__title reveal">Project Title</h1>
-          <p class="project-hero__tagline reveal" data-delay="60">
-            One or two sentences. What does this project do? What makes it
-            interesting?
-          </p>
+  <span class="tag">C</span>
+  <span class="tag">Structures</span>
+  <span class="tag">File Handling</span>
+</div>
 
-          <div class="project-hero__stack reveal" data-delay="100">
-            <!-- ✏️ UPDATE: key components as tags -->
-            <span class="tag">Component 1</span>
-            <span class="tag">Component 2</span>
-          </div>
+<h1 class="project-hero__title reveal">
+  Student Management System
+</h1>
+
+<p class="project-hero__tagline reveal" data-delay="60">
+  A console-based C application that manages student records through file-based
+  storage and CRUD operations, demonstrating structures, arrays, and modular
+  programming.
+</p>
+
+<div class="project-hero__stack reveal" data-delay="100">
+  <span class="tag">Structures</span>
+  <span class="tag">Arrays</span>
+  <span class="tag">Functions</span>
+  <span class="tag">File Handling</span>
+  <span class="tag">Modular Design</span>
+</div>
         </div>
 
         <!-- Cover Image / Video -->
@@ -114,7 +120,7 @@
           <div class="project-hero__cover reveal" data-delay="140">
             <!-- ✏️ UPDATE: replace src. The onerror shows an emoji placeholder until you add the image. -->
             <img
-              src="assets/images/cover.jpg"
+              src="assets/images/cover.png"
               alt="Project cover"
               onerror="
                 this.parentElement.innerHTML =
@@ -139,13 +145,14 @@
             <h2 class="project-section__title">The Idea</h2>
             <div class="project-section__body">
               <p>
-                What inspired this project? What problem are you solving? Why is
-                it interesting to you personally? This section should feel human
-                — not a product spec.
+                I built this project to practice core C programming concepts by
+                creating a complete application rather than solving isolated
+                programming exercises.
               </p>
+
               <p>
-                What were the key unknowns going in? What did you have to figure
-                out?
+                After learning core C concepts such as structures, pointers, recursion, and file I/O, I wanted to move beyond small exercises and build a complete software project.
+                The goal was not only to manage student records but also to learn project organization, modular design, compilation, linking, and persistent storage.
               </p>
             </div>
           </div>
@@ -155,20 +162,24 @@
             <div class="project-section__label">02 — Planning</div>
             <h2 class="project-section__title">Design & Architecture</h2>
             <div class="project-section__body">
-              <p>
-                Describe your overall system architecture or build approach.
-              </p>
-              <ul>
-                <li><strong>Layer 1</strong> — description</li>
-                <li><strong>Layer 2</strong> — description</li>
-                <li><strong>Layer 3</strong> — description</li>
-              </ul>
-              <h4>Key Design Decisions</h4>
-              <ul>
-                <li>Why did you choose X over Y?</li>
-                <li>What trade-offs did you make?</li>
-              </ul>
-            </div>
+            <p>
+                The application follows a simple menu-driven architecture. Student records are stored using structures and managed through separate functions responsible for each operation.
+            </p>
+
+            <ul>
+                <li><strong>Controller Layer</strong> — main.c</li>
+                <li><strong>Interface Layer</strong> — student.h</li>
+                <li><strong>Implementation Layer</strong> — student.c</li>
+                <li><strong>Persistence Layer</strong> — students.txt</li>
+            </ul>
+
+            <h4>Key Design Decisions</h4>
+
+            <ul>
+                <li>Used structures to organize student information.</li>
+                <li>Separated functionality into multiple source files.</li>
+                <li>Implemented file-based storage to preserve records between sessions.</li>
+            </ul>
 
             <!-- Diagram placeholder — replace with real image -->
             <div
@@ -184,55 +195,22 @@
                 font-size: var(--fs-sm);
               "
             >
-              📐 Diagram — <em>assets/diagrams/architecture.png</em>
-              <!-- Replace with: <img src="assets/diagrams/architecture.png" alt="Architecture diagram"> -->
+              <img src="assets/images/architecture.png" alt="Architecture diagram">
             </div>
           </div>
 
-          <!-- SECTION 03 — HARDWARE / BOM -->
-          <div class="project-section reveal">
-            <div class="project-section__label">03 — Hardware</div>
-            <h2 class="project-section__title">Components & BOM</h2>
+        
 
-            <table class="bom-table">
-              <thead>
-                <tr>
-                  <th>Component</th>
-                  <th>Qty</th>
-                  <th>Purpose</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- ✏️ UPDATE: Add your components -->
-                <tr>
-                  <td>Component Name</td>
-                  <td>1</td>
-                  <td>What it does in your build</td>
-                </tr>
-                <tr>
-                  <td>Component Name</td>
-                  <td>2</td>
-                  <td>What it does in your build</td>
-                </tr>
-                <tr>
-                  <td>Component Name</td>
-                  <td>1</td>
-                  <td>What it does in your build</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- SECTION 04 — MEDIA GALLERY -->
+          <!-- SECTION 03 — MEDIA GALLERY -->
           <div class="project-section reveal">
-            <div class="project-section__label">04 — Media</div>
+            <div class="project-section__label">03 — Media</div>
             <h2 class="project-section__title">Build Photos</h2>
 
             <div class="gallery">
               <!-- ✏️ UPDATE: Replace with real images. Clicking opens lightbox automatically. -->
               <div class="gallery__item">
                 <img
-                  src="assets/images/build-01.jpg"
+                  src="assets/images/build-01.png"
                   alt="Build photo 1"
                   onerror="
                     this.parentElement.style.cssText =
@@ -243,7 +221,7 @@
               </div>
               <div class="gallery__item">
                 <img
-                  src="assets/images/build-02.jpg"
+                  src="assets/images/build-02.png"
                   alt="Build photo 2"
                   onerror="
                     this.parentElement.style.cssText =
@@ -254,7 +232,7 @@
               </div>
               <div class="gallery__item">
                 <img
-                  src="assets/images/build-03.jpg"
+                  src="assets/images/build-03.png"
                   alt="Build photo 3"
                   onerror="
                     this.parentElement.style.cssText =
@@ -267,34 +245,29 @@
             </div>
           </div>
 
-          <!-- SECTION 05 — IMPLEMENTATION -->
+          <!-- SECTION 04 — IMPLEMENTATION -->
           <div class="project-section reveal">
-            <div class="project-section__label">05 — Implementation</div>
+            <div class="project-section__label">04 — Implementation</div>
             <h2 class="project-section__title">Code & Technical Details</h2>
             <div class="project-section__body">
               <p>
-                Explain the technical core of the project. How does the key
-                algorithm or system work?
-              </p>
+  Student records are represented using a structure and stored in an array during runtime. File operations are used to persist data between sessions.
+</p>
             </div>
 
             <!-- Code block — duplicate as needed -->
             <div class="code-block" style="margin-top: var(--sp-5)">
               <div class="code-block__header">
-                <!-- ✏️ UPDATE: language label -->
-                <span class="code-block__lang">C++ (Arduino)</span>
+                <span class="code-block__lang">C _</span>
                 <span class="code-block__copy">Copy</span>
               </div>
               <pre>
-// ✏️ UPDATE: Replace with your actual code snippet
-void setup() {
-  // Your setup code
-}
-
-void loop() {
-  // Your loop code
-}</pre
-              >
+typedef struct {
+    int roll;
+    char name[50];
+    char department[50];
+} Student;
+              </pre>
             </div>
 
             <!-- Optional callout boxes — use as needed -->
@@ -308,34 +281,40 @@ void loop() {
           </div>
           --></div>
 
-          <!-- SECTION 06 — BUILD TIMELINE (optional — remove if not needed) -->
+          <!-- SECTION 05 — BUILD TIMELINE (optional — remove if not needed) -->
           <div class="project-section reveal">
-            <div class="project-section__label">06 — Timeline</div>
+            <div class="project-section__label">05 — Timeline</div>
             <h2 class="project-section__title">Build Log</h2>
 
             <div class="timeline">
-              <!-- ✏️ UPDATE: Add your timeline items -->
               <div class="timeline__item">
-                <div class="timeline__date">Week 1</div>
-                <div class="timeline__title">Phase Name</div>
-                <div class="timeline__desc">
-                  What happened. What decisions were made.
-                </div>
-              </div>
-              <div class="timeline__item">
-                <div class="timeline__date">Week 2</div>
-                <div class="timeline__title">Phase Name</div>
-                <div class="timeline__desc">
-                  What happened. What decisions were made.
-                </div>
-              </div>
-              <!-- Add more .timeline__item divs as needed -->
-            </div>
+  <div class="timeline__date">Phase 1</div>
+  <div class="timeline__title">Data Structure Design</div>
+  <div class="timeline__desc">
+    Designed the Student structure and record management system.
+  </div>
+</div>
+
+<div class="timeline__item">
+  <div class="timeline__date">Phase 2</div>
+  <div class="timeline__title">CRUD Operations</div>
+  <div class="timeline__desc">
+    Implemented add, search, update, and delete functionality.
+  </div>
+</div>
+
+<div class="timeline__item">
+  <div class="timeline__date">Phase 3</div>
+  <div class="timeline__title">File Storage</div>
+  <div class="timeline__desc">
+    Added save and load functionality using text files.
+  </div>
+</div>
           </div>
 
-          <!-- SECTION 07 — TROUBLESHOOTING -->
+          <!-- SECTION 06 — TROUBLESHOOTING -->
           <div class="project-section reveal">
-            <div class="project-section__label">07 — Troubleshooting</div>
+            <div class="project-section__label">06 — Troubleshooting</div>
             <h2 class="project-section__title">Failures & Fixes</h2>
 
             <!--
@@ -345,10 +324,12 @@ void loop() {
             <div class="callout callout--error">
               <span class="callout__icon">⚠️</span>
               <div>
-                <div class="callout__title">Failure Title</div>
-                <div class="callout__body">
-                  What failed, why it failed, and how you fixed it.
-                </div>
+                <div class="callout__title">Undefined Reference Error</div>
+
+<div class="callout__body">
+  Compiled only main.c
+Linker could not find implementations.
+</div>
               </div>
             </div>
 
@@ -358,63 +339,54 @@ void loop() {
             >
               <span class="callout__icon">🔧</span>
               <div>
-                <div class="callout__title">Another Issue</div>
-                <div class="callout__body">Description and resolution.</div>
+                <div class="callout__title">Variable Shadowing</div>
+
+<div class="callout__body">
+  FILE *students accidentally shadowed Student students[].
+</div>
               </div>
             </div>
           </div>
 
-          <!-- SECTION 08 — RESULTS -->
+          <!-- SECTION 07 — RESULTS -->
           <div class="project-section reveal">
-            <div class="project-section__label">08 — Results</div>
+            <div class="project-section__label">07 — Results</div>
             <h2 class="project-section__title">Final Performance</h2>
             <div class="project-section__body">
               <ul>
-                <!-- ✏️ UPDATE -->
-                <li><strong>Metric 1:</strong> value</li>
-                <li><strong>Metric 2:</strong> value</li>
-              </ul>
+  <li><strong>Multi-file Project Architecture:</strong> Implemented</li>
+  <li><strong>Student Record Search:</strong> Implemented</li>
+  <li><strong>Modular Code Organization:</strong> Implemented</li>
+  <li><strong>Update or Delete Records:</strong> Implemented</li>
+  <li><strong>Persistent File Storage:</strong> Implemented</li>
+</ul>
             </div>
 
-            <!-- Demo video placeholder -->
-            <div
-              style="
-                margin-top: var(--sp-6);
-                aspect-ratio: 16/9;
-                background: var(--clr-bg-soft);
-                border: 1px solid var(--clr-border);
-                border-radius: var(--radius-md);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: var(--clr-text-muted);
-                font-family: var(--font-mono);
-                font-size: var(--fs-sm);
-              "
-            >
-              🎥 Demo video — <em>assets/videos/demo.mp4</em>
-              <!--
-              Replace with:
-              <video src="assets/videos/demo.mp4" controls style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-md);"></video>
-            --></div>
+            
           </div>
 
-          <!-- SECTION 09 — REFLECTION -->
+          <!-- SECTION 08 — REFLECTION -->
           <div class="project-section reveal">
-            <div class="project-section__label">09 — Reflection</div>
+            <div class="project-section__label">08 — Reflection</div>
             <h2 class="project-section__title">What I Learned</h2>
             <div class="project-section__body">
-              <!-- ✏️ UPDATE -->
               <p>
-                What did this project teach you? What surprised you? What was
-                the most valuable lesson?
-              </p>
-              <h4>What I'd Do Differently</h4>
-              <ul>
-                <li>Improvement 1</li>
-                <li>Improvement 2</li>
-                <li>Improvement 3</li>
-              </ul>
+  This project marked my transition from writing small standalone C programs to building a structured software project. While I was already familiar with concepts such as structures, pointers, recursion, and file I/O, this was my first experience organizing code across multiple source files and managing a complete application.
+</p>
+
+<p>
+  The most valuable lesson was understanding how real C programs are built and compiled. Working with header files, source files, compilation, linking, and persistent file storage helped me move beyond solving isolated programming problems and toward software engineering practices.
+</p>
+
+<h4>What I'd Do Differently</h4>
+
+<ul>
+  <li>Replace the fixed-size student array with dynamic memory allocation using malloc() and realloc().</li>
+  <li>Add stronger input validation, including duplicate roll number detection and CGPA validation.</li>
+  <li>Implement sorting and more efficient search techniques for larger datasets.</li>
+  <li>Explore binary file storage or database integration instead of plain text files.</li>
+  <li>Develop a graphical user interface to improve usability.</li>
+</ul>
             </div>
           </div>
 
@@ -437,70 +409,101 @@ void loop() {
 
         <!-- ===== SIDEBAR ===== -->
         <aside class="project-sidebar">
-          <div class="sidebar-card">
-            <div class="sidebar-card__title">Project Info</div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Status</span>
-              <!-- ✏️ UPDATE: badge class -->
-              <span class="sidebar-card__val"
-                ><span class="badge badge--completed">Completed</span></span
-              >
-            </div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Date</span>
-              <!-- ✏️ UPDATE -->
-              <span class="sidebar-card__val">Month Year</span>
-            </div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Difficulty</span>
-              <!-- ✏️ UPDATE: Beginner / Easy / Intermediate / Advanced / Expert -->
-              <span class="sidebar-card__val">Intermediate</span>
-            </div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Duration</span>
-              <!-- ✏️ UPDATE -->
-              <span class="sidebar-card__val">X Weeks</span>
-            </div>
-          </div>
+  <div class="sidebar-card">
+    <div class="sidebar-card__title">Project Info</div>
 
-          <div class="sidebar-card">
-            <div class="sidebar-card__title">Key Specs</div>
-            <!-- ✏️ UPDATE: Add 3–5 relevant specs -->
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">MCU</span>
-              <span class="sidebar-card__val">Arduino Uno</span>
-            </div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Spec 2</span>
-              <span class="sidebar-card__val">Value</span>
-            </div>
-          </div>
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Status</span>
+      <span class="sidebar-card__val">
+        <span class="badge badge--completed">Completed</span>
+      </span>
+    </div>
 
-          <div class="sidebar-card">
-            <div class="sidebar-card__title">Links</div>
-            <div class="sidebar-links">
-              <!-- ✏️ UPDATE: GitHub repo URL -->
-              <a
-                href="https://github.com/joydip09"
-                target="_blank"
-                rel="noopener"
-                class="btn btn--outline btn--sm"
-                style="justify-content: center"
-              >
-                GitHub Repository ↗
-              </a>
-              <!-- Optional: schematic, docs, demo links -->
-              <a
-                href="assets/diagrams/schematic.pdf"
-                target="_blank"
-                class="btn btn--ghost btn--sm"
-                style="justify-content: center"
-              >
-                Schematic PDF ↗
-              </a>
-            </div>
-          </div>
-        </aside>
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Date</span>
+      <span class="sidebar-card__val">2025</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Difficulty</span>
+      <span class="sidebar-card__val">Beginner</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Duration</span>
+      <span class="sidebar-card__val">~3 Days</span>
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="sidebar-card__title">Key Specs</div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Language</span>
+      <span class="sidebar-card__val">C</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Storage</span>
+      <span class="sidebar-card__val">Text File</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Architecture</span>
+      <span class="sidebar-card__val">Multi-file</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Data Model</span>
+      <span class="sidebar-card__val">Structures</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Operations</span>
+      <span class="sidebar-card__val">CRUD</span>
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="sidebar-card__title">Concepts Used</div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Structures</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Arrays</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">File Handling</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Functions</span>
+    </div>
+
+    <div class="sidebar-card__row">
+      <span class="sidebar-card__key">Modular Design</span>
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="sidebar-card__title">Links</div>
+
+    <div class="sidebar-links">
+      <a
+        href="https://github.com/joydip09/Student-Management"
+        target="_blank"
+        rel="noopener"
+        class="btn btn--outline btn--sm"
+        style="justify-content: center"
+      >
+        GitHub Repository ↗
+      </a>
+    </div>
+  </div>
+</aside>
       </div>
       <!-- /project-body -->
     </main>
@@ -520,9 +523,7 @@ void loop() {
             <div class="footer__heading">More Projects</div>
             <ul class="footer__links">
               <li>
-                <a
-                  href="/projects/student-management-system/"
-                  class="footer__link"
+                <a href="/projects/student-management-system/" class="footer__link"
                   >Student Management System</a
                 >
               </li>
