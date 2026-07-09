@@ -28,18 +28,25 @@
     ]
   },
   {
-    "id": "smart-irrigation",
-    "title": "Smart Irrigation System",
-    "tagline": "IoT-powered plant watering system with soil moisture sensing and remote control.",
-    "description": "ESP32-based system that reads soil moisture, controls a pump via relay, and reports data to a dashboard over Wi-Fi.",
-    "thumbnail": "/projects/smart-irrigation/assets/images/cover.jpg",
-    "url": "/projects/smart-irrigation/",
-    "tags": ["IoT", "ESP32", "Sensors", "MQTT", "Hardware"],
+    "id": "esp32-oled-drawing-pad",
+    "title": "ESP32 OLED DrawingPad",
+    "tagline": "A browser-based drawing application that turns any device into a wireless graphics tablet for an ESP32 OLED.",
+    "description": "Built a real-time drawing system using an ESP32-S3, WebSockets, HTML5 Canvas, and an SSD1306 OLED. Features include live drawing, brush and eraser tools, image upload with Floyd–Steinberg dithering, and direct framebuffer streaming over Wi-Fi.",
+    "thumbnail": "/projects/ESP32-OLED-DrawingPad/assets/images/cover.jpg",
+    "url": "/projects/ESP32-OLED-DrawingPad/",
+    "tags": [
+      "ESP32-S3",
+      "WebSockets",
+      "OLED",
+      "Embedded",
+      "JavaScript",
+      "Canvas"
+    ],
     "status": "Completed",
-    "difficulty": 2,
-    "date": "2025-01-15",
+    "difficulty": 4,
+    "date": "2026-07-09",
     "featured": true,
-    "github": "https://github.com/joydip09/"
+    "github": "https://github.com/joydip09/ESP32-OLED-DrawingPad"
   },
   {
     "id": "holographic-display",

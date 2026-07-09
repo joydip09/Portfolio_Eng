@@ -1,0 +1,100 @@
+{
+  "id": "esp32-oled-drawing-pad",
+  "title": "ESP32 OLED Drawing Pad",
+  "tagline": "A real-time browser-based drawing application that turns any phone or computer into a wireless graphics tablet for an ESP32-powered OLED display.",
+  "status": "Completed",
+  "date": "2026-07-09",
+  "difficulty": 4,
+  "tags": [
+    "ESP32-S3",
+    "WebSockets",
+    "OLED",
+    "JavaScript",
+    "Canvas API",
+    "LittleFS",
+    "Embedded Systems",
+    "IoT"
+  ],
+  "github": "https://github.com/joydip09/ESP32-OLED-DrawingPad",
+  "cover": "assets/images/cover.jpg",
+  "featured": true,
+
+  "problem": "I wanted to build something that combined embedded programming and modern web development. Most OLED projects only display predefined graphics, so I built a system where any browser becomes a live drawing interface for an ESP32. The challenge was achieving responsive drawing over Wi-Fi while working within the limitations of a 128×64 monochrome OLED.",
+
+  "components": [
+    {
+      "name": "ESP32-S3-WROOM-1-N16R8",
+      "qty": 1,
+      "purpose": "Wi-Fi enabled microcontroller and web server"
+    },
+    {
+      "name": "SSD1306 128×64 OLED",
+      "qty": 1,
+      "purpose": "Monochrome graphics display"
+    },
+    {
+      "name": "USB-C Development Board",
+      "qty": 1,
+      "purpose": "Programming and power"
+    }
+  ],
+
+  "timeline": [
+    {
+      "date": "Phase 1",
+      "title": "Web Server",
+      "desc": "Hosted HTML, CSS and JavaScript directly from LittleFS."
+    },
+    {
+      "date": "Phase 2",
+      "title": "Coordinate Transfer",
+      "desc": "Mapped browser coordinates to OLED pixels."
+    },
+    {
+      "date": "Phase 3",
+      "title": "Real-time Drawing",
+      "desc": "Implemented continuous stroke rendering with line interpolation."
+    },
+    {
+      "date": "Phase 4",
+      "title": "WebSocket Migration",
+      "desc": "Replaced HTTP requests with persistent WebSocket communication."
+    },
+    {
+      "date": "Phase 5",
+      "title": "Performance Optimization",
+      "desc": "Optimized display refreshes and reduced unnecessary OLED updates."
+    },
+    {
+      "date": "Phase 6",
+      "title": "Drawing Tools",
+      "desc": "Added brush, eraser, adjustable brush size and canvas controls."
+    },
+    {
+      "date": "Phase 7",
+      "title": "Image Upload",
+      "desc": "Built an image processing pipeline with brightness, contrast, gamma correction and Floyd–Steinberg dithering."
+    }
+  ],
+
+  "failures": [
+    "HTTP requests caused noticeable latency during drawing. Migrated the protocol to WebSockets.",
+    "OLED updates became slow when refreshing every pixel. Introduced buffered rendering.",
+    "Bitmap transfer initially produced corrupted images due to memory layout issues. Debugged by sending raw frame buffers directly.",
+    "Undo/Redo implementation was too slow using stroke replay, leading to protocol redesign."
+  ],
+
+  "results": {
+    "Communication": "Real-time WebSockets",
+    "Display": "128×64 SSD1306 OLED",
+    "Image Processing": "Brightness, Contrast, Gamma, Floyd–Steinberg Dithering",
+    "Web Interface": "Responsive HTML5 Canvas",
+    "Storage": "LittleFS"
+  },
+
+  "reflections": {
+    "what_worked": "Separating the project into firmware and frontend layers made development much easier. Using LittleFS and WebSockets significantly improved scalability and responsiveness.",
+    "what_failed": "HTTP communication and replay-based undo did not scale well for continuous drawing.",
+    "next_time": "I'd implement differential frame updates, hardware-accelerated graphics, collaborative drawing and animation recording."
+  }
+}

@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ✏️ UPDATE: description and title -->
     <meta
       name="description"
-      content="PROJECT TITLE — short description for SEO."
+      content="Turn any browser into a wireless drawing tablet for an ESP32. Draw in real time, upload images, process them with dithering, and stream graphics directly to a 128×64 OLED display."
     />
-    <title>PROJECT TITLE — Joy</title>
+    <title>ESP32-OLED-DrawingPad</title>
 
     <link rel="stylesheet" href="/assets/css/variables.css" />
     <link rel="stylesheet" href="/assets/css/base.css" />
@@ -77,29 +76,32 @@
             <span>/</span>
             <a href="/projects/">Projects</a>
             <span>/</span>
-            <!-- ✏️ UPDATE -->
-            <span>Project Title</span>
+            <span>ESP32-OLED-DrawingPad</span>
           </div>
 
           <div class="project-hero__meta-top">
-            <!-- ✏️ UPDATE: badge class options: badge--completed | badge--progress | badge--prototype | badge--experimental | badge--archived -->
             <span class="badge badge--completed">Completed</span>
-            <!-- ✏️ UPDATE: add your tags -->
-            <span class="tag">Tag 1</span>
-            <span class="tag">Tag 2</span>
+
+            <span class="tag">ESP32-S3</span>
+            <span class="tag">OLED</span>
+            <span class="tag">WebSockets</span>
+            <span class="tag">Canvas API</span>
+            <span class="tag">LittleFS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">C++</span>
           </div>
 
-          <!-- ✏️ UPDATE -->
-          <h1 class="project-hero__title reveal">Project Title</h1>
+          <h1 class="project-hero__title reveal">ESP32-OLED-DrawingPad</h1>
           <p class="project-hero__tagline reveal" data-delay="60">
-            One or two sentences. What does this project do? What makes it
-            interesting?
+            Turn any browser into a wireless drawing tablet for an ESP32. Draw
+            in real time, upload images, process them with dithering, and stream
+            graphics directly to a 128×64 OLED display.
           </p>
 
           <div class="project-hero__stack reveal" data-delay="100">
             <!-- ✏️ UPDATE: key components as tags -->
-            <span class="tag">Component 1</span>
-            <span class="tag">Component 2</span>
+            <span class="tag">ESP32-S3</span>
+            <span class="tag">OLED</span>
           </div>
         </div>
 
@@ -139,13 +141,15 @@
             <h2 class="project-section__title">The Idea</h2>
             <div class="project-section__body">
               <p>
-                What inspired this project? What problem are you solving? Why is
-                it interesting to you personally? This section should feel human
-                — not a product spec.
+                I wanted to build a project that combined embedded systems with
+                modern web technologies. Instead of displaying pre-programmed
+                graphics on an OLED, I wanted the display to become an
+                interactive device controlled entirely from a web browser.
               </p>
               <p>
-                What were the key unknowns going in? What did you have to figure
-                out?
+                The biggest challenge wasn't drawing pixels—it was designing a
+                communication pipeline that felt responsive despite Wi-Fi
+                latency and the limitations of a small monochrome display.
               </p>
             </div>
           </div>
@@ -156,17 +160,34 @@
             <h2 class="project-section__title">Design & Architecture</h2>
             <div class="project-section__body">
               <p>
-                Describe your overall system architecture or build approach.
+                The system was split into a browser-based frontend, a WebSocket
+                transport layer, and an ESP32 rendering pipeline.
               </p>
               <ul>
-                <li><strong>Layer 1</strong> — description</li>
-                <li><strong>Layer 2</strong> — description</li>
-                <li><strong>Layer 3</strong> — description</li>
+                <li>
+                  <strong>Frontend</strong> — canvas-based drawing and tool
+                  controls
+                </li>
+                <li>
+                  <strong>Transport</strong> — low-latency WebSocket message
+                  passing
+                </li>
+                <li>
+                  <strong>Device</strong> — OLED rendering, buffering, and image
+                  processing
+                </li>
               </ul>
               <h4>Key Design Decisions</h4>
               <ul>
-                <li>Why did you choose X over Y?</li>
-                <li>What trade-offs did you make?</li>
+                <li>Switched from HTTP polling to WebSockets.</li>
+                <li>Stored frontend assets in LittleFS.</li>
+                <li>Used HTML5 Canvas as the drawing surface.</li>
+                <li>
+                  Buffered OLED rendering instead of refreshing every pixel.
+                </li>
+                <li>
+                  Separated image processing into reusable rendering stages.
+                </li>
               </ul>
             </div>
 
@@ -184,8 +205,10 @@
                 font-size: var(--fs-sm);
               "
             >
-              📐 Diagram — <em>assets/diagrams/architecture.png</em>
-              <!-- Replace with: <img src="assets/diagrams/architecture.png" alt="Architecture diagram"> -->
+              <img
+                src="assets/images/architecture.png"
+                alt="Architecture diagram"
+              />
             </div>
           </div>
 
@@ -205,19 +228,19 @@
               <tbody>
                 <!-- ✏️ UPDATE: Add your components -->
                 <tr>
-                  <td>Component Name</td>
+                  <td>ESP32-S3-WROOM-1-N16R8</td>
                   <td>1</td>
-                  <td>What it does in your build</td>
+                  <td>Wi-Fi microcontroller</td>
                 </tr>
                 <tr>
-                  <td>Component Name</td>
-                  <td>2</td>
-                  <td>What it does in your build</td>
+                  <td>SSD1306 OLED 128×64</td>
+                  <td>1</td>
+                  <td>Primary display for the drawing pad</td>
                 </tr>
                 <tr>
-                  <td>Component Name</td>
+                  <td>LittleFS</td>
                   <td>1</td>
-                  <td>What it does in your build</td>
+                  <td>File system for storing frontend assets</td>
                 </tr>
               </tbody>
             </table>
@@ -232,7 +255,7 @@
               <!-- ✏️ UPDATE: Replace with real images. Clicking opens lightbox automatically. -->
               <div class="gallery__item">
                 <img
-                  src="assets/images/build-01.jpg"
+                  src="assets/images/ui.png"
                   alt="Build photo 1"
                   onerror="
                     this.parentElement.style.cssText =
@@ -243,7 +266,7 @@
               </div>
               <div class="gallery__item">
                 <img
-                  src="assets/images/build-02.jpg"
+                  src="assets/images/image-editor.png"
                   alt="Build photo 2"
                   onerror="
                     this.parentElement.style.cssText =
@@ -254,7 +277,7 @@
               </div>
               <div class="gallery__item">
                 <img
-                  src="assets/images/build-03.jpg"
+                  src="assets/images/oled.jpeg"
                   alt="Build photo 3"
                   onerror="
                     this.parentElement.style.cssText =
@@ -273,40 +296,62 @@
             <h2 class="project-section__title">Code & Technical Details</h2>
             <div class="project-section__body">
               <p>
-                Explain the technical core of the project. How does the key
-                algorithm or system work?
+                I used memory buffer instead of refreshing the OLED every time a
+                pixel was drawn. This allowed for smoother rendering and reduced
+                flickering. Also, I implemented Floyd-Steinberg dithering
+                algorithm to convert grayscale images into a format suitable for
+                the monochrome OLED display.
               </p>
             </div>
 
             <!-- Code block — duplicate as needed -->
             <div class="code-block" style="margin-top: var(--sp-5)">
               <div class="code-block__header">
-                <!-- ✏️ UPDATE: language label -->
                 <span class="code-block__lang">C++ (Arduino)</span>
                 <span class="code-block__copy">Copy</span>
               </div>
               <pre>
-// ✏️ UPDATE: Replace with your actual code snippet
-void setup() {
-  // Your setup code
-}
+memcpy(
+    display.getBuffer(),
+    payload,
+    1024
+);
 
-void loop() {
-  // Your loop code
-}</pre
+display.display();
+                </pre
               >
             </div>
+            <div class="code-block" style="margin-top: var(--sp-5)">
+              <div class="code-block__header">
+                <span class="code-block__lang">Javascript</span>
+                <span class="code-block__copy">Copy</span>
+              </div>
+              <pre>
+for (let y = 0; y < OLED_HEIGHT; y++) {
+      for (let x = 0; x < OLED_WIDTH; x++) {
+        const index = y * OLED_WIDTH + x;
 
-            <!-- Optional callout boxes — use as needed -->
-            <!--
-          <div class="callout callout--info" style="margin-top:var(--sp-6);">
-            <span class="callout__icon">💡</span>
-            <div>
-              <div class="callout__title">Tip Title</div>
-              <div class="callout__body">Tip content here.</div>
+        const oldPixel = gray[index];
+        const newPixel = oldPixel < THRESHOLD ? 0 : 255;
+        const error = oldPixel - newPixel;
+
+        gray[index] = newPixel;
+
+        if (x < OLED_WIDTH - 1) gray[index + 1] += (error * 7) / 16;
+
+        if (x > 0 && y < OLED_HEIGHT - 1)
+          gray[index + OLED_WIDTH - 1] += (error * 3) / 16;
+
+        if (y < OLED_HEIGHT - 1) gray[index + OLED_WIDTH] += (error * 5) / 16;
+
+        if (x < OLED_WIDTH - 1 && y < OLED_HEIGHT - 1)
+          gray[index + OLED_WIDTH + 1] += (error * 1) / 16;
+      }
+    }
+                </pre
+              >
             </div>
           </div>
-          --></div>
 
           <!-- SECTION 06 — BUILD TIMELINE (optional — remove if not needed) -->
           <div class="project-section reveal">
@@ -314,22 +359,86 @@ void loop() {
             <h2 class="project-section__title">Build Log</h2>
 
             <div class="timeline">
-              <!-- ✏️ UPDATE: Add your timeline items -->
               <div class="timeline__item">
-                <div class="timeline__date">Week 1</div>
-                <div class="timeline__title">Phase Name</div>
+                <div class="timeline__date">Phase 1</div>
+                <div class="timeline__title">Web server and LittleFS</div>
                 <div class="timeline__desc">
-                  What happened. What decisions were made.
+                  Built the ESP32 web interface and served the frontend assets
+                  from LittleFS.
                 </div>
               </div>
               <div class="timeline__item">
-                <div class="timeline__date">Week 2</div>
-                <div class="timeline__title">Phase Name</div>
+                <div class="timeline__date">Phase 2</div>
+                <div class="timeline__title">Coordinate mapping</div>
                 <div class="timeline__desc">
-                  What happened. What decisions were made.
+                  Mapped browser pointer positions into the OLED display
+                  coordinate system.
                 </div>
               </div>
-              <!-- Add more .timeline__item divs as needed -->
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 3</div>
+                <div class="timeline__title">Continuous drawing</div>
+                <div class="timeline__desc">
+                  Implemented smooth stroke rendering so drawing felt responsive
+                  in real time.
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 4</div>
+                <div class="timeline__title">WebSocket migration</div>
+                <div class="timeline__desc">
+                  Replaced slower polling with WebSockets for faster live
+                  updates.
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 5</div>
+                <div class="timeline__title">Stroke interpolation</div>
+                <div class="timeline__desc">
+                  Added interpolation to reduce jagged motion and improve visual
+                  quality.
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 6</div>
+                <div class="timeline__title">Brush & eraser</div>
+                <div class="timeline__desc">
+                  Introduced editable drawing tools so the canvas could support
+                  both drawing and correction.
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 7</div>
+                <div class="timeline__title">Undo / Redo</div>
+                <div class="timeline__desc">
+                  Added history support so users could revise recent strokes
+                  without restarting.
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 8</div>
+                <div class="timeline__title">Image upload</div>
+                <div class="timeline__desc">
+                  Enabled importing images into the drawing workflow for
+                  conversion to OLED-friendly output.
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 9</div>
+                <div class="timeline__title">Dithering pipeline</div>
+                <div class="timeline__desc">
+                  Applied a dithering pass to preserve image detail on the
+                  monochrome display.
+                </div>
+              </div>
+              <div class="timeline__item">
+                <div class="timeline__date">Phase 10</div>
+                <div class="timeline__title">Bitmap transfer</div>
+                <div class="timeline__desc">
+                  Finalized efficient bitmap streaming so full-frame updates
+                  reached the display reliably.
+                </div>
+              </div>
             </div>
           </div>
 
@@ -338,16 +447,17 @@ void loop() {
             <div class="project-section__label">07 — Troubleshooting</div>
             <h2 class="project-section__title">Failures & Fixes</h2>
 
-            <!--
-            Callout types: callout--error | callout--warning | callout--info | callout--success
-            ✏️ UPDATE: Replace with your actual failures
-          -->
             <div class="callout callout--error">
               <span class="callout__icon">⚠️</span>
               <div>
-                <div class="callout__title">Failure Title</div>
+                <div class="callout__title">
+                  High latency during continuous drawing
+                </div>
                 <div class="callout__body">
-                  What failed, why it failed, and how you fixed it.
+                  HTTP polling introduced too much latency during continuous
+                  drawing, so the interaction felt delayed and choppy. Switching
+                  to WebSockets reduced round-trip time and made the drawing
+                  experience much more responsive.
                 </div>
               </div>
             </div>
@@ -358,8 +468,41 @@ void loop() {
             >
               <span class="callout__icon">🔧</span>
               <div>
-                <div class="callout__title">Another Issue</div>
-                <div class="callout__body">Description and resolution.</div>
+                <div class="callout__title">OLED refresh bottlenecks</div>
+                <div class="callout__body">
+                  Frequent OLED refreshes caused performance bottlenecks until
+                  buffered rendering was implemented. Buffering updates and
+                  drawing to a memory buffer before sending a single refresh
+                  greatly improved stability and reduced flicker.
+                </div>
+              </div>
+            </div>
+
+            <div class="callout callout--info" style="margin-top: var(--sp-4)">
+              <span class="callout__icon">🧩</span>
+              <div>
+                <div class="callout__title">Corrupted bitmap transfers</div>
+                <div class="callout__body">
+                  Bitmap transfer initially produced corrupted images because of
+                  byte ordering issues during transmission. The fix was to
+                  standardize the byte layout and validate the payload structure
+                  before rendering.
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="callout callout--success"
+              style="margin-top: var(--sp-4)"
+            >
+              <span class="callout__icon">✅</span>
+              <div>
+                <div class="callout__title">Undo performance degradation</div>
+                <div class="callout__body">
+                  Replay-based undo became increasingly slow as drawings grew.
+                  Replacing it with a lightweight state history approach kept
+                  undo and redo responsive even for larger drawings.
+                </div>
               </div>
             </div>
           </div>
@@ -370,33 +513,35 @@ void loop() {
             <h2 class="project-section__title">Final Performance</h2>
             <div class="project-section__body">
               <ul>
-                <!-- ✏️ UPDATE -->
-                <li><strong>Metric 1:</strong> value</li>
-                <li><strong>Metric 2:</strong> value</li>
+                <li>
+                  <strong>Browser → OLED communication:</strong> over WebSockets
+                </li>
+                <li>
+                  <strong>Real-time drawing:</strong> responsive sketching
+                  directly from the browser
+                </li>
+                <li><strong>Tools:</strong> adjustable brush and eraser</li>
+                <li>
+                  <strong>Rendering:</strong> continuous stroke interpolation
+                  for smoother motion
+                </li>
+                <li>
+                  <strong>Image workflow:</strong> upload and preprocessing for
+                  OLED display output
+                </li>
+                <li>
+                  <strong>Image processing:</strong> Floyd–Steinberg dithering
+                </li>
+                <li>
+                  <strong>Display controls:</strong> brightness, contrast, and
+                  gamma adjustments
+                </li>
+                <li>
+                  <strong>Transfer:</strong> direct 1024-byte framebuffer
+                  transfer
+                </li>
               </ul>
             </div>
-
-            <!-- Demo video placeholder -->
-            <div
-              style="
-                margin-top: var(--sp-6);
-                aspect-ratio: 16/9;
-                background: var(--clr-bg-soft);
-                border: 1px solid var(--clr-border);
-                border-radius: var(--radius-md);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: var(--clr-text-muted);
-                font-family: var(--font-mono);
-                font-size: var(--fs-sm);
-              "
-            >
-              🎥 Demo video — <em>assets/videos/demo.mp4</em>
-              <!--
-              Replace with:
-              <video src="assets/videos/demo.mp4" controls style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-md);"></video>
-            --></div>
           </div>
 
           <!-- SECTION 09 — REFLECTION -->
@@ -404,16 +549,21 @@ void loop() {
             <div class="project-section__label">09 — Reflection</div>
             <h2 class="project-section__title">What I Learned</h2>
             <div class="project-section__body">
-              <!-- ✏️ UPDATE -->
               <p>
-                What did this project teach you? What surprised you? What was
-                the most valuable lesson?
+                This project taught me far more than OLED programming. It
+                combined frontend development, embedded systems, networking,
+                graphics programming, image processing and performance
+                optimization into a single application. The most valuable lesson
+                was that architecture decisions—such as switching from HTTP to
+                WebSockets—can completely transform the user experience.
               </p>
               <h4>What I'd Do Differently</h4>
               <ul>
-                <li>Improvement 1</li>
-                <li>Improvement 2</li>
-                <li>Improvement 3</li>
+                <li>Differential framebuffer updates</li>
+                <li>Collaborative multi-user drawing</li>
+                <li>Animation recorder</li>
+                <li>Higher-resolution display support</li>
+                <li>PNG/GIF playback</li>
               </ul>
             </div>
           </div>
@@ -421,16 +571,19 @@ void loop() {
           <!-- PROJECT NAVIGATION -->
           <div class="project-nav">
             <!-- ✏️ UPDATE: prev/next project links -->
-            <a href="/projects/PREVIOUS-PROJECT/" class="project-nav__item">
+            <a
+              href="/projects/student-management-system/"
+              class="project-nav__item"
+            >
               <div class="project-nav__dir">← Previous</div>
-              <div class="project-nav__title">Previous Project Name</div>
+              <div class="project-nav__title">Student Management System</div>
             </a>
             <a
-              href="/projects/NEXT-PROJECT/"
+              href="/projects/holographic-display/"
               class="project-nav__item project-nav__item--next"
             >
               <div class="project-nav__dir">Next →</div>
-              <div class="project-nav__title">Next Project Name</div>
+              <div class="project-nav__title">Holographic Display</div>
             </a>
           </div>
         </article>
@@ -441,38 +594,45 @@ void loop() {
             <div class="sidebar-card__title">Project Info</div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Status</span>
-              <!-- ✏️ UPDATE: badge class -->
               <span class="sidebar-card__val"
                 ><span class="badge badge--completed">Completed</span></span
               >
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Date</span>
-              <!-- ✏️ UPDATE -->
-              <span class="sidebar-card__val">Month Year</span>
+              <span class="sidebar-card__val">July 2026</span>
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Difficulty</span>
-              <!-- ✏️ UPDATE: Beginner / Easy / Intermediate / Advanced / Expert -->
-              <span class="sidebar-card__val">Intermediate</span>
+              <span class="sidebar-card__val">Advanced</span>
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Duration</span>
-              <!-- ✏️ UPDATE -->
-              <span class="sidebar-card__val">X Weeks</span>
+              <span class="sidebar-card__val">~2 Weeks</span>
             </div>
           </div>
 
           <div class="sidebar-card">
             <div class="sidebar-card__title">Key Specs</div>
-            <!-- ✏️ UPDATE: Add 3–5 relevant specs -->
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">MCU</span>
-              <span class="sidebar-card__val">Arduino Uno</span>
+              <span class="sidebar-card__val">ESP32-S3</span>
             </div>
             <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Spec 2</span>
-              <span class="sidebar-card__val">Value</span>
+              <span class="sidebar-card__key">Communication</span>
+              <span class="sidebar-card__val">WebSocket</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Display</span>
+              <span class="sidebar-card__val">SSD1306 128×64</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Storage</span>
+              <span class="sidebar-card__val">LittleFS</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Frontend</span>
+              <span class="sidebar-card__val">HTML5 Canvas</span>
             </div>
           </div>
 
@@ -481,22 +641,13 @@ void loop() {
             <div class="sidebar-links">
               <!-- ✏️ UPDATE: GitHub repo URL -->
               <a
-                href="https://github.com/joydip09"
+                href="https://github.com/joydip09/ESP32-OLED-DrawingPad"
                 target="_blank"
                 rel="noopener"
                 class="btn btn--outline btn--sm"
                 style="justify-content: center"
               >
                 GitHub Repository ↗
-              </a>
-              <!-- Optional: schematic, docs, demo links -->
-              <a
-                href="assets/diagrams/schematic.pdf"
-                target="_blank"
-                class="btn btn--ghost btn--sm"
-                style="justify-content: center"
-              >
-                Schematic PDF ↗
               </a>
             </div>
           </div>
