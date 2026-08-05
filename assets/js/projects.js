@@ -15,7 +15,11 @@ async function loadProjects() {
 
   let projects = [];
   try {
-    const res = await fetch("../data/projects.json");
+    const projectsJsonPath = location.pathname.includes("/projects/")
+      ? "../data/projects.json"
+      : "data/projects.json";
+
+    const res = await fetch(projectsJsonPath);
     projects = await res.json();
   } catch (err) {
     console.warn("Could not load projects.json:", err);
