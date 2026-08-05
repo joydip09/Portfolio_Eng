@@ -1,0 +1,114 @@
+{
+  "id": "tunescope",
+  "title": "TuneScope",
+  "tagline": "A standalone ESP32-S3 music recognition device with a real-time OLED audio visualizer.",
+  "status": "Completed",
+  "date": "2026-08-05",
+  "difficulty": 5,
+  "tags": [
+    "ESP32-S3",
+    "Embedded Systems",
+    "IoT",
+    "Arduino",
+    "PlatformIO",
+    "C++",
+    "I2S",
+    "OLED",
+    "Wi-Fi",
+    "REST API",
+    "FreeRTOS"
+  ],
+  "github": "https://github.com/joydip09/TuneScope",
+  "cover": "assets/images/projects/tunescope/cover.jpg",
+  "featured": true,
+
+  "problem": "I wanted to explore whether a standalone embedded device could identify songs without relying on a smartphone. The goal was to build a dedicated music recognition device that records nearby audio, sends it to an online recognition service over Wi-Fi, and presents the results through a polished OLED interface while maintaining a clean, modular firmware architecture.",
+
+  "components": [
+    {
+      "name": "ESP32-S3 N16R8",
+      "qty": 1,
+      "purpose": "Main controller responsible for audio capture, networking, processing, and display."
+    },
+    {
+      "name": "INMP441 I2S Microphone",
+      "qty": 1,
+      "purpose": "Captures nearby music as digital PCM audio."
+    },
+    {
+      "name": "SSD1306 128×64 OLED",
+      "qty": 1,
+      "purpose": "Displays recognition status, song information, and the real-time audio visualizer."
+    },
+    {
+      "name": "Push Button",
+      "qty": 2,
+      "purpose": "Recognition trigger and display mode switching."
+    },
+    {
+      "name": "USB Power",
+      "qty": 1,
+      "purpose": "Power supply and firmware programming."
+    }
+  ],
+
+  "timeline": [
+    {
+      "date": "Phase 1",
+      "title": "Hardware Bring-up",
+      "desc": "Initialized the ESP32-S3, OLED, microphone, Wi-Fi, and verified PSRAM functionality."
+    },
+    {
+      "date": "Phase 2",
+      "title": "Audio Processing",
+      "desc": "Implemented continuous audio capture, RMS calculation, and a real-time OLED audio visualizer."
+    },
+    {
+      "date": "Phase 3",
+      "title": "Recording Pipeline",
+      "desc": "Built a PSRAM-based recorder and generated valid WAV files from raw PCM audio."
+    },
+    {
+      "date": "Phase 4",
+      "title": "Cloud Recognition",
+      "desc": "Integrated the AudD Music Recognition API using HTTPS, multipart uploads, and JSON parsing."
+    },
+    {
+      "date": "Phase 5",
+      "title": "User Interface",
+      "desc": "Designed a modular OLED interface featuring splash screens, status pages, title scrolling, and multiple display modes."
+    },
+    {
+      "date": "Phase 6",
+      "title": "Optimization & Documentation",
+      "desc": "Optimized rendering performance, improved architecture, documented the project, and prepared it for public release."
+    }
+  ],
+
+  "failures": [
+    "Incorrect I2S configuration initially produced invalid microphone data.",
+    "OLED flickering caused by excessive full-screen redraws.",
+    "Managing large audio buffers required migrating recording to PSRAM.",
+    "Constructing multipart/form-data requests for HTTPS uploads was more complex than expected.",
+    "Recognition and UI logic became tightly coupled before introducing a dedicated DisplayManager.",
+    "Long song titles exceeded the OLED width and required an automatic scrolling system."
+  ],
+
+  "results": {
+    "MCU": "ESP32-S3 N16R8",
+    "Recording Format": "16-bit PCM, 16 kHz Mono",
+    "Recording Duration": "5 seconds",
+    "Recognition Service": "AudD Music Recognition API",
+    "Display": "128×64 SSD1306 OLED",
+    "Architecture": "Modular firmware with independent subsystems",
+    "Connectivity": "Wi-Fi + HTTPS",
+    "Language": "C++17",
+    "Framework": "Arduino (PlatformIO)"
+  },
+
+  "reflections": {
+    "what_worked": "Breaking the project into independent modules greatly simplified debugging and made the firmware easier to extend. Separating rendering from business logic through a DisplayManager significantly improved maintainability.",
+    "what_failed": "Early versions mixed hardware control, networking, and display updates together, making debugging difficult. Some performance issues also stemmed from unnecessary OLED redraws before optimizing the rendering pipeline.",
+    "next_time": "I would design an event-driven architecture from the beginning, add automated testing for individual modules, and implement OTA updates and local audio analysis to reduce reliance on cloud recognition."
+  }
+}

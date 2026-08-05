@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TuneScope — A standalone ESP32-S3 music recognition device featuring real-time audio visualization, OLED interface, and cloud-based song recognition."
+    />
+
+    <title>TuneScope — Joy</title>
+
+    <link rel="stylesheet" href="/assets/css/variables.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/nav.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/project.css" />
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <!-- Reading Progress Bar -->
+    <div
+      id="reading-progress"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, #008080, #3eb489);
+        z-index: 1001;
+        transition: width 0.1s linear;
+      "
+    ></div>
+
+    <!-- ===================== NAV (do not edit) ===================== -->
+    <header class="nav" role="banner">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo">
+          <div class="nav__logo-mark">J</div>
+          <span>Joy</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="/" class="nav__link">Home</a>
+          <a href="/projects/" class="nav__link active">Projects</a>
+          <a href="/about.html" class="nav__link">About</a>
+          <a href="/about.html#contact" class="nav__link">Contact</a>
+        </nav>
+        <div class="nav__actions">
+          <a
+            href="https://github.com/joydip09"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--ghost btn--sm"
+            >GitHub ↗</a
+          >
+          <button class="nav__hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <nav class="nav__mobile">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/projects/" class="nav__link">Projects</a>
+        <a href="/about.html" class="nav__link">About</a>
+        <a href="/about.html#contact" class="nav__link">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ===================== PROJECT HERO ===================== -->
+      <section class="project-hero">
+        <div class="project-hero__bg"></div>
+        <div class="project-hero__content">
+          <div class="project-hero__breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/projects/">Projects</a>
+            <span>/</span>
+            <span>TuneScope</span>
+          </div>
+
+          <div class="project-hero__meta-top">
+            <span class="badge badge--completed">Completed</span>
+            <span class="tag">ESP32-S3</span>
+            <span class="tag">Embedded Systems</span>
+            <span class="tag">IoT</span>
+            <span class="tag">PlatformIO</span>
+            <span class="tag">C++</span>
+          </div>
+
+          <h1 class="project-hero__title reveal">TuneScope</h1>
+          <p class="project-hero__tagline reveal" data-delay="60">
+            TuneScope is a standalone ESP32-S3 music recognition device that
+            captures nearby audio, identifies songs using the AudD Music
+            Recognition API, and presents the results through a polished OLED
+            interface with a real-time audio visualizer.
+          </p>
+
+          <div class="project-hero__stack reveal" data-delay="100">
+            <span class="tag">ESP32-S3</span>
+            <span class="tag">INMP441</span>
+            <span class="tag">SSD1306 OLED</span>
+            <span class="tag">AudD API</span>
+            <span class="tag">PlatformIO</span>
+            <span class="tag">Arduino</span>
+          </div>
+        </div>
+
+        <!-- Cover Image / Video -->
+        <div
+          style="
+            max-width: var(--container-max);
+            margin-inline: auto;
+            padding-inline: var(--sp-6);
+          "
+        >
+          <div class="project-hero__cover reveal" data-delay="140">
+            <img
+              src="assets/images/complete_assembly.jpeg"
+              alt="Project cover"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>⚙️</div>'
+              "
+            />
+            <!--
+            For a video cover instead:
+            <video src="assets/videos/cover.mp4" autoplay muted loop playsinline></video>
+          --></div>
+        </div>
+      </section>
+
+      <!-- ===================== PROJECT BODY ===================== -->
+      <div class="project-body">
+        <!-- ===== MAIN CONTENT ===== -->
+        <article class="project-main">
+          <!-- SECTION 01 — PROBLEM / IDEA -->
+          <div class="project-section reveal">
+            <div class="project-section__label">01 — Problem</div>
+
+            <h2 class="project-section__title">Why I Built TuneScope</h2>
+
+            <div class="project-section__body">
+              <p>
+                Music recognition has become a feature we take for granted on
+                smartphones, but I wanted to understand what it would take to
+                build a dedicated embedded device capable of performing the same
+                task. Instead of relying on a mobile application, I set out to
+                create a standalone system that could listen to nearby music,
+                identify the song over Wi-Fi, and display the results on a small
+                OLED screen.
+              </p>
+
+              <p>
+                Beyond the final functionality, the project was an opportunity
+                to explore several areas of embedded systems development
+                simultaneously: digital audio acquisition, I²S peripherals,
+                memory management with PSRAM, HTTPS networking, REST APIs, JSON
+                parsing, graphical user interfaces, and modular firmware
+                architecture.
+              </p>
+
+              <p>
+                Rather than building a proof of concept, I wanted the firmware
+                to be maintainable and scalable. Throughout development I
+                focused on separating hardware drivers, recording, networking,
+                recognition, and display logic into independent modules so that
+                future features could be added without major architectural
+                changes.
+              </p>
+            </div>
+          </div>
+
+          <!-- SECTION 02 — PLANNING / DESIGN -->
+          <div class="project-section reveal">
+            <div class="project-section__label">02 — Planning</div>
+            <h2 class="project-section__title">Design & Architecture</h2>
+            <div class="project-section__body">
+              <p>
+                Instead of implementing everything inside <code>main.cpp</code>,
+                the firmware was designed around independent modules with
+                clearly defined responsibilities. Each subsystem owns its own
+                resources and communicates through well-defined interfaces,
+                making the project easier to maintain and debug.
+              </p>
+
+              <ul>
+                <li>
+                  <strong>Hardware Layer</strong> — GPIO, I²S microphone, OLED
+                  display, buttons and Wi-Fi peripherals.
+                </li>
+
+                <li>
+                  <strong>Application Layer</strong> — Recorder, WAV generator,
+                  song recognizer, DisplayManager and Visualizer.
+                </li>
+
+                <li>
+                  <strong>Presentation Layer</strong> — OLED layouts, status
+                  screens, scrolling titles and user interaction.
+                </li>
+              </ul>
+
+              <h4>Key Design Decisions</h4>
+
+              <ul>
+                <li>
+                  Separated display rendering from recognition logic using a
+                  dedicated DisplayManager.
+                </li>
+
+                <li>
+                  Used PSRAM to store audio recordings rather than internal RAM.
+                </li>
+
+                <li>
+                  Implemented a modular architecture so every subsystem could be
+                  developed and tested independently.
+                </li>
+
+                <li>
+                  Designed the recognition workflow as an explicit state machine
+                  instead of using multiple boolean flags.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Diagram placeholder — replace with real image -->
+            <div
+              style="
+                margin-top: var(--sp-6);
+                background: var(--clr-bg-soft);
+                border: 1px solid var(--clr-border);
+                border-radius: var(--radius-md);
+                padding: var(--sp-8);
+                text-align: center;
+                color: var(--clr-text-muted);
+                font-family: var(--font-mono);
+                font-size: var(--fs-sm);
+              "
+            >
+              <img
+                src="assets/images/wiring.png"
+                alt="TuneScope Architecture Diagram"
+                style="max-width: 100%; border-radius: 12px"
+              />
+            </div>
+          </div>
+
+          <!-- SECTION 03 — HARDWARE / BOM -->
+          <div class="project-section reveal">
+            <div class="project-section__label">03 — Hardware</div>
+            <h2 class="project-section__title">Components & BOM</h2>
+
+            <table class="bom-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Qty</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ESP32-S3 N16R8</td>
+                  <td>1</td>
+                  <td>
+                    Main controller responsible for audio capture, networking,
+                    OLED rendering, and music recognition.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>INMP441 I²S Microphone</td>
+                  <td>1</td>
+                  <td>
+                    Captures nearby music as 16-bit PCM audio for recognition.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>SSD1306 128×64 OLED</td>
+                  <td>1</td>
+                  <td>
+                    Displays system status, song information, and the real-time
+                    audio visualizer.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Momentary Push Button</td>
+                  <td>2</td>
+                  <td>
+                    One button starts recognition while the second switches
+                    between display modes.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>USB Type-C Cable</td>
+                  <td>1</td>
+                  <td>Powers the device and uploads firmware.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SECTION 04 — MEDIA GALLERY -->
+          <div class="project-section reveal">
+            <div class="project-section__label">04 — Media</div>
+            <h2 class="project-section__title">Prototype Gallery</h2>
+
+            <div class="gallery">
+              <div class="gallery__item">
+                <img
+                  src="assets/images/complete_assembly.jpeg"
+                  alt="Complete assembly of TuneScope"
+                  onerror="
+                    this.parentElement.style.cssText =
+                      'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
+                    this.remove();
+                  "
+                />
+              </div>
+              <div class="gallery__item">
+                <img
+                  src="assets/images/splash.jpeg"
+                  alt="Splash screen on TuneScope"
+                  onerror="
+                    this.parentElement.style.cssText =
+                      'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
+                    this.remove();
+                  "
+                />
+              </div>
+              <div class="gallery__item">
+                <img
+                  src="assets/images/no_song.jpeg"
+                  alt="No song playing on TuneScope"
+                  onerror="
+                    this.parentElement.style.cssText =
+                      'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
+                    this.remove();
+                  "
+                />
+              </div>
+              <div class="gallery__item">
+                <img
+                  src="assets/images/recording.jpeg"
+                  alt="Recording in progress on TuneScope"
+                  onerror="
+                    this.parentElement.style.cssText =
+                      'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
+                    this.remove();
+                  "
+                />
+              </div>
+              <div class="gallery__item">
+                <img
+                  src="assets/images/visualizer.jpeg"
+                  alt="Audio visualizer on TuneScope"
+                  onerror="
+                    this.parentElement.style.cssText =
+                      'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
+                    this.remove();
+                  "
+                />
+              </div>
+              <div class="gallery__item">
+                <img
+                  src="assets/images/now_playing.jpeg"
+                  alt="Now playing on TuneScope"
+                  onerror="
+                    this.parentElement.style.cssText =
+                      'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
+                    this.remove();
+                  "
+                />
+              </div>
+              <!-- Add more .gallery__item divs as needed -->
+            </div>
+          </div>
+
+          <!-- SECTION 05 — IMPLEMENTATION -->
+          <div class="project-section reveal">
+            <div class="project-section__label">05 — Implementation</div>
+            <h2 class="project-section__title">Code & Technical Details</h2>
+            <div class="project-section__body">
+              <p>
+                The firmware is organized into independent modules that separate
+                hardware drivers, application logic, networking, and user
+                interface rendering. Audio captured by the INMP441 microphone is
+                stored in PSRAM, converted into a WAV file, uploaded securely to
+                the AudD Music Recognition API, and the returned metadata is
+                parsed before being displayed on the OLED. A dedicated
+                DisplayManager controls every screen while the Visualizer
+                continuously renders real-time audio levels without interfering
+                with the recognition workflow.
+              </p>
+
+              <p>
+                Designing the firmware this way made it possible to develop and
+                debug each subsystem independently while keeping the application
+                scalable for future additions such as FFT visualizations, OTA
+                updates, and offline audio analysis.
+              </p>
+            </div>
+
+            <!-- Code block — duplicate as needed -->
+            <div class="code-block" style="margin-top: var(--sp-5)">
+              <div class="code-block__header">
+                <span class="code-block__lang">C++ (Arduino)</span>
+                <span class="code-block__copy">Copy</span>
+              </div>
+              <pre>
+RecognitionState state = Recording;
+
+Recorder recorder;
+recorder.startRecording();
+
+WavFile wav = WavGenerator::build(recorder.buffer());
+
+SongInfo song = recognizer.recognize(wav);
+
+displayManager.showSong(song);</pre
+              >
+            </div>
+
+            <!-- Optional callout boxes — use as needed -->
+            <!--
+          <div class="callout callout--info" style="margin-top:var(--sp-6);">
+            <span class="callout__icon">💡</span>
+            <div>
+              <div class="callout__title">Tip Title</div>
+              <div class="callout__body">Tip content here.</div>
+            </div>
+          </div>
+          --></div>
+
+          <!-- SECTION 06 — BUILD TIMELINE (optional — remove if not needed) -->
+          <div class="timeline__item">
+            <div class="timeline__date">Phase 1</div>
+            <div class="timeline__title">Hardware Bring-up</div>
+            <div class="timeline__desc">
+              Configured the ESP32-S3, OLED display, microphone, buttons, Wi-Fi,
+              and verified PSRAM before building higher-level functionality.
+            </div>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__date">Phase 2</div>
+            <div class="timeline__title">Audio Processing</div>
+            <div class="timeline__desc">
+              Implemented continuous microphone sampling, RMS calculation, and
+              the first real-time OLED audio visualizer.
+            </div>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__date">Phase 3</div>
+            <div class="timeline__title">Recording Pipeline</div>
+            <div class="timeline__desc">
+              Added PSRAM-based recording, WAV generation, and recorder
+              verification tools.
+            </div>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__date">Phase 4</div>
+            <div class="timeline__title">Music Recognition</div>
+            <div class="timeline__desc">
+              Integrated the AudD API using HTTPS, multipart uploads, and JSON
+              parsing.
+            </div>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__date">Phase 5</div>
+            <div class="timeline__title">OLED Interface</div>
+            <div class="timeline__desc">
+              Built a modular UI with DisplayManager, title scrolling,
+              recognition states, and multiple display modes.
+            </div>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__date">Phase 6</div>
+            <div class="timeline__title">Optimization & Release</div>
+            <div class="timeline__desc">
+              Optimized rendering performance, finalized documentation, and
+              prepared the project for public release.
+            </div>
+          </div>
+
+          <!-- SECTION 07 — TROUBLESHOOTING -->
+          <div class="project-section reveal">
+            <div class="project-section__label">07 — Troubleshooting</div>
+            <h2 class="project-section__title">Failures & Fixes</h2>
+
+            <!--
+            Callout types: callout--error | callout--warning | callout--info | callout--success
+            ✏️ UPDATE: Replace with your actual failures
+          -->
+            <div class="callout callout--error">
+              <span class="callout__icon">⚠️</span>
+              <div>
+                <div class="callout__title">Managing Large Audio Buffers</div>
+
+                <div class="callout__body">
+                  Recording several seconds of PCM audio exceeded the ESP32's
+                  internal RAM. The recording pipeline was redesigned to
+                  allocate buffers in PSRAM, allowing reliable audio capture
+                  without exhausting memory.
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="callout callout--warning"
+              style="margin-top: var(--sp-4)"
+            >
+              <span class="callout__icon">🔧</span>
+              <div>
+                <div class="callout__title">Separating UI from Recognition</div>
+
+                <div class="callout__body">
+                  Early versions mixed display rendering with recognition logic,
+                  making the firmware harder to maintain. Introducing a
+                  dedicated DisplayManager isolated presentation from
+                  application logic and simplified future development.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 08 — RESULTS -->
+          <div class="project-section reveal">
+            <div class="project-section__label">08 — Results</div>
+            <h2 class="project-section__title">Final Performance</h2>
+            <div class="project-section__body">
+              <p>
+                TuneScope successfully demonstrates that a standalone embedded
+                device can perform cloud-based music recognition while providing
+                a polished user experience. The completed system records nearby
+                audio, uploads it securely over Wi-Fi, identifies the song using
+                the AudD Music Recognition API, and presents the results on an
+                OLED display alongside a responsive real-time audio visualizer.
+              </p>
+
+              <ul>
+                <li><strong>Microcontroller:</strong> ESP32-S3 N16R8</li>
+
+                <li>
+                  <strong>Recording:</strong> 16-bit PCM @ 16 kHz (5 seconds)
+                </li>
+
+                <li>
+                  <strong>Recognition:</strong> AudD Music Recognition API
+                </li>
+
+                <li><strong>Display:</strong> 128×64 SSD1306 OLED</li>
+
+                <li><strong>Networking:</strong> HTTPS over Wi-Fi</li>
+
+                <li><strong>Architecture:</strong> Modular C++ firmware</li>
+              </ul>
+            </div>
+
+            <!-- Demo video placeholder -->
+            <div
+              style="
+                margin-top: var(--sp-6);
+                aspect-ratio: 16/9;
+                background: var(--clr-bg-soft);
+                border: 1px solid var(--clr-border);
+                border-radius: var(--radius-md);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--clr-text-muted);
+                font-family: var(--font-mono);
+                font-size: var(--fs-sm);
+              "
+            >
+              <video
+                src="assets/videos/demo.mp4"
+                controls
+                autoplay
+                muted
+                loop
+                playsinline
+                style="
+                  width: 100%;
+                  border-radius: var(--radius-md);
+                  border: 1px solid var(--clr-border);
+                "
+              ></video>
+            </div>
+          </div>
+
+          <!-- SECTION 09 — REFLECTION -->
+          <div class="project-section reveal">
+            <div class="project-section__label">09 — Reflection</div>
+            <h2 class="project-section__title">What I Learned</h2>
+            <div class="project-section__body">
+              <p>
+                TuneScope became much more than a music recognition project. It
+                fundamentally changed how I approach embedded software
+                development. Earlier projects typically focused on making
+                features work, whereas TuneScope required thinking about
+                software architecture, ownership of resources, module
+                boundaries, and long-term maintainability from the beginning.
+              </p>
+
+              <p>
+                One of the biggest lessons was realizing that clean architecture
+                matters just as much as functional code. Early versions tightly
+                coupled recording, networking, and display updates, making even
+                small changes difficult. Refactoring the firmware into
+                independent modules and introducing a dedicated DisplayManager
+                dramatically simplified future development while making the
+                codebase easier to understand and debug.
+              </p>
+
+              <p>
+                This project also gave me practical experience with digital
+                audio processing, I²S peripherals, PSRAM memory management,
+                HTTPS communication, REST APIs, JSON parsing, and designing
+                responsive user interfaces on resource-constrained embedded
+                hardware. It reinforced the importance of incremental
+                development and building reliable foundations before adding new
+                features.
+              </p>
+
+              <h4>What I'd Do Differently</h4>
+
+              <ul>
+                <li>
+                  Design the event-driven architecture from the beginning
+                  instead of refactoring towards it later.
+                </li>
+
+                <li>Add automated testing for individual firmware modules.</li>
+
+                <li>
+                  Implement OTA firmware updates and persistent settings
+                  storage.
+                </li>
+
+                <li>
+                  Explore local audio analysis techniques to reduce reliance on
+                  cloud recognition.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- PROJECT NAVIGATION -->
+          <div class="project-nav">
+            <!-- ✏️ UPDATE: prev/next project links -->
+            <a href="/projects/PREVIOUS-PROJECT/" class="project-nav__item">
+              <div class="project-nav__dir">← Previous</div>
+              <div class="project-nav__title">ESP32 OLED DrawingPad</div>
+            </a>
+            <a
+              href="/projects/tunescope/#"
+              class="project-nav__item project-nav__item--next"
+            >
+              <div class="project-nav__dir">Next →</div>
+              <div class="project-nav__title">Coming Soon</div>
+            </a>
+          </div>
+        </article>
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="project-sidebar">
+          <div class="sidebar-card">
+            <div class="sidebar-card__title">Project Info</div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Status</span>
+              <span class="sidebar-card__val">
+                <span class="badge badge--completed"> Completed </span>
+              </span>
+            </div>
+
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Date</span>
+              <span class="sidebar-card__val"> August 2026 </span>
+            </div>
+
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Difficulty</span>
+              <span class="sidebar-card__val"> Expert </span>
+            </div>
+
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Duration</span>
+              <span class="sidebar-card__val"> ~3 Weeks </span>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <div class="sidebar-card__title">Key Specs</div>
+            <!-- ✏️ UPDATE: Add 3–5 relevant specs -->
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">MCU</span>
+              <span class="sidebar-card__val"> ESP32-S3 </span>
+            </div>
+
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Language</span>
+              <span class="sidebar-card__val"> C++17 </span>
+            </div>
+
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Framework</span>
+              <span class="sidebar-card__val"> Arduino </span>
+            </div>
+
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">IDE</span>
+              <span class="sidebar-card__val"> PlatformIO </span>
+            </div>
+
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Connectivity</span>
+              <span class="sidebar-card__val"> Wi-Fi </span>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <div class="sidebar-card__title">Links</div>
+            <div class="sidebar-links">
+              <!-- ✏️ UPDATE: GitHub repo URL -->
+              <a
+                href="https://github.com/joydip09/TuneScope"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--outline btn--sm"
+                style="justify-content: center"
+              >
+                GitHub Repository ↗
+              </a>
+              <!-- Optional: schematic, docs, demo links -->
+              <a
+                href="assets/diagrams/schematic.pdf"
+                target="_blank"
+                class="btn btn--ghost btn--sm"
+                style="justify-content: center"
+              >
+                Schematic PDF ↗
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <!-- /project-body -->
+    </main>
+
+    <!-- ===================== FOOTER (do not edit) ===================== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <div class="footer__brand-name">Joy</div>
+            <p class="footer__brand-desc">
+              Building intelligent systems with hardware, code, and relentless
+              experimentation.
+            </p>
+          </div>
+          <div>
+            <div class="footer__heading">More Projects</div>
+            <ul class="footer__links">
+              <li>
+                <a
+                  href="/projects/student-management-system/"
+                  class="footer__link"
+                  >Student Management System</a
+                >
+              </li>
+              <li>
+                <a href="/projects/ESP32-OLED-DrawingPad/" class="footer__link"
+                  >ESP32 OLED Drawing Pad</a
+                >
+              </li>
+              <li>
+                <a href="/projects/tunescope/" class="footer__link"
+                  >TuneScope</a
+                >
+              </li>
+              <li>
+                <a href="/projects/" class="footer__link">All Projects →</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer__heading">Connect</div>
+            <ul class="footer__links">
+              <li>
+                <a
+                  href="https://github.com/joydip09"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >GitHub ↗</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://linkedin.com/in/joydip-chowdhury-4583843a5/"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >LinkedIn ↗</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span
+            >© <span id="footer-year"></span> Joy — Engineering Portfolio</span
+          >
+          <span>Built with HTML · CSS · Vanilla JS</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/project-page.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

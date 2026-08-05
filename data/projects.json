@@ -49,17 +49,26 @@
     "github": "https://github.com/joydip09/ESP32-OLED-DrawingPad"
   },
   {
-    "id": "holographic-display",
-    "title": "DIY Holographic Display",
-    "tagline": "Persistence-of-vision LED cylinder creating 3D holographic-like visuals.",
-    "description": "A spinning LED strip driven by an ESP32, synced via Hall sensor, rendering cylindrical volumetric images in mid-air.",
-    "thumbnail": "/projects/holographic-display/assets/images/cover.jpg",
-    "url": "/projects/holographic-display/",
-    "tags": ["Experimental", "ESP32", "LED", "Hardware", "POV"],
-    "status": "Prototype",
+    "id": "tunescope",
+    "title": "TuneScope",
+    "tagline": "A standalone ESP32-S3 music recognition device with a real-time OLED audio visualizer.",
+    "description": "An embedded music recognition device built around the ESP32-S3 that records nearby audio through an INMP441 microphone, identifies songs using the AudD Music Recognition API over Wi-Fi, and presents the results on a 128×64 OLED display with a responsive real-time audio visualizer.",
+    "thumbnail": "/projects/tunescope/assets/images/cover.jpeg",
+    "url": "/projects/tunescope/",
+    "tags": [
+      "ESP32-S3",
+      "Embedded",
+      "IoT",
+      "Audio",
+      "OLED",
+      "Wi-Fi",
+      "PlatformIO",
+      "C++"
+    ],
+    "status": "Completed",
     "difficulty": 5,
-    "date": "2025-05-01",
+    "date": "2026-08-05",
     "featured": true,
-    "github": "https://github.com/joydip09/"
+    "github": "https://github.com/joydip09/TuneScope"
   }
 ]
