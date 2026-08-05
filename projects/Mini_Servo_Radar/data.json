@@ -1,0 +1,104 @@
+{
+  "id": "Mini_Servo_Radar",
+  "title": "Mini Servo Radar",
+  "tagline": "A modular Arduino-based radar system with automatic and manual scanning modes, visualized in real time using Processing.",
+  "status": "Completed",
+  "date": "2026-05-20",
+  "difficulty": 3,
+  "tags": [
+    "Arduino",
+    "Embedded Systems",
+    "C++",
+    "Processing",
+    "HC-SR04",
+    "Servo Motor",
+    "Sensors",
+    "Serial Communication"
+  ],
+  "github": "https://github.com/joydip09/Mini_Servo_Radar",
+  "cover": "assets/images/cover.png",
+  "featured": true,
+
+  "problem": "I wanted to build more than a basic Arduino sensor project. The goal was to create a modular embedded system that combined sensing, actuation, user input, and a real-time visualization interface while practicing clean project organization and hardware abstraction.",
+
+  "components": [
+    {
+      "name": "Arduino Uno",
+      "qty": 1,
+      "purpose": "Main microcontroller that controls the entire system."
+    },
+    {
+      "name": "HC-SR04 Ultrasonic Sensor",
+      "qty": 1,
+      "purpose": "Measures object distance during each scan."
+    },
+    {
+      "name": "SG90 Servo Motor",
+      "qty": 1,
+      "purpose": "Rotates the ultrasonic sensor through a 180° sweep."
+    },
+    {
+      "name": "10k Potentiometer",
+      "qty": 1,
+      "purpose": "Provides manual control of the servo angle."
+    },
+    {
+      "name": "Toggle Switch",
+      "qty": 1,
+      "purpose": "Switches between automatic and manual scanning modes."
+    },
+    {
+      "name": "Breadboard & Jumper Wires",
+      "qty": 1,
+      "purpose": "Prototype circuit assembly."
+    }
+  ],
+
+  "timeline": [
+    {
+      "date": "Phase 1",
+      "title": "Servo Control",
+      "desc": "Implemented smooth 180° automatic servo sweep using modular servo control functions."
+    },
+    {
+      "date": "Phase 2",
+      "title": "Distance Measurement",
+      "desc": "Integrated the HC-SR04 ultrasonic sensor and displayed live angle and distance data through Serial Monitor."
+    },
+    {
+      "date": "Phase 3",
+      "title": "Radar Visualization",
+      "desc": "Developed a Processing application that receives serial data and renders a real-time semicircular radar interface."
+    },
+    {
+      "date": "Phase 4",
+      "title": "Manual Control",
+      "desc": "Added potentiometer-based manual scanning and implemented mode switching using a toggle switch."
+    },
+    {
+      "date": "Phase 5",
+      "title": "Project Organization",
+      "desc": "Refactored the project into separate modules for servo control, ultrasonic sensing, and user input, then documented and published it on GitHub."
+    }
+  ],
+
+  "failures": [
+    "Initially planned to use a 16x2 LCD but replaced it with a Processing-based radar interface for a more informative visualization.",
+    "Experienced unstable ultrasonic readings while the servo was moving, which was improved by adding a short stabilization delay before measurements.",
+    "Encountered serial communication issues while integrating Processing and resolved them by using a consistent CSV data format and matching baud rates."
+  ],
+
+  "results": {
+    "Scanning Range": "0°–180°",
+    "Operating Modes": "Automatic & Manual",
+    "Visualization": "Real-time Processing Radar GUI",
+    "Architecture": "Modular",
+    "Communication": "USB Serial (9600 baud)"
+  },
+
+  "reflections": {
+    "what_worked": "Separating the firmware into independent modules made development, testing, and debugging significantly easier. Using Processing instead of an LCD produced a much clearer and more engaging visualization of the sensor data.",
+    "what_failed": "The original plan of displaying information on a 16x2 LCD limited the user experience and provided little insight into the scanning process, so it was replaced with a graphical interface.",
+    "next_time": "Replace delay-based timing with millis() for non-blocking operation, add object persistence and radar sweep trails, apply distance filtering for smoother measurements, and migrate the project to an ESP32 or STM32 platform with a standalone graphical display."
+  }
+}

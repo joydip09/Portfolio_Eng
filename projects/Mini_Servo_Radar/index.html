@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Turn any browser into a wireless drawing tablet for an ESP32. Draw in real time, upload images, process them with dithering, and stream graphics directly to a 128×64 OLED display."
+      content="Mini Servo Radar is a modular Arduino project with automatic and manual scanning modes, HC-SR04 distance sensing, SG90 servo control, and Processing-based radar visualization."
     />
-    <title>ESP32-OLED-DrawingPad</title>
+    <title>Mini Servo Radar — Joy</title>
 
     <link rel="stylesheet" href="/assets/css/variables.css" />
     <link rel="stylesheet" href="/assets/css/base.css" />
@@ -76,32 +76,28 @@
             <span>/</span>
             <a href="/projects/">Projects</a>
             <span>/</span>
-            <span>ESP32-OLED-DrawingPad</span>
+            <span>Mini Servo Radar</span>
           </div>
 
           <div class="project-hero__meta-top">
             <span class="badge badge--completed">Completed</span>
-
-            <span class="tag">ESP32-S3</span>
-            <span class="tag">OLED</span>
-            <span class="tag">WebSockets</span>
-            <span class="tag">Canvas API</span>
-            <span class="tag">LittleFS</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">C++</span>
+            <span class="tag">Arduino</span>
+            <span class="tag">Embedded</span>
+            <span class="tag">Processing</span>
           </div>
 
-          <h1 class="project-hero__title reveal">ESP32-OLED-DrawingPad</h1>
+          <h1 class="project-hero__title reveal">Mini Servo Radar</h1>
           <p class="project-hero__tagline reveal" data-delay="60">
-            Turn any browser into a wireless drawing tablet for an ESP32. Draw
-            in real time, upload images, process them with dithering, and stream
-            graphics directly to a 128×64 OLED display.
+            A modular Arduino-based radar system featuring automatic and manual
+            scanning modes with a real-time Processing visualization.
           </p>
 
           <div class="project-hero__stack reveal" data-delay="100">
-            <!-- ✏️ UPDATE: key components as tags -->
-            <span class="tag">ESP32-S3</span>
-            <span class="tag">OLED</span>
+            <span class="tag">Arduino Uno</span>
+            <span class="tag">HC-SR04</span>
+            <span class="tag">SG90 Servo</span>
+            <span class="tag">Processing</span>
+            <span class="tag">Serial Communication</span>
           </div>
         </div>
 
@@ -114,19 +110,15 @@
           "
         >
           <div class="project-hero__cover reveal" data-delay="140">
-            <!-- ✏️ UPDATE: replace src. The onerror shows an emoji placeholder until you add the image. -->
             <img
-              src="assets/images/cover.jpg"
+              src="assets/images/cover.png"
               alt="Project cover"
               onerror="
                 this.parentElement.innerHTML =
                   '<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem;\'>⚙️</div>'
               "
             />
-            <!--
-            For a video cover instead:
-            <video src="assets/videos/cover.mp4" autoplay muted loop playsinline></video>
-          --></div>
+          </div>
         </div>
       </section>
 
@@ -135,21 +127,22 @@
         <!-- ===== MAIN CONTENT ===== -->
         <article class="project-main">
           <!-- SECTION 01 — PROBLEM / IDEA -->
-          <!-- ✏️ UPDATE: Replace placeholder text throughout -->
           <div class="project-section reveal">
             <div class="project-section__label">01 — Problem</div>
-            <h2 class="project-section__title">The Idea</h2>
+            <h2 class="project-section__title">The Problem</h2>
             <div class="project-section__body">
               <p>
-                I wanted to build a project that combined embedded systems with
-                modern web technologies. Instead of displaying pre-programmed
-                graphics on an OLED, I wanted the display to become an
-                interactive device controlled entirely from a web browser.
+                The goal of this project was to move beyond basic Arduino
+                examples and build a complete embedded system with clean modular
+                architecture. Rather than simply measuring distance, I wanted to
+                combine sensing, actuation, user input, and desktop
+                visualization into a single project while practicing hardware
+                abstraction and modular firmware design.
               </p>
               <p>
-                The biggest challenge wasn't drawing pixels—it was designing a
-                communication pipeline that felt responsive despite Wi-Fi
-                latency and the limitations of a small monochrome display.
+                The main challenge was coordinating the servo, ultrasonic
+                sensor, input controls, and Processing visualization without
+                turning the sketch into a single tightly coupled loop.
               </p>
             </div>
           </div>
@@ -160,38 +153,45 @@
             <h2 class="project-section__title">Design & Architecture</h2>
             <div class="project-section__body">
               <p>
-                The system was split into a browser-based frontend, a WebSocket
-                transport layer, and an ESP32 rendering pipeline.
+                The project is split into four modules so each responsibility
+                stays isolated and easier to test.
               </p>
               <ul>
                 <li>
-                  <strong>Frontend</strong> — canvas-based drawing and tool
-                  controls
+                  <strong>Servo Control Module</strong> — handles automatic
+                  sweep and manual positioning.
                 </li>
                 <li>
-                  <strong>Transport</strong> — low-latency WebSocket message
-                  passing
+                  <strong>Ultrasonic Sensor Module</strong> — performs distance
+                  measurement.
                 </li>
                 <li>
-                  <strong>Device</strong> — OLED rendering, buffering, and image
-                  processing
+                  <strong>Input Module</strong> — reads the potentiometer and
+                  mode switch.
+                </li>
+                <li>
+                  <strong>Main Controller</strong> — coordinates all modules and
+                  sends formatted serial data to Processing.
                 </li>
               </ul>
               <h4>Key Design Decisions</h4>
               <ul>
-                <li>Switched from HTTP polling to WebSockets.</li>
-                <li>Stored frontend assets in LittleFS.</li>
-                <li>Used HTML5 Canvas as the drawing surface.</li>
                 <li>
-                  Buffered OLED rendering instead of refreshing every pixel.
+                  Modular programming was used instead of one large Arduino
+                  sketch.
                 </li>
                 <li>
-                  Separated image processing into reusable rendering stages.
+                  Processing replaced a 16×2 LCD to provide a more informative
+                  radar visualization.
+                </li>
+                <li>
+                  A state-based architecture separated automatic and manual
+                  operating modes.
                 </li>
               </ul>
             </div>
 
-            <!-- Diagram placeholder — replace with real image -->
+            <!-- Diagram area — replace with a real image -->
             <div
               style="
                 margin-top: var(--sp-6);
@@ -206,7 +206,7 @@
               "
             >
               <img
-                src="assets/images/architecture.png"
+                src="assets/images/circuit_diagram.png"
                 alt="Architecture diagram"
               />
             </div>
@@ -226,21 +226,45 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- ✏️ UPDATE: Add your components -->
                 <tr>
-                  <td>ESP32-S3-WROOM-1-N16R8</td>
+                  <td>Arduino Uno</td>
                   <td>1</td>
-                  <td>Wi-Fi microcontroller</td>
+                  <td>
+                    Main microcontroller for sensing, servo control, and serial
+                    communication.
+                  </td>
                 </tr>
                 <tr>
-                  <td>SSD1306 OLED 128×64</td>
+                  <td>HC-SR04 Ultrasonic Sensor</td>
                   <td>1</td>
-                  <td>Primary display for the drawing pad</td>
+                  <td>Measures distance to objects in front of the radar.</td>
                 </tr>
                 <tr>
-                  <td>LittleFS</td>
+                  <td>SG90 Servo Motor</td>
                   <td>1</td>
-                  <td>File system for storing frontend assets</td>
+                  <td>Rotates the sensor through the scanning range.</td>
+                </tr>
+                <tr>
+                  <td>10k Potentiometer</td>
+                  <td>1</td>
+                  <td>
+                    Provides manual position input when manual mode is active.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Toggle Switch</td>
+                  <td>1</td>
+                  <td>Selects between automatic and manual scanning modes.</td>
+                </tr>
+                <tr>
+                  <td>Breadboard</td>
+                  <td>1</td>
+                  <td>Supports prototyping and module interconnection.</td>
+                </tr>
+                <tr>
+                  <td>Jumper Wires</td>
+                  <td>1 set</td>
+                  <td>Connects sensors, servo, controls, and power rails.</td>
                 </tr>
               </tbody>
             </table>
@@ -252,11 +276,10 @@
             <h2 class="project-section__title">Build Photos</h2>
 
             <div class="gallery">
-              <!-- ✏️ UPDATE: Replace with real images. Clicking opens lightbox automatically. -->
               <div class="gallery__item">
                 <img
-                  src="assets/images/ui.png"
-                  alt="Build photo 1"
+                  src="assets/images/setup.png"
+                  alt="Hardware setup for the Mini Servo Radar prototype"
                   onerror="
                     this.parentElement.style.cssText =
                       'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
@@ -266,8 +289,8 @@
               </div>
               <div class="gallery__item">
                 <img
-                  src="assets/images/image-editor.png"
-                  alt="Build photo 2"
+                  src="assets/images/MODE_AUTO.png"
+                  alt="Automatic mode screenshot from the Processing radar visualization"
                   onerror="
                     this.parentElement.style.cssText =
                       'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
@@ -277,8 +300,8 @@
               </div>
               <div class="gallery__item">
                 <img
-                  src="assets/images/oled.jpeg"
-                  alt="Build photo 3"
+                  src="assets/images/MODE_MANUAL.png"
+                  alt="Manual mode screenshot showing potentiometer-controlled scanning"
                   onerror="
                     this.parentElement.style.cssText =
                       'background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;';
@@ -296,11 +319,10 @@
             <h2 class="project-section__title">Code & Technical Details</h2>
             <div class="project-section__body">
               <p>
-                I used memory buffer instead of refreshing the OLED every time a
-                pixel was drawn. This allowed for smoother rendering and reduced
-                flickering. Also, I implemented Floyd-Steinberg dithering
-                algorithm to convert grayscale images into a format suitable for
-                the monochrome OLED display.
+                The Arduino sketch is organized around small functions for
+                scanning, sensing, input handling, and serial output. The main
+                loop selects the active mode, updates the servo position, reads
+                distance, and sends formatted data to Processing.
               </p>
             </div>
 
@@ -311,47 +333,30 @@
                 <span class="code-block__copy">Copy</span>
               </div>
               <pre>
-memcpy(
-    display.getBuffer(),
-    payload,
-    1024
-);
+void loop() {
+  if (isAutomaticMode()) {
+    autoSweep();
+  } else {
+    manualPosition();
+  }
 
-display.display();
-                </pre
+  int angle = getServoAngle();
+  int distance = measureDistance();
+  sendSerialData(angle, distance, isAutomaticMode());
+}</pre
               >
             </div>
-            <div class="code-block" style="margin-top: var(--sp-5)">
-              <div class="code-block__header">
-                <span class="code-block__lang">Javascript</span>
-                <span class="code-block__copy">Copy</span>
-              </div>
-              <pre>
-for (let y = 0; y < OLED_HEIGHT; y++) {
-      for (let x = 0; x < OLED_WIDTH; x++) {
-        const index = y * OLED_WIDTH + x;
 
-        const oldPixel = gray[index];
-        const newPixel = oldPixel < THRESHOLD ? 0 : 255;
-        const error = oldPixel - newPixel;
-
-        gray[index] = newPixel;
-
-        if (x < OLED_WIDTH - 1) gray[index + 1] += (error * 7) / 16;
-
-        if (x > 0 && y < OLED_HEIGHT - 1)
-          gray[index + OLED_WIDTH - 1] += (error * 3) / 16;
-
-        if (y < OLED_HEIGHT - 1) gray[index + OLED_WIDTH] += (error * 5) / 16;
-
-        if (x < OLED_WIDTH - 1 && y < OLED_HEIGHT - 1)
-          gray[index + OLED_WIDTH + 1] += (error * 1) / 16;
-      }
-    }
-                </pre
-              >
+            <!-- Optional callout boxes — use as needed -->
+            <!--
+          <div class="callout callout--info" style="margin-top:var(--sp-6);">
+            <span class="callout__icon">💡</span>
+            <div>
+              <div class="callout__title">Tip Title</div>
+              <div class="callout__body">Tip content here.</div>
             </div>
           </div>
+          --></div>
 
           <!-- SECTION 06 — BUILD TIMELINE (optional — remove if not needed) -->
           <div class="project-section reveal">
@@ -361,82 +366,41 @@ for (let y = 0; y < OLED_HEIGHT; y++) {
             <div class="timeline">
               <div class="timeline__item">
                 <div class="timeline__date">Phase 1</div>
-                <div class="timeline__title">Web server and LittleFS</div>
+                <div class="timeline__title">Servo control</div>
                 <div class="timeline__desc">
-                  Built the ESP32 web interface and served the frontend assets
-                  from LittleFS.
+                  Implemented automatic servo sweep.
                 </div>
               </div>
               <div class="timeline__item">
                 <div class="timeline__date">Phase 2</div>
-                <div class="timeline__title">Coordinate mapping</div>
+                <div class="timeline__title">Distance sensing</div>
                 <div class="timeline__desc">
-                  Mapped browser pointer positions into the OLED display
-                  coordinate system.
+                  Integrated the HC-SR04 and verified readings using Serial
+                  Monitor.
                 </div>
               </div>
               <div class="timeline__item">
                 <div class="timeline__date">Phase 3</div>
-                <div class="timeline__title">Continuous drawing</div>
+                <div class="timeline__title">Radar visualization</div>
                 <div class="timeline__desc">
-                  Implemented smooth stroke rendering so drawing felt responsive
-                  in real time.
+                  Created a Processing application that renders a semicircular
+                  radar display using serial data.
                 </div>
               </div>
               <div class="timeline__item">
                 <div class="timeline__date">Phase 4</div>
-                <div class="timeline__title">WebSocket migration</div>
+                <div class="timeline__title">Manual mode</div>
                 <div class="timeline__desc">
-                  Replaced slower polling with WebSockets for faster live
-                  updates.
+                  Added potentiometer control and mode switching using a toggle
+                  switch.
                 </div>
               </div>
               <div class="timeline__item">
                 <div class="timeline__date">Phase 5</div>
-                <div class="timeline__title">Stroke interpolation</div>
+                <div class="timeline__title">Refactoring</div>
                 <div class="timeline__desc">
-                  Added interpolation to reduce jagged motion and improve visual
-                  quality.
-                </div>
-              </div>
-              <div class="timeline__item">
-                <div class="timeline__date">Phase 6</div>
-                <div class="timeline__title">Brush & eraser</div>
-                <div class="timeline__desc">
-                  Introduced editable drawing tools so the canvas could support
-                  both drawing and correction.
-                </div>
-              </div>
-              <div class="timeline__item">
-                <div class="timeline__date">Phase 7</div>
-                <div class="timeline__title">Undo / Redo</div>
-                <div class="timeline__desc">
-                  Added history support so users could revise recent strokes
-                  without restarting.
-                </div>
-              </div>
-              <div class="timeline__item">
-                <div class="timeline__date">Phase 8</div>
-                <div class="timeline__title">Image upload</div>
-                <div class="timeline__desc">
-                  Enabled importing images into the drawing workflow for
-                  conversion to OLED-friendly output.
-                </div>
-              </div>
-              <div class="timeline__item">
-                <div class="timeline__date">Phase 9</div>
-                <div class="timeline__title">Dithering pipeline</div>
-                <div class="timeline__desc">
-                  Applied a dithering pass to preserve image detail on the
-                  monochrome display.
-                </div>
-              </div>
-              <div class="timeline__item">
-                <div class="timeline__date">Phase 10</div>
-                <div class="timeline__title">Bitmap transfer</div>
-                <div class="timeline__desc">
-                  Finalized efficient bitmap streaming so full-frame updates
-                  reached the display reliably.
+                  Separated the project into independent modules and documented
+                  the project.
                 </div>
               </div>
             </div>
@@ -450,14 +414,11 @@ for (let y = 0; y < OLED_HEIGHT; y++) {
             <div class="callout callout--error">
               <span class="callout__icon">⚠️</span>
               <div>
-                <div class="callout__title">
-                  High latency during continuous drawing
-                </div>
+                <div class="callout__title">LCD replaced with Processing</div>
                 <div class="callout__body">
-                  HTTP polling introduced too much latency during continuous
-                  drawing, so the interaction felt delayed and choppy. Switching
-                  to WebSockets reduced round-trip time and made the drawing
-                  experience much more responsive.
+                  I initially planned to use a 16×2 LCD but later replaced it
+                  with a Processing-based radar interface because it provided a
+                  much richer visualization.
                 </div>
               </div>
             </div>
@@ -468,40 +429,11 @@ for (let y = 0; y < OLED_HEIGHT; y++) {
             >
               <span class="callout__icon">🔧</span>
               <div>
-                <div class="callout__title">OLED refresh bottlenecks</div>
+                <div class="callout__title">Servo noise during measurement</div>
                 <div class="callout__body">
-                  Frequent OLED refreshes caused performance bottlenecks until
-                  buffered rendering was implemented. Buffering updates and
-                  drawing to a memory buffer before sending a single refresh
-                  greatly improved stability and reduced flicker.
-                </div>
-              </div>
-            </div>
-
-            <div class="callout callout--info" style="margin-top: var(--sp-4)">
-              <span class="callout__icon">🧩</span>
-              <div>
-                <div class="callout__title">Corrupted bitmap transfers</div>
-                <div class="callout__body">
-                  Bitmap transfer initially produced corrupted images because of
-                  byte ordering issues during transmission. The fix was to
-                  standardize the byte layout and validate the payload structure
-                  before rendering.
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="callout callout--success"
-              style="margin-top: var(--sp-4)"
-            >
-              <span class="callout__icon">✅</span>
-              <div>
-                <div class="callout__title">Undo performance degradation</div>
-                <div class="callout__body">
-                  Replay-based undo became increasingly slow as drawings grew.
-                  Replacing it with a lightweight state history approach kept
-                  undo and redo responsive even for larger drawings.
+                  Distance readings fluctuated while the servo was moving. I
+                  improved stability by introducing a short settling delay
+                  before taking ultrasonic measurements.
                 </div>
               </div>
             </div>
@@ -513,33 +445,12 @@ for (let y = 0; y < OLED_HEIGHT; y++) {
             <h2 class="project-section__title">Final Performance</h2>
             <div class="project-section__body">
               <ul>
+                <li><strong>Scanning Range:</strong> 0°–180°</li>
+                <li><strong>Operating Modes:</strong> Automatic & Manual</li>
                 <li>
-                  <strong>Browser → OLED communication:</strong> over WebSockets
+                  <strong>Visualization:</strong> Processing Desktop Radar
                 </li>
-                <li>
-                  <strong>Real-time drawing:</strong> responsive sketching
-                  directly from the browser
-                </li>
-                <li><strong>Tools:</strong> adjustable brush and eraser</li>
-                <li>
-                  <strong>Rendering:</strong> continuous stroke interpolation
-                  for smoother motion
-                </li>
-                <li>
-                  <strong>Image workflow:</strong> upload and preprocessing for
-                  OLED display output
-                </li>
-                <li>
-                  <strong>Image processing:</strong> Floyd–Steinberg dithering
-                </li>
-                <li>
-                  <strong>Display controls:</strong> brightness, contrast, and
-                  gamma adjustments
-                </li>
-                <li>
-                  <strong>Transfer:</strong> direct 1024-byte framebuffer
-                  transfer
-                </li>
+                <li><strong>Communication:</strong> USB Serial (9600 baud)</li>
               </ul>
             </div>
           </div>
@@ -550,36 +461,36 @@ for (let y = 0; y < OLED_HEIGHT; y++) {
             <h2 class="project-section__title">What I Learned</h2>
             <div class="project-section__body">
               <p>
-                This project taught me far more than OLED programming. It
-                combined frontend development, embedded systems, networking,
-                graphics programming, image processing and performance
-                optimization into a single application. The most valuable lesson
-                was that architecture decisions—such as switching from HTTP to
-                WebSockets—can completely transform the user experience.
+                This project reinforced the value of modular firmware
+                organization, serial communication, hardware abstraction,
+                state-based programming, and embedded debugging.
               </p>
               <h4>What I'd Do Differently</h4>
               <ul>
-                <li>Differential framebuffer updates</li>
-                <li>Collaborative multi-user drawing</li>
-                <li>Animation recorder</li>
-                <li>Higher-resolution display support</li>
-                <li>PNG/GIF playback</li>
+                <li>Replace delay() with millis()</li>
+                <li>Add radar trail effects</li>
+                <li>Add distance filtering</li>
+                <li>Implement standalone OLED/TFT visualization</li>
+                <li>Port the project to ESP32</li>
               </ul>
             </div>
           </div>
 
           <!-- PROJECT NAVIGATION -->
           <div class="project-nav">
-            <a href="/projects/Mini_Servo_Radar/" class="project-nav__item">
+            <a
+              href="/projects/student-management-system/"
+              class="project-nav__item"
+            >
               <div class="project-nav__dir">← Previous</div>
-              <div class="project-nav__title">Mini Servo Radar</div>
+              <div class="project-nav__title">Student Management System</div>
             </a>
             <a
-              href="/projects/tunescope/"
+              href="/projects/ESP32-OLED-DrawingPad/"
               class="project-nav__item project-nav__item--next"
             >
               <div class="project-nav__dir">Next →</div>
-              <div class="project-nav__title">TuneScope</div>
+              <div class="project-nav__title">ESP32 OLED Drawing Pad</div>
             </a>
           </div>
         </article>
@@ -596,15 +507,15 @@ for (let y = 0; y < OLED_HEIGHT; y++) {
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Date</span>
-              <span class="sidebar-card__val">July 2026</span>
+              <span class="sidebar-card__val">May 2026</span>
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Difficulty</span>
-              <span class="sidebar-card__val">Advanced</span>
+              <span class="sidebar-card__val">Intermediate</span>
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Duration</span>
-              <span class="sidebar-card__val">~2 Weeks</span>
+              <span class="sidebar-card__val">~3 Days</span>
             </div>
           </div>
 
@@ -612,32 +523,31 @@ for (let y = 0; y < OLED_HEIGHT; y++) {
             <div class="sidebar-card__title">Key Specs</div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">MCU</span>
-              <span class="sidebar-card__val">ESP32-S3</span>
+              <span class="sidebar-card__val">Arduino Uno</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Sensor</span>
+              <span class="sidebar-card__val">HC-SR04</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Actuator</span>
+              <span class="sidebar-card__val">SG90 Servo</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Visualization</span>
+              <span class="sidebar-card__val">Processing</span>
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Communication</span>
-              <span class="sidebar-card__val">WebSocket</span>
-            </div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Display</span>
-              <span class="sidebar-card__val">SSD1306 128×64</span>
-            </div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Storage</span>
-              <span class="sidebar-card__val">LittleFS</span>
-            </div>
-            <div class="sidebar-card__row">
-              <span class="sidebar-card__key">Frontend</span>
-              <span class="sidebar-card__val">HTML5 Canvas</span>
+              <span class="sidebar-card__val">USB Serial</span>
             </div>
           </div>
 
           <div class="sidebar-card">
             <div class="sidebar-card__title">Links</div>
             <div class="sidebar-links">
-              <!-- ✏️ UPDATE: GitHub repo URL -->
               <a
-                href="https://github.com/joydip09/ESP32-OLED-DrawingPad"
+                href="https://github.com/joydip09/Mini_Servo_Radar"
                 target="_blank"
                 rel="noopener"
                 class="btn btn--outline btn--sm"

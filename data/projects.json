@@ -28,6 +28,29 @@
     ]
   },
   {
+    "id": "Mini_Servo_Radar",
+    "title": "Mini Servo Radar",
+    "tagline": "A modular Arduino-based radar system with automatic and manual scanning modes, visualized in real time using Processing.",
+    "description": "An embedded radar system built around the Arduino Uno that combines an HC-SR04 ultrasonic sensor and an SG90 servo motor to scan a 180° field of view. The project features automatic and potentiometer-controlled manual scanning modes, switchable via a hardware toggle switch, with live radar visualization rendered on a desktop application built with Processing.",
+    "thumbnail": "/projects/Mini_Servo_Radar/assets/images/cover.png",
+    "url": "/projects/Mini_Servo_Radar/",
+    "tags": [
+      "Arduino",
+      "Embedded",
+      "Processing",
+      "HC-SR04",
+      "Servo",
+      "Sensors",
+      "Serial Communication",
+      "C++"
+    ],
+    "status": "Completed",
+    "difficulty": 3,
+    "date": "2026-05-20",
+    "featured": true,
+    "github": "https://github.com/joydip09/Mini_Servo_Radar"
+  },
+  {
     "id": "esp32-oled-drawing-pad",
     "title": "ESP32 OLED DrawingPad",
     "tagline": "A browser-based drawing application that turns any device into a wireless graphics tablet for an ESP32 OLED.",

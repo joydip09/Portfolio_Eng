@@ -19,7 +19,7 @@
     "FreeRTOS"
   ],
   "github": "https://github.com/joydip09/TuneScope",
-  "cover": "assets/images/projects/tunescope/cover.jpg",
+  "cover": "assets/images/cover.jpeg",
   "featured": true,
 
   "problem": "I wanted to explore whether a standalone embedded device could identify songs without relying on a smartphone. The goal was to build a dedicated music recognition device that records nearby audio, sends it to an online recognition service over Wi-Fi, and presents the results through a polished OLED interface while maintaining a clean, modular firmware architecture.",
