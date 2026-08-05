@@ -55,19 +55,24 @@ async function loadProjects() {
 // ----------------------------------------
 
 function renderCard(p) {
+  const pagePrefix = location.pathname.includes("/projects/") ? "../" : "";
+
   const tags = (p.tags || [])
     .map((t) => `<span class="tag">${t}</span>`)
     .join("");
+
   const badge = p.status
     ? `<span class="badge badge--${statusClass(p.status)} project-card__badge">${p.status}</span>`
     : "";
+
   const dots = renderDots(p.difficulty || 1);
+
   const thumb = p.thumbnail
-    ? `<img src="${p.thumbnail}" alt="${p.title}" loading="lazy">`
+    ? `<img src="${pagePrefix}${p.thumbnail}" alt="${p.title}" loading="lazy">`
     : `<div class="project-card__thumb--placeholder">⚙️</div>`;
 
   return `
-    <a href="${p.url || "#"}" class="project-card__link">
+    <a href="${p.url ? pagePrefix + p.url : "#"}" class="project-card__link">
       <article class="project-card" data-tags='${JSON.stringify(p.tags || [])}' data-status="${p.status || ""}">
         <div class="project-card__thumb">
           ${thumb}
