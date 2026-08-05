@@ -76,8 +76,8 @@
     "title": "TuneScope",
     "tagline": "A standalone ESP32-S3 music recognition device with a real-time OLED audio visualizer.",
     "description": "An embedded music recognition device built around the ESP32-S3 that records nearby audio through an INMP441 microphone, identifies songs using the AudD Music Recognition API over Wi-Fi, and presents the results on a 128×64 OLED display with a responsive real-time audio visualizer.",
-    "thumbnail": "../projects/tunescope/assets/images/cover.jpeg",
-    "url": "../projects/tunescope/",
+    "thumbnail": "../projects/TuneScope/assets/images/cover.jpeg",
+    "url": "../projects/TuneScope/",
     "tags": [
       "ESP32-S3",
       "Embedded",

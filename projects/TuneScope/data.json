@@ -1,5 +1,5 @@
 {
-  "id": "TuneScope",
+  "id": "tunescope",
   "title": "TuneScope",
   "tagline": "A standalone ESP32-S3 music recognition device with a real-time OLED audio visualizer.",
   "status": "Completed",
