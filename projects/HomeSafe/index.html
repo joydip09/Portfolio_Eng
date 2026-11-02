@@ -15,12 +15,25 @@
     <link rel="stylesheet" href="../../assets/css/nav.css" />
     <link rel="stylesheet" href="../../assets/css/components.css" />
     <link rel="stylesheet" href="../../assets/css/project.css" />
-    <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="../../assets/icons/favicon.svg"
+      type="image/svg+xml"
+    />
   </head>
   <body>
     <div
       id="reading-progress"
-      style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,#008080,#3eb489);z-index:1001;transition:width .1s linear"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, #008080, #3eb489);
+        z-index: 1001;
+        transition: width 0.1s linear;
+      "
     ></div>
 
     <header class="nav" role="banner">
@@ -36,7 +49,13 @@
           <a href="../../about.html#contact" class="nav__link">Contact</a>
         </nav>
         <div class="nav__actions">
-          <a href="https://github.com/joydip09" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">GitHub ↗</a>
+          <a
+            href="https://github.com/joydip09"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--ghost btn--sm"
+            >GitHub ↗</a
+          >
           <button class="nav__hamburger" aria-label="Toggle menu">
             <span></span><span></span><span></span>
           </button>
@@ -63,7 +82,7 @@
           </div>
 
           <div class="project-hero__meta-top">
-            <span class="badge badge--prototype">Prototype</span>
+            <span class="badge badge--completed">Completed</span>
             <span class="tag">Embedded Systems</span>
             <span class="tag">TinyML</span>
             <span class="tag">IoT</span>
@@ -72,9 +91,11 @@
 
           <h1 class="project-hero__title reveal">HomeSafe</h1>
           <p class="project-hero__tagline reveal" data-delay="60">
-            A local-first home-safety prototype built around the ESP32-S3, combining
-            environmental monitoring, TinyML audio classification, intrusion
-            detection, physical alarms, and an Android companion app.
+            A local-first home-safety prototype built around the ESP32-S3,
+            combining environmental monitoring, TinyML audio classification,
+            intrusion detection, physical alarms, and an Android companion
+            app.<br />
+            A combination of Edge Computing, IoT and Safety.
           </p>
 
           <div class="project-hero__stack reveal" data-delay="100">
@@ -88,12 +109,21 @@
           </div>
         </div>
 
-        <div style="max-width:var(--container-max);margin-inline:auto;padding-inline:var(--sp-6)">
+        <div
+          style="
+            max-width: var(--container-max);
+            margin-inline: auto;
+            padding-inline: var(--sp-6);
+          "
+        >
           <div class="project-hero__cover reveal" data-delay="140">
             <img
               src="assets/images/cover.jpg"
               alt="HomeSafe ESP32-S3 home-safety prototype"
-              onerror="this.parentElement.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem&quot;>🏠</div>'"
+              onerror="
+                this.parentElement.innerHTML =
+                  '<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem&quot;>🏠</div>'
+              "
             />
           </div>
         </div>
@@ -106,23 +136,26 @@
             <h2 class="project-section__title">The Idea</h2>
             <div class="project-section__body">
               <p>
-                Many home-monitoring setups address one condition at a time. I wanted
-                to explore whether several household safety signals could be brought
-                together in one affordable device: environmental sensor readings,
-                flame indication, movement while security is armed, and unusual
-                sounds recognized by a small machine-learning model.
+                Many home-monitoring setups address one condition at a time. I
+                wanted to explore whether several household safety signals could
+                be brought together in one affordable device: environmental
+                sensor readings, flame indication, movement while security is
+                armed, and unusual sounds recognized by a small machine-learning
+                model.
               </p>
               <p>
                 HomeSafe combines conventional sensors with on-device audio
                 classification and a companion Android application. The ESP32-S3
-                remains responsible for interpreting sensor data, making security
-                decisions, and controlling the physical alarm. The phone acts as a
-                monitoring and control interface rather than the safety controller.
+                remains responsible for interpreting sensor data, making
+                security decisions, and controlling the physical alarm. The
+                phone acts as a monitoring and control interface rather than the
+                safety controller.
               </p>
               <p>
-                The central engineering challenge was coordinating sensor sampling,
-                continuous audio inference, alarm logic, Wi-Fi, and application
-                communication on a resource-constrained microcontroller.
+                The central engineering challenge was coordinating sensor
+                sampling, continuous audio inference, alarm logic, Wi-Fi, and
+                application communication on a resource-constrained
+                microcontroller.
               </p>
             </div>
           </div>
@@ -134,33 +167,73 @@
               <p>
                 HomeSafe is organized into three functional layers. Sensor
                 interpretation and safety decisions stay on the ESP32-S3; the
-                Android application receives synchronized state and sends supported
-                commands over a direct WebSocket connection.
+                Android application receives synchronized state and sends
+                supported commands over a direct WebSocket connection.
               </p>
               <ul>
-                <li><strong>Sensing layer</strong> — DHT11, MQ-2, MQ-135, flame sensor, PIR motion sensor, and INMP441 I2S microphone.</li>
-                <li><strong>Embedded processing layer</strong> — ESP32-S3 firmware acquires readings, evaluates environmental conditions, runs TinyML audio inference, manages security schedules, and arbitrates the buzzer and RGB LED.</li>
-                <li><strong>Application layer</strong> — Android companion app displays device state, environment, security, and event history, and sends supported control commands.</li>
+                <li>
+                  <strong>Sensing layer</strong> — DHT11, MQ-2, MQ-135, flame
+                  sensor, PIR motion sensor, and INMP441 I2S microphone.
+                </li>
+                <li>
+                  <strong>Embedded processing layer</strong> — ESP32-S3 firmware
+                  acquires readings, evaluates environmental conditions, runs
+                  TinyML audio inference, manages security schedules, and
+                  arbitrates the buzzer and RGB LED.
+                </li>
+                <li>
+                  <strong>Application layer</strong> — Android companion app
+                  displays device state, environment, security, and event
+                  history, and sends supported control commands.
+                </li>
               </ul>
 
               <h4>Key Design Decisions</h4>
               <ul>
-                <li><strong>Local-first processing:</strong> core detection and physical alarm behavior do not require a cloud service or phone connection.</li>
-                <li><strong>Edge audio inference:</strong> the INMP441 microphone supplies 16 kHz mono audio to an Edge Impulse inference library integrated into the firmware.</li>
-                <li><strong>Direct communication:</strong> the app connects to the ESP32 over Wi-Fi using a versioned WebSocket protocol.</li>
-                <li><strong>Separate repositories:</strong> firmware/hardware and the Android app are maintained independently.</li>
-                <li><strong>Custom enclosure:</strong> a case was designed in SolidWorks to organize and house the hardware.</li>
+                <li>
+                  <strong>Local-first processing:</strong> core detection and
+                  physical alarm behavior do not require a cloud service or
+                  phone connection.
+                </li>
+                <li>
+                  <strong>Edge audio inference:</strong> the INMP441 microphone
+                  supplies 16 kHz mono audio to an Edge Impulse inference
+                  library integrated into the firmware.
+                </li>
+                <li>
+                  <strong>Direct communication:</strong> the app connects to the
+                  ESP32 over Wi-Fi using a versioned WebSocket protocol.
+                </li>
+                <li>
+                  <strong>Separate repositories:</strong> firmware/hardware and
+                  the Android app are maintained independently.
+                </li>
+                <li>
+                  <strong>Custom enclosure:</strong> a case was designed in
+                  SolidWorks to organize and house the hardware.
+                </li>
               </ul>
             </div>
 
-            <figure style="margin-top:var(--sp-6)">
+            <figure style="margin-top: var(--sp-6)">
               <img
-                src="assets/diagrams/architecture.png"
-                alt="HomeSafe system architecture showing sensors, ESP32-S3 processing, alarms, and Android companion app"
-                style="width:100%;height:auto;border:1px solid var(--clr-border);border-radius:var(--radius-md)"
-                onerror="this.parentElement.style.display='none'"
+                src="assets/diagrams/circuit_diagram.jpg"
+                alt="HomeSafe circuit diagram showing sensors, ESP32-S3 processing, alarms, and Android companion app"
+                style="
+                  width: 100%;
+                  height: auto;
+                  border: 1px solid var(--clr-border);
+                  border-radius: var(--radius-md);
+                "
+                onerror="this.parentElement.style.display = 'none'"
               />
-              <figcaption style="margin-top:var(--sp-2);color:var(--clr-text-muted);font-size:var(--fs-sm)">
+              <figcaption
+                style="
+                  margin-top: var(--sp-2);
+                  color: var(--clr-text-muted);
+                  font-size: var(--fs-sm);
+                "
+              >
                 HomeSafe system architecture.
               </figcaption>
             </figure>
@@ -171,31 +244,94 @@
             <h2 class="project-section__title">Components &amp; BOM</h2>
             <table class="bom-table">
               <thead>
-                <tr><th>Component</th><th>Qty</th><th>Purpose</th></tr>
+                <tr>
+                  <th>Component</th>
+                  <th>Qty</th>
+                  <th>Purpose</th>
+                </tr>
               </thead>
               <tbody>
-                <tr><td>ESP32-S3 DevKitC-1</td><td>1</td><td>Main controller, Wi-Fi connectivity, ADC, I2S capture, and firmware runtime.</td></tr>
-                <tr><td>DHT11</td><td>1</td><td>Ambient temperature and relative-humidity monitoring.</td></tr>
-                <tr><td>MQ-2 gas sensor module</td><td>1</td><td>Analog indication associated with smoke and combustible gases.</td></tr>
-                <tr><td>MQ-135 gas sensor module</td><td>1</td><td>Analog air-quality and gas-related indication.</td></tr>
-                <tr><td>Flame sensor module</td><td>1</td><td>Analog flame-level reading and digital detection input.</td></tr>
-                <tr><td>PIR motion sensor</td><td>1</td><td>Movement detection for armed-security monitoring.</td></tr>
-                <tr><td>INMP441 I2S microphone</td><td>1</td><td>16 kHz mono audio capture for TinyML classification.</td></tr>
-                <tr><td>Common-anode RGB LED</td><td>1</td><td>Visual status and alarm indication.</td></tr>
-                <tr><td>Active buzzer</td><td>1</td><td>Audible physical alarm.</td></tr>
-                <tr><td>Power supply and supporting electronics</td><td>1 set</td><td>Power distribution, resistors, breadboard, and wiring.</td></tr>
-                <tr><td>Custom SolidWorks enclosure design</td><td>1</td><td>Mechanical housing designed to organize the electronics.</td></tr>
+                <tr>
+                  <td>ESP32-S3 DevKitC-1</td>
+                  <td>1</td>
+                  <td>
+                    Main controller, Wi-Fi connectivity, ADC, I2S capture, and
+                    firmware runtime.
+                  </td>
+                </tr>
+                <tr>
+                  <td>DHT11</td>
+                  <td>1</td>
+                  <td>Ambient temperature and relative-humidity monitoring.</td>
+                </tr>
+                <tr>
+                  <td>MQ-2 gas sensor module</td>
+                  <td>1</td>
+                  <td>
+                    Analog indication associated with smoke and combustible
+                    gases.
+                  </td>
+                </tr>
+                <tr>
+                  <td>MQ-135 gas sensor module</td>
+                  <td>1</td>
+                  <td>Analog air-quality and gas-related indication.</td>
+                </tr>
+                <tr>
+                  <td>Flame sensor module</td>
+                  <td>1</td>
+                  <td>
+                    Analog flame-level reading and digital detection input.
+                  </td>
+                </tr>
+                <tr>
+                  <td>PIR motion sensor</td>
+                  <td>1</td>
+                  <td>Movement detection for armed-security monitoring.</td>
+                </tr>
+                <tr>
+                  <td>INMP441 I2S microphone</td>
+                  <td>1</td>
+                  <td>16 kHz mono audio capture for TinyML classification.</td>
+                </tr>
+                <tr>
+                  <td>Common-anode RGB LED</td>
+                  <td>1</td>
+                  <td>Visual status and alarm indication.</td>
+                </tr>
+                <tr>
+                  <td>Active buzzer</td>
+                  <td>1</td>
+                  <td>Audible physical alarm.</td>
+                </tr>
+                <tr>
+                  <td>Power supply and supporting electronics</td>
+                  <td>1 set</td>
+                  <td>
+                    Power distribution, resistors, breadboard, and wiring.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Custom SolidWorks enclosure design</td>
+                  <td>1</td>
+                  <td>
+                    Mechanical housing designed to organize the electronics.
+                  </td>
+                </tr>
               </tbody>
             </table>
-            <div class="callout callout--warning" style="margin-top:var(--sp-5)">
+            <div
+              class="callout callout--warning"
+              style="margin-top: var(--sp-5)"
+            >
               <span class="callout__icon">⚡</span>
               <div>
                 <div class="callout__title">Power and input-voltage note</div>
                 <div class="callout__body">
-                  MQ-series modules use heater elements and need a suitable supply.
-                  ESP32-S3 GPIO inputs are 3.3 V devices; a 5 V module output must
-                  not be connected directly to an ESP32-S3 input. Use appropriate
-                  signal conditioning and a common ground.
+                  MQ-series modules use heater elements and need a suitable
+                  supply. ESP32-S3 GPIO inputs are 3.3 V devices; a 5 V module
+                  output must not be connected directly to an ESP32-S3 input.
+                  Use appropriate signal conditioning and a common ground.
                 </div>
               </div>
             </div>
@@ -206,22 +342,18 @@
             <h2 class="project-section__title">Build Photos</h2>
             <div class="gallery">
               <div class="gallery__item">
-                <img src="assets/images/build-01.jpg" alt="HomeSafe electronics and sensor assembly" onerror="this.parentElement.style.display='none'" />
+                <img
+                  src="assets/images/build-01.jpg"
+                  alt="HomeSafe electronics and sensor assembly"
+                  onerror="this.parentElement.style.display = 'none'"
+                />
               </div>
               <div class="gallery__item">
-                <img src="assets/images/build-02.jpg" alt="SolidWorks enclosure design" onerror="this.parentElement.style.display='none'" />
-              </div>
-              <div class="gallery__item">
-                <img src="assets/images/build-03.jpg" alt="HomeSafe Android app home screen" onerror="this.parentElement.style.display='none'" />
-              </div>
-              <div class="gallery__item">
-                <img src="assets/images/build-04.jpg" alt="HomeSafe environment monitoring screen" onerror="this.parentElement.style.display='none'" />
-              </div>
-              <div class="gallery__item">
-                <img src="assets/images/build-05.jpg" alt="HomeSafe security screen" onerror="this.parentElement.style.display='none'" />
-              </div>
-              <div class="gallery__item">
-                <img src="assets/images/build-06.jpg" alt="Edge Impulse audio classifier results" onerror="this.parentElement.style.display='none'" />
+                <img
+                  src="assets/diagrams/diagram_2.png"
+                  alt="HomeSafe hardware connecting diagram"
+                  onerror="this.parentElement.style.display = 'none'"
+                />
               </div>
             </div>
           </div>
@@ -252,10 +384,10 @@
                 qualifies as an audio event, followed by an event cooldown.
               </p>
               <p>
-                MFCC, MFE, and spectrogram-based feature extraction were explored
-                during model development. The feature-extraction pipeline
-                converts raw audio into a representation that the classifier
-                can use to distinguish sound classes.
+                MFCC, MFE, and spectrogram-based feature extraction were
+                explored during model development. The feature-extraction
+                pipeline converts raw audio into a representation that the
+                classifier can use to distinguish sound classes.
               </p>
 
               <h4>Application communication</h4>
@@ -272,33 +404,125 @@
               <p>
                 The app has Home, Environment, Security, and History tabs, with
                 connection settings accessible from Home. Events received while
-                connected are de-duplicated and stored locally in SQLite, with
-                a retention limit of 500 events. The app does not receive
-                historical event replay from the device, so events can be
-                missed while disconnected.
+                connected are de-duplicated and stored locally in SQLite, with a
+                retention limit of 500 events. The app does not receive
+                historical event replay from the device, so events can be missed
+                while disconnected.
               </p>
             </div>
 
-            <div class="callout callout--info" style="margin-top:var(--sp-6)">
+            <div class="callout callout--info" style="margin-top: var(--sp-6)">
               <span class="callout__icon">🧠</span>
               <div>
                 <div class="callout__title">Why TinyML on the device?</div>
                 <div class="callout__body">
-                  Audio classification runs on the ESP32-S3 rather than requiring
-                  audio to be sent to a cloud service. This keeps the core
-                  inference path local and allows the physical alarm to operate
-                  independently of the Android app.
+                  Audio classification runs on the ESP32-S3 rather than
+                  requiring audio to be sent to a cloud service. This keeps the
+                  core inference path local and allows the physical alarm to
+                  operate independently of the Android app.
                 </div>
               </div>
             </div>
           </div>
 
           <div class="project-section reveal">
-            <div class="project-section__label">06 — Timeline</div>
+            <div class="project-section__label">06 — Report Highlights</div>
+            <h2 class="project-section__title">Measured Behavior &amp; Data</h2>
+            <div class="project-section__body">
+              <p>
+                The project report documents the tested decision rules and the
+                embedded audio pipeline rather than presenting HomeSafe as a
+                certified safety product. The examples below show how the
+                prototype turns sensor readings into confirmed events.
+              </p>
+
+              <table class="bom-table">
+                <thead>
+                  <tr>
+                    <th>Input</th>
+                    <th>Test condition</th>
+                    <th>Confirmation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>MQ-2</td>
+                    <td>ADC &ge; 900</td>
+                    <td>1,000 ms sustained</td>
+                  </tr>
+                  <tr>
+                    <td>MQ-135</td>
+                    <td>ADC &ge; 400</td>
+                    <td>1,000 ms sustained</td>
+                  </tr>
+                  <tr>
+                    <td>Flame sensor</td>
+                    <td>Digital output LOW</td>
+                    <td>1,000 ms sustained</td>
+                  </tr>
+                  <tr>
+                    <td>PIR motion</td>
+                    <td>HIGH while armed</td>
+                    <td>1,000 ms sustained</td>
+                  </tr>
+                  <tr>
+                    <td>DHT11</td>
+                    <td>Temperature and humidity readings</td>
+                    <td>Informational; sampled every 2,000 ms</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4>TinyML model profile</h4>
+              <ul>
+                <li>
+                  <strong>Classes:</strong> alarm, distress, glass_break,
+                  impact, and normal.
+                </li>
+                <li>
+                  <strong>Pipeline:</strong> 16 kHz audio, 2-second windows, 500
+                  ms stride, MFCC features, and an INT8-quantized 1D CNN.
+                </li>
+                <li>
+                  <strong>Dataset:</strong> 813 training samples and 134 test
+                  samples documented in the model-development section of the
+                  report.
+                </li>
+                <li>
+                  <strong>Embedded timing:</strong> approximately 79 ms for DSP
+                  and 4 ms for classification in the supplied serial tests.
+                </li>
+              </ul>
+
+              <h4>Representative device-state message</h4>
+              <pre><code>{
+  "temperature": 28.0,
+  "humidity": 65,
+  "mq2_raw": 450,
+  "mq135_raw": 180,
+  "flame_detected": false,
+  "motion_detected": false,
+  "armed": false,
+  "environmental_alarm_active": false,
+  "security_alarm_active": false
+}</code></pre>
+              <p>
+                The values above are illustrative. The report's supplied
+                classifier results include a sample alarm score of 0.828, above
+                the configured 0.80 event threshold. Reported evaluation results
+                include 77.0% validation accuracy and a separate 57.54%
+                quantized-model result; these results are not a claim of
+                certified real-world detection accuracy.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-section reveal">
+            <div class="project-section__label">07 — Timeline</div>
             <h2 class="project-section__title">Build Log</h2>
             <div class="timeline">
               <div class="timeline__item">
-                <div class="timeline__date">August 2026</div>
+                <div class="timeline__date">September 2026</div>
                 <div class="timeline__title">Concept &amp; System Planning</div>
                 <div class="timeline__desc">
                   Defined the home-safety concept, identified the sensing and
@@ -320,9 +544,8 @@
                 <div class="timeline__title">TinyML Model Integration</div>
                 <div class="timeline__desc">
                   Developed the audio-classification workflow in Edge Impulse,
-                  explored feature-extraction approaches, exported the
-                  inference library, and integrated it into the PlatformIO
-                  firmware.
+                  explored feature-extraction approaches, exported the inference
+                  library, and integrated it into the PlatformIO firmware.
                 </div>
               </div>
               <div class="timeline__item">
@@ -335,7 +558,7 @@
                 </div>
               </div>
               <div class="timeline__item">
-                <div class="timeline__date">October–November 2026</div>
+                <div class="timeline__date">October 2026</div>
                 <div class="timeline__title">Integration &amp; Validation</div>
                 <div class="timeline__desc">
                   Integrated environmental monitoring, TinyML inference,
@@ -348,25 +571,30 @@
           </div>
 
           <div class="project-section reveal">
-            <div class="project-section__label">07 — Troubleshooting</div>
+            <div class="project-section__label">08 — Troubleshooting</div>
             <h2 class="project-section__title">Failures &amp; Fixes</h2>
             <div class="callout callout--warning">
               <span class="callout__icon">⚡</span>
               <div>
                 <div class="callout__title">MQ sensor power requirements</div>
                 <div class="callout__body">
-                  Initial experiments powering the MQ modules from the ESP32
-                  3.3 V rail showed that this was not a suitable operating
+                  Initial experiments powering the MQ modules from the ESP32 3.3
+                  V rail showed that this was not a suitable operating
                   arrangement. The project uses a separate suitable 5 V supply
                   for the MQ modules, with a shared ground and care taken to
                   keep ESP32 input signals within 3.3 V limits.
                 </div>
               </div>
             </div>
-            <div class="callout callout--warning" style="margin-top:var(--sp-4)">
+            <div
+              class="callout callout--warning"
+              style="margin-top: var(--sp-4)"
+            >
               <span class="callout__icon">📈</span>
               <div>
-                <div class="callout__title">Sensor warm-up and unstable readings</div>
+                <div class="callout__title">
+                  Sensor warm-up and unstable readings
+                </div>
                 <div class="callout__body">
                   MQ-series readings change during warm-up and respond to
                   environmental conditions. This highlighted the need for
@@ -375,7 +603,7 @@
                 </div>
               </div>
             </div>
-            <div class="callout callout--info" style="margin-top:var(--sp-4)">
+            <div class="callout callout--info" style="margin-top: var(--sp-4)">
               <span class="callout__icon">🧩</span>
               <div>
                 <div class="callout__title">TinyML library integration</div>
@@ -387,10 +615,12 @@
                 </div>
               </div>
             </div>
-            <div class="callout callout--info" style="margin-top:var(--sp-4)">
+            <div class="callout callout--info" style="margin-top: var(--sp-4)">
               <span class="callout__icon">🔄</span>
               <div>
-                <div class="callout__title">Keeping device and app state synchronized</div>
+                <div class="callout__title">
+                  Keeping device and app state synchronized
+                </div>
                 <div class="callout__body">
                   The app and firmware needed a defined protocol for initial
                   state and later changes. Protocol versioning, sequence
@@ -402,25 +632,61 @@
           </div>
 
           <div class="project-section reveal">
-            <div class="project-section__label">08 — Results</div>
+            <div class="project-section__label">09 — Results</div>
             <h2 class="project-section__title">Implemented Capabilities</h2>
             <div class="project-section__body">
               <ul>
                 <li><strong>Controller:</strong> ESP32-S3 DevKitC-1.</li>
-                <li><strong>Environmental and security inputs:</strong> DHT11, MQ-2, MQ-135, flame sensor, and PIR sensor.</li>
-                <li><strong>Audio input:</strong> INMP441 I2S microphone, 16 kHz mono.</li>
-                <li><strong>Audio inference:</strong> Edge Impulse TinyML model integrated into the ESP32 firmware.</li>
-                <li><strong>Audio event threshold:</strong> non-normal class confidence of at least 0.80; 3-second audio event cooldown.</li>
-                <li><strong>Environmental logic:</strong> 1-second hazard confirmation and 5-second cooldown after hazards clear.</li>
-                <li><strong>Communication:</strong> direct Wi-Fi WebSocket connection using protocol v1.</li>
-                <li><strong>Android app:</strong> Home, Environment, Security, and History tabs.</li>
-                <li><strong>Local event storage:</strong> up to 500 received events in SQLite.</li>
-                <li><strong>Security scheduling:</strong> configurable daily schedule, including overnight schedules.</li>
-                <li><strong>Physical alerts:</strong> common-anode RGB LED and active buzzer controlled by the ESP32.</li>
-                <li><strong>Cloud requirement:</strong> no cloud account or cloud service required for the core local system.</li>
+                <li>
+                  <strong>Environmental and security inputs:</strong> DHT11,
+                  MQ-2, MQ-135, flame sensor, and PIR sensor.
+                </li>
+                <li>
+                  <strong>Audio input:</strong> INMP441 I2S microphone, 16 kHz
+                  mono.
+                </li>
+                <li>
+                  <strong>Audio inference:</strong> Edge Impulse TinyML model
+                  integrated into the ESP32 firmware.
+                </li>
+                <li>
+                  <strong>Audio event threshold:</strong> non-normal class
+                  confidence of at least 0.80; 3-second audio event cooldown.
+                </li>
+                <li>
+                  <strong>Environmental logic:</strong> 1-second hazard
+                  confirmation and 5-second cooldown after hazards clear.
+                </li>
+                <li>
+                  <strong>Communication:</strong> direct Wi-Fi WebSocket
+                  connection using protocol v1.
+                </li>
+                <li>
+                  <strong>Android app:</strong> Home, Environment, Security, and
+                  History tabs.
+                </li>
+                <li>
+                  <strong>Local event storage:</strong> up to 500 received
+                  events in SQLite.
+                </li>
+                <li>
+                  <strong>Security scheduling:</strong> configurable daily
+                  schedule, including overnight schedules.
+                </li>
+                <li>
+                  <strong>Physical alerts:</strong> common-anode RGB LED and
+                  active buzzer controlled by the ESP32.
+                </li>
+                <li>
+                  <strong>Cloud requirement:</strong> no cloud account or cloud
+                  service required for the core local system.
+                </li>
               </ul>
             </div>
-            <div class="callout callout--warning" style="margin-top:var(--sp-5)">
+            <div
+              class="callout callout--warning"
+              style="margin-top: var(--sp-5)"
+            >
               <span class="callout__icon">🛡️</span>
               <div>
                 <div class="callout__title">Prototype safety limitation</div>
@@ -436,47 +702,76 @@
           </div>
 
           <div class="project-section reveal">
-            <div class="project-section__label">09 — Reflection</div>
+            <div class="project-section__label">10 — Reflection</div>
             <h2 class="project-section__title">What I Learned</h2>
             <div class="project-section__body">
               <p>
-                HomeSafe brought together several areas of engineering that
-                are often developed separately: analog and digital sensor
-                interfacing, embedded firmware, real-time audio capture,
-                TinyML inference, wireless protocols, Android development,
-                and mechanical enclosure design. One of the biggest lessons
-                was that integration is its own engineering challenge. A
-                sensor or model working independently does not guarantee that
-                the complete system will behave reliably when everything runs
-                together.
+                HomeSafe brought together several areas of engineering that are
+                often developed separately: analog and digital sensor
+                interfacing, embedded firmware, real-time audio capture, TinyML
+                inference, wireless protocols, Android development, and
+                mechanical enclosure design. One of the biggest lessons was that
+                integration is its own engineering challenge. A sensor or model
+                working independently does not guarantee that the complete
+                system will behave reliably when everything runs together.
               </p>
               <h4>What worked</h4>
               <ul>
-                <li>Keeping hazard evaluation and physical alarm behavior on the ESP32-S3.</li>
-                <li>Separating firmware and Android app development into two repositories.</li>
-                <li>Using a versioned WebSocket protocol to synchronize the app with the device.</li>
-                <li>Integrating the Edge Impulse inference library into the embedded firmware.</li>
+                <li>
+                  Keeping hazard evaluation and physical alarm behavior on the
+                  ESP32-S3.
+                </li>
+                <li>
+                  Separating firmware and Android app development into two
+                  repositories.
+                </li>
+                <li>
+                  Using a versioned WebSocket protocol to synchronize the app
+                  with the device.
+                </li>
+                <li>
+                  Integrating the Edge Impulse inference library into the
+                  embedded firmware.
+                </li>
               </ul>
               <h4>What I would improve next</h4>
               <ul>
                 <li>Design a dedicated PCB and improve power distribution.</li>
-                <li>Develop repeatable calibration and controlled test procedures for the gas and flame sensors.</li>
-                <li>Evaluate the audio model with a larger, independent test set and document per-class performance.</li>
-                <li>Improve communication security and add a robust authenticated connection model.</li>
-                <li>Implement Android system notifications and a reliable strategy for events occurring while the app is disconnected.</li>
-                <li>Complete longer-duration tests across different environmental and operating conditions.</li>
+                <li>
+                  Develop repeatable calibration and controlled test procedures
+                  for the gas and flame sensors.
+                </li>
+                <li>
+                  Evaluate the audio model with a larger, independent test set
+                  and document per-class performance.
+                </li>
+                <li>
+                  Improve communication security and add a robust authenticated
+                  connection model.
+                </li>
+                <li>
+                  Implement Android system notifications and a reliable strategy
+                  for events occurring while the app is disconnected.
+                </li>
+                <li>
+                  Complete longer-duration tests across different environmental
+                  and operating conditions.
+                </li>
               </ul>
             </div>
           </div>
 
           <div class="project-nav">
-            <a href="../../projects/" class="project-nav__item">
-              <div class="project-nav__dir">← Back</div>
-              <div class="project-nav__title">All Projects</div>
+            <a href="../../projects/TuneScope/" class="project-nav__item">
+              <div class="project-nav__dir">← Previous</div>
+              <div class="project-nav__title">TuneScope</div>
             </a>
-            <a href="../../projects/" class="project-nav__item project-nav__item--next">
-              <div class="project-nav__dir">Explore →</div>
-              <div class="project-nav__title">More Projects</div>
+            <a
+              href="../../projects/"
+              class="project-nav__item project-nav__item--next"
+            >
+              <div class="project-nav__dir">Next →</div>
+              <div class="project-nav__title">Coming Soon</div>
             </a>
           </div>
         </article>
@@ -486,11 +781,13 @@
             <div class="sidebar-card__title">Project Info</div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Status</span>
-              <span class="sidebar-card__val"><span class="badge badge--prototype">Prototype</span></span>
+              <span class="sidebar-card__val"
+                ><span class="badge badge--completed">Completed</span></span
+              >
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Started</span>
-              <span class="sidebar-card__val">August 2026</span>
+              <span class="sidebar-card__val">September 2026</span>
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Difficulty</span>
@@ -498,28 +795,67 @@
             </div>
             <div class="sidebar-card__row">
               <span class="sidebar-card__key">Duration</span>
-              <span class="sidebar-card__val">Ongoing</span>
+              <span class="sidebar-card__val">~2 Months</span>
             </div>
           </div>
 
           <div class="sidebar-card">
             <div class="sidebar-card__title">Key Specs</div>
-            <div class="sidebar-card__row"><span class="sidebar-card__key">MCU</span><span class="sidebar-card__val">ESP32-S3</span></div>
-            <div class="sidebar-card__row"><span class="sidebar-card__key">Firmware</span><span class="sidebar-card__val">C++ / PlatformIO</span></div>
-            <div class="sidebar-card__row"><span class="sidebar-card__key">TinyML</span><span class="sidebar-card__val">Edge Impulse</span></div>
-            <div class="sidebar-card__row"><span class="sidebar-card__key">Audio</span><span class="sidebar-card__val">16 kHz mono</span></div>
-            <div class="sidebar-card__row"><span class="sidebar-card__key">Connectivity</span><span class="sidebar-card__val">Wi-Fi / WebSocket</span></div>
-            <div class="sidebar-card__row"><span class="sidebar-card__key">App</span><span class="sidebar-card__val">React Native</span></div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">MCU</span
+              ><span class="sidebar-card__val">ESP32-S3</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Firmware</span
+              ><span class="sidebar-card__val">C++ / PlatformIO</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">TinyML</span
+              ><span class="sidebar-card__val">Edge Impulse</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Audio</span
+              ><span class="sidebar-card__val">16 kHz mono</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">Connectivity</span
+              ><span class="sidebar-card__val">Wi-Fi / WebSocket</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__key">App</span
+              ><span class="sidebar-card__val">React Native</span>
+            </div>
           </div>
 
           <div class="sidebar-card">
             <div class="sidebar-card__title">Links</div>
             <div class="sidebar-links">
-              <a href="https://github.com/joydip09/HomeSafe" target="_blank" rel="noopener" class="btn btn--outline btn--sm" style="justify-content:center">
+              <a
+                href="https://github.com/joydip09/HomeSafe"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--outline btn--sm"
+                style="justify-content: center"
+              >
                 Firmware &amp; Hardware ↗
               </a>
-              <a href="https://github.com/joydip09/HomeSafeApp" target="_blank" rel="noopener" class="btn btn--outline btn--sm" style="justify-content:center">
+              <a
+                href="https://github.com/joydip09/HomeSafeApp"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--outline btn--sm"
+                style="justify-content: center"
+              >
                 Android App ↗
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1kJwGFeTJD6lwhxFl9YShAOyVjq19dWP8/view?usp=drive_link"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--outline btn--sm"
+                style="justify-content: center"
+              >
+                Project Report ↗
               </a>
             </div>
           </div>
@@ -540,22 +876,60 @@
           <div>
             <div class="footer__heading">More Projects</div>
             <ul class="footer__links">
-              <li><a href="../../projects/student-management-system/" class="footer__link">Student Management System</a></li>
-              <li><a href="../../projects/ESP32-OLED-DrawingPad/" class="footer__link">ESP32 OLED Drawing Pad</a></li>
-              <li><a href="../../projects/TuneScope/" class="footer__link">TuneScope</a></li>
-              <li><a href="../../projects/" class="footer__link">All Projects →</a></li>
+              <li>
+                <a
+                  href="../../projects/student-management-system/"
+                  class="footer__link"
+                  >Student Management System</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../projects/ESP32-OLED-DrawingPad/"
+                  class="footer__link"
+                  >ESP32 OLED Drawing Pad</a
+                >
+              </li>
+              <li>
+                <a href="../../projects/TuneScope/" class="footer__link"
+                  >TuneScope</a
+                >
+              </li>
+              <li>
+                <a href="../../projects/" class="footer__link"
+                  >All Projects →</a
+                >
+              </li>
             </ul>
           </div>
           <div>
             <div class="footer__heading">Connect</div>
             <ul class="footer__links">
-              <li><a href="https://github.com/joydip09" target="_blank" rel="noopener" class="footer__link">GitHub ↗</a></li>
-              <li><a href="https://linkedin.com/in/joydip-chowdhury-4583843a5/" target="_blank" rel="noopener" class="footer__link">LinkedIn ↗</a></li>
+              <li>
+                <a
+                  href="https://github.com/joydip09"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >GitHub ↗</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://linkedin.com/in/joydip-chowdhury-4583843a5/"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__link"
+                  >LinkedIn ↗</a
+                >
+              </li>
             </ul>
           </div>
         </div>
         <div class="footer__bottom">
-          <span>© <span id="footer-year"></span> Joy — Engineering Portfolio</span>
+          <span
+            >© <span id="footer-year"></span> Joy — Engineering Portfolio</span
+          >
           <span>Built with HTML · CSS · Vanilla JS</span>
         </div>
       </div>
@@ -564,7 +938,8 @@
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/project-page.js"></script>
     <script>
-      document.getElementById("footer-year").textContent = new Date().getFullYear();
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
     </script>
   </body>
 </html>

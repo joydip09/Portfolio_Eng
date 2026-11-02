@@ -93,5 +93,29 @@
     "date": "2026-08-05",
     "featured": true,
     "github": "https://github.com/joydip09/TuneScope"
+  },
+  {
+    "id": "homesafe",
+    "title": "HomeSafe",
+    "tagline": "A local-first home-safety prototype combining environmental monitoring, TinyML audio classification, intrusion detection, physical alarms, and an Android companion app.",
+    "description": "A local-first home-safety prototype combining environmental monitoring, TinyML audio classification, intrusion detection, physical alarms, and an Android companion app.",
+    "thumbnail": "projects/HomeSafe/assets/images/cover.jpg",
+    "url": "projects/HomeSafe/",
+    "tags": [
+      "ESP32-S3",
+      "Embedded Systems",
+      "TinyML",
+      "Edge AI",
+      "IoT",
+      "Android",
+      "React Native",
+      "TypeScript"
+    ],
+    "status": "Completed",
+    "difficulty": 5,
+    "date": "2026-10-29",
+    "featured": true,
+    "github": "https://github.com/joydip09/HomeSafe",
+    "app_github": "https://github.com/joydip09/HomeSafeApp"
   }
 ]

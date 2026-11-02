@@ -187,6 +187,35 @@
   font-size: var(--fs-base);
   line-height: 1.8;
   color: var(--clr-text-primary);
+  min-width: 0;
+}
+
+.project-section__body pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.project-section__body .bom-table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 600px) {
+  .project-section__body pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .bom-table {
+    table-layout: fixed;
+  }
+
+  .bom-table th,
+  .bom-table td {
+    overflow-wrap: anywhere;
+  }
 }
 
 .project-section__body p {

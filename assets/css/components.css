@@ -476,6 +476,9 @@
 
 .bom-table {
   width: 100%;
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
   border-collapse: collapse;
   font-size: var(--fs-sm);
 }

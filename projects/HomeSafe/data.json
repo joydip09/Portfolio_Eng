@@ -2,8 +2,8 @@
   "id": "homesafe",
   "title": "HomeSafe",
   "tagline": "A local-first home-safety prototype combining environmental monitoring, TinyML audio classification, intrusion detection, physical alarms, and an Android companion app.",
-  "status": "Prototype",
-  "date": "2026-08-18",
+  "status": "Completed",
+  "date": "2026-10-31",
   "difficulty": 4,
   "tags": [
     "ESP32-S3",
@@ -83,7 +83,7 @@
   ],
   "timeline": [
     {
-      "date": "August 2026",
+      "date": "September 2026",
       "title": "Concept & System Planning",
       "desc": "Defined the home-safety concept, identified sensing and audio-classification requirements, and planned the hardware, firmware, machine-learning, and Android components."
     },
@@ -103,7 +103,7 @@
       "desc": "Built the React Native Android app and connected it to the ESP32 using a WebSocket protocol for device state, security controls, and event history."
     },
     {
-      "date": "October–November 2026",
+      "date": "October 2026",
       "title": "Integration & Validation",
       "desc": "Integrated environmental monitoring, TinyML inference, intrusion monitoring, physical alarms, persistent security settings, and app communication. Continued hardware and system-level validation."
     }
