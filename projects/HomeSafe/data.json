@@ -1,0 +1,139 @@
+{
+  "id": "homesafe",
+  "title": "HomeSafe",
+  "tagline": "A local-first home-safety prototype combining environmental monitoring, TinyML audio classification, intrusion detection, physical alarms, and an Android companion app.",
+  "status": "Prototype",
+  "date": "2026-08-18",
+  "difficulty": 4,
+  "tags": [
+    "ESP32-S3",
+    "Embedded Systems",
+    "TinyML",
+    "Edge AI",
+    "IoT",
+    "Android",
+    "React Native",
+    "TypeScript",
+    "Edge Impulse",
+    "PlatformIO",
+    "C++",
+    "WebSocket"
+  ],
+  "github": "https://github.com/joydip09/HomeSafe",
+  "app_github": "https://github.com/joydip09/HomeSafeApp",
+  "cover": "assets/images/cover.jpg",
+  "featured": true,
+  "problem": "Many home-monitoring setups address one condition at a time. I wanted to explore whether several household safety signals could be brought together in one affordable device: environmental sensor readings, flame indication, movement while security is armed, and unusual sounds recognized by a small machine-learning model. HomeSafe combines conventional sensors with on-device audio classification and a companion Android application. The ESP32-S3 remains responsible for interpreting sensor data, making security decisions, and controlling the physical alarm. The phone acts as a monitoring and control interface rather than the safety controller.",
+  "components": [
+    {
+      "name": "ESP32-S3 DevKitC-1",
+      "qty": 1,
+      "purpose": "Main controller, Wi-Fi connectivity, ADC, I2S capture, and firmware runtime."
+    },
+    {
+      "name": "DHT11",
+      "qty": 1,
+      "purpose": "Ambient temperature and relative-humidity monitoring."
+    },
+    {
+      "name": "MQ-2 gas sensor module",
+      "qty": 1,
+      "purpose": "Analog indication associated with smoke and combustible gases."
+    },
+    {
+      "name": "MQ-135 gas sensor module",
+      "qty": 1,
+      "purpose": "Analog air-quality and gas-related indication."
+    },
+    {
+      "name": "Flame sensor module",
+      "qty": 1,
+      "purpose": "Analog flame-level reading and digital detection input."
+    },
+    {
+      "name": "PIR motion sensor",
+      "qty": 1,
+      "purpose": "Movement detection for armed-security monitoring."
+    },
+    {
+      "name": "INMP441 I2S microphone",
+      "qty": 1,
+      "purpose": "16 kHz mono audio capture for TinyML classification."
+    },
+    {
+      "name": "Common-anode RGB LED",
+      "qty": 1,
+      "purpose": "Visual status and alarm indication."
+    },
+    {
+      "name": "Active buzzer",
+      "qty": 1,
+      "purpose": "Audible physical alarm."
+    },
+    {
+      "name": "Power supply and supporting electronics",
+      "qty": 1,
+      "purpose": "Power distribution, resistors, breadboard, and wiring."
+    },
+    {
+      "name": "Custom SolidWorks enclosure design",
+      "qty": 1,
+      "purpose": "Mechanical housing designed to organize the electronics."
+    }
+  ],
+  "timeline": [
+    {
+      "date": "August 2026",
+      "title": "Concept & System Planning",
+      "desc": "Defined the home-safety concept, identified sensing and audio-classification requirements, and planned the hardware, firmware, machine-learning, and Android components."
+    },
+    {
+      "date": "September 2026",
+      "title": "Hardware Development",
+      "desc": "Selected the ESP32-S3 and sensor modules, tested sensor responses and supply requirements, and developed a custom enclosure design in SolidWorks."
+    },
+    {
+      "date": "October 2026",
+      "title": "TinyML Model Integration",
+      "desc": "Developed the audio-classification workflow in Edge Impulse, explored feature-extraction approaches, exported the inference library, and integrated it into the PlatformIO firmware."
+    },
+    {
+      "date": "October 2026",
+      "title": "Android Companion App",
+      "desc": "Built the React Native Android app and connected it to the ESP32 using a WebSocket protocol for device state, security controls, and event history."
+    },
+    {
+      "date": "October–November 2026",
+      "title": "Integration & Validation",
+      "desc": "Integrated environmental monitoring, TinyML inference, intrusion monitoring, physical alarms, persistent security settings, and app communication. Continued hardware and system-level validation."
+    }
+  ],
+  "failures": [
+    "Initial experiments powering the MQ modules from the ESP32 3.3 V rail showed that this was not a suitable operating arrangement. The project uses a separate suitable 5 V supply for the MQ modules, with a shared ground and care taken to keep ESP32 input signals within 3.3 V limits.",
+    "MQ-series readings change during warm-up and respond to environmental conditions. This highlighted the need for warm-up time, calibration, and treating current readings as raw ADC values rather than certified gas concentrations.",
+    "The Edge Impulse export needed to be placed in the PlatformIO project in a compatible library structure. The generated inference library is maintained under the firmware repository's lib directory.",
+    "The app and firmware needed a defined protocol for initial state and later changes. Protocol versioning, sequence numbers, event IDs, snapshots, and incremental updates were used to make synchronization more explicit."
+  ],
+  "results": {
+    "controller": "ESP32-S3 DevKitC-1",
+    "environmental_and_security_inputs": "DHT11, MQ-2, MQ-135, flame sensor, PIR sensor",
+    "audio_input": "INMP441 I2S microphone, 16 kHz mono",
+    "audio_inference": "Edge Impulse TinyML model integrated into ESP32 firmware",
+    "audio_event_threshold": "Non-normal class confidence >= 0.80",
+    "audio_event_cooldown": "3 seconds",
+    "environmental_confirmation": "1 second",
+    "environmental_alarm_cooldown": "5 seconds after hazards clear",
+    "communication": "Wi-Fi / versioned WebSocket protocol v1",
+    "mobile_application": "React Native Android app with Home, Environment, Security, and History tabs",
+    "event_storage": "Up to 500 events received while connected, stored locally in SQLite",
+    "security": "Armed/disarmed mode, sustained-motion confirmation, persistent settings, daily schedule",
+    "physical_alerts": "Common-anode RGB LED and active buzzer",
+    "cloud_dependency": "No cloud account or service required for core local operation"
+  },
+  "reflections": {
+    "what_worked": "HomeSafe brought together sensor interfacing, embedded firmware, real-time audio capture, TinyML inference, wireless protocols, Android development, and mechanical enclosure design. Keeping hazard evaluation and physical alarm behavior on the ESP32-S3, separating the firmware and app repositories, and using a versioned WebSocket protocol were important architectural decisions.",
+    "what_failed": "MQ-series sensor power requirements, warm-up behavior, and changing raw readings required more attention than expected. Integration also exposed the challenge of coordinating sensor sampling, audio inference, alarm logic, and application communication. The complete system still needs more extensive calibration and controlled validation.",
+    "next_time": "Design a dedicated PCB and improve power distribution; establish repeatable sensor calibration and controlled test procedures; evaluate the audio model using a larger independent test set and per-class metrics; improve communication security; implement Android system notifications and a strategy for events during disconnection; and conduct longer-duration system tests."
+  },
+  "safety_note": "HomeSafe is an educational engineering prototype, not a certified fire, gas, intrusion, or life-safety system. Sensor modules require calibration and controlled validation. It should not be used as the sole protection for people or property."
+}
